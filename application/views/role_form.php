@@ -57,19 +57,19 @@
                                  <?php endforeach  ?>
                               </div>
                               <div class="col-md-6 mb-3">
-
                                  <?php foreach ($akses as $k => $val) : ?>
-                                    <?php if ($k % 2 != 0) :  ?>
-                                       <label class="switch-input mb-3">
-                                          <?php if (isset($role->id)) :  ?>
-                                             <input type="checkbox" name="role_akses[]" <?= $this->ram->get_roles_akses($role->id, $val->nama) ? "checked" : "" ?> value="<?= $val->id ?>">
-                                          <?php else :  ?>
-                                             <input type="checkbox" name="role_akses[]" value="<?= $val->id ?>">
-                                          <?php endif;  ?>
-                                          <i data-swon-text="ON" data-swoff-text="OFF"></i>
-                                          <?= ucwords($val->content)  ?>
-                                       </label>
-                                    <?php endif;  ?>
+                              
+                                       <?php if ($k % 2 != 0) :  ?>
+                                          <label class="switch-input mb-3">
+                                             <?php if (isset($role->id)) :  ?>
+                                                <input type="checkbox" name="role_akses[]" <?= $this->ram->get_roles_akses($role->id, $val->nama) ? "checked" : "" ?> value="<?= $val->id ?>">
+                                             <?php else :  ?>
+                                                <input type="checkbox" name="role_akses[]" value="<?= $val->id ?>">
+                                             <?php endif;  ?>
+                                             <i data-swon-text="ON" data-swoff-text="OFF"></i>
+                                             <?= ucwords($val->content)  ?>
+                                          </label>
+                                       <?php endif;  ?>
                                  <?php endforeach  ?>
                               </div>
                            </div>

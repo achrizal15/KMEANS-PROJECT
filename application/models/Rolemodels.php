@@ -16,28 +16,13 @@ class Rolemodels extends CI_Model
       foreach ($menus as $menu) {
          if ($this->db->get_where("akses", ["content" => $menu["content"]])->row() == null) {
             $this->db->insert("akses", [
-               "nama" => $menu["title"],
+               "nama" => $menu["nama"],
                "content" => $menu["content"],
                "icon" => $menu["icon"],
                "link" => $menu["link"],
-               "submenu" => $menu["submenu"],
+               "group"=>$menu["group"],
                "created_at" => date("Y-m-d H:i:s", strtotime("now"))
             ]);
-         }
-         if ($menu["submenu"] == false) {
-            continue;
-         }
-         $akses_id = $this->db->get_where("akses", ["content" => $menu["content"]])->row()->id;
-         foreach ($menu['listsubmenu'] as $sub) {
-            $hasSub = $this->db->get_where("sub_menu", ["akses_id" => $akses_id, "nama" => strtolower($sub["title"])])->row();
-            if ($hasSub == null) {
-               $this->db->insert("sub_menu", [
-                  "nama" => $sub["title"],
-                  "link" => $sub["link"],
-                  "akses_id" => $akses_id
-               ]);
-            }
-           
          }
       }
    }

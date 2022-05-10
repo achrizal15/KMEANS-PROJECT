@@ -24,8 +24,8 @@
 					<div class="widget widget-metric_1 animate">
 						<span class="icon-wrapper custom-bg-orange"><i class="fa fa-area-chart"></i></span>
 						<div class="right">
-							<span class="value"> <?= $total_produk  ?><i class="change-icon change-up fa fa-sort-up text-indicator-green"></i></span>
-							<span class="title">JUMLAH PRODUK <span class="change text-indicator-green"></span></span>
+							<span class="value"> 50<i class="change-icon change-up fa fa-sort-up text-indicator-green"></i></span>
+							<span class="title">JUMLAH SMP <span class="change text-indicator-green"></span></span>
 						</div>
 					</div>
 				</div>
@@ -33,8 +33,8 @@
 					<div class="widget widget-metric_1 animate">
 						<span class="icon-wrapper custom-bg-lightseagreen"><i class="fa fa-shopping-cart"></i></span>
 						<div class="right">
-							<span class="value"><?= $total_qty->total_produk  ?> <i class="change-icon change-up fa fa-sort-up text-indicator-green"></i></span>
-							<span class="title">QTY PRODUK<span class="change text-indicator-green"></span></span>
+							<span class="value">20 <i class="change-icon change-up fa fa-sort-up text-indicator-green"></i></span>
+							<span class="title">SD<span class="change text-indicator-green"></span></span>
 						</div>
 					</div>
 				</div>
@@ -42,12 +42,12 @@
 					<div class="widget widget-metric_1 animate">
 						<span class="icon-wrapper custom-bg-blue2"><i class="fa-solid fa-cart-flatbed"></i></span>
 						<div class="right">
-							<span class="value"><?= $stok_in  ?><i class="change-icon change-down fa fa-sort-up text-indicator-green"></i></span>
-							<span class="title">STOK MASUK <span class="change text-indicator-green"></span></span>
+							<span class="value">17<i class="change-icon change-down fa fa-sort-up text-indicator-green"></i></span>
+							<span class="title">SMA <span class="change text-indicator-green"></span></span>
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-6 col-lg-3">
+				<!-- <div class="col-sm-6 col-lg-3">
 					<div class="widget widget-metric_1 animate">
 						<span class="icon-wrapper custom-bg-purple"><i class="fa-solid fa-dolly"></i></span>
 						<div class="right">
@@ -55,7 +55,7 @@
 							<span class="title">STOK KELUAR <span class="change text-indicator-green"></span></span>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 			<!-- END TOP METRICS -->
 

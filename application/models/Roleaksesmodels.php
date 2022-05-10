@@ -31,10 +31,7 @@ class Roleaksesmodels extends CI_Model
          $this->db->where("a.nama", $akses_id);
       }
       $menuresult = $this->db->get()->row();
-      if (!$menuresult) {
-         $subres =    $this->db->get_where("sub_menu", ["nama" => $akses_id])->row();
-         return $subres;
-      }
+
       return $menuresult;
    }
    public function add($data)

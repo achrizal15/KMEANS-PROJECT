@@ -32,8 +32,8 @@
                            <thead>
                               <tr>
                                  <th>NAMA</th>
-                                 <?php foreach ($akses as $asu) :  ?>
-                                    <th><?= strtoupper($asu->content)  ?></th>
+                                 <?php foreach(list_menu()as $menu) : ?>
+                                    <th><?= strtoupper($menu["nama"])  ?></th>
                                  <?php endforeach;  ?>
                                  <th>CREATED AT</th>
                                  <th>ACTION</th>
@@ -43,14 +43,9 @@
                               <?php foreach ($role as $v) : ?>
                                  <tr>
                                     <td><?= ucwords($v->nama)  ?></td>
-                                    <td><?= $this->ram->get_roles_akses($v->id, "home") ? "YES" : "NO" ?></td>
-                                    <td><?= $this->ram->get_roles_akses($v->id, "produk") ? "YES" : "NO" ?></td>
-                                    <td><?= $this->ram->get_roles_akses($v->id, "distributor") ? "YES" : "NO" ?></td>
-                                    <td><?= $this->ram->get_roles_akses($v->id, "gudang") ? "YES" : "NO" ?></td>
-                                    <td><?= $this->ram->get_roles_akses($v->id, "stokmasuk") ? "YES" : "NO" ?></td>
-                                    <td><?= $this->ram->get_roles_akses($v->id, "stokkeluar") ? "YES" : "NO" ?></td>
-                                    <td><?= $this->ram->get_roles_akses($v->id, "user") ? "YES" : "NO" ?></td>
-                                    <td><?= $this->ram->get_roles_akses($v->id, "laporan") ? "YES" : "NO" ?></td>
+                                    <?php foreach(list_menu()as $menu) : ?>
+                                    <td><?= $this->ram->get_roles_akses($v->id, $menu["content"]) ? "YES" : "NO" ?></td>
+                                    <?php endforeach  ?>
                                     <td class="align-middle"><?= date("d-m-Y", strtotime($v->created_at))  ?></td>
                                     <td class="align-middle" width="150px">
                                        <?php if($v->id!=1):  ?>

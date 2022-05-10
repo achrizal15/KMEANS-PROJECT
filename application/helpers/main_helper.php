@@ -16,28 +16,32 @@ if (!function_exists("list_menu")) {
       $CI->load->model("rolemodels");
       $menu = [
          [
-            "title" => "Home",
+            "nama" => "Home",
             "content" => "home",
             "icon" => "fa-solid fa-gauge",
-            "link" => base_url(),
-            "submenu" => false
+            "link" => "",
+            "group"=>null
          ],
          [
-            "title" => "Manage Staff",
-            "content" => "managestaff",
+            "nama" => "Materi",
+            "content" => "materi",
+            "icon" => "fa-solid fa-square-poll-horizontal",
+            "link" => "materi",
+            "group"=>null
+         ],
+         [
+            "nama" => "User",
+            "link" => "usercontroller",
             "icon" => "fa-solid fa-user-headset",
-            "link" => base_url(),
-            "submenu" => true,
-            "listsubmenu" => [
-               [
-                  "title" => "Role",
-                  "link" => "rolecontroller"
-               ],
-               [
-                  "title" => "User",
-                  "link" => "usercontroller"
-               ]
-            ]
+            "content" => "user",
+            "group" => "Manage Staff",
+         ],
+         [
+            "group" => "Manage Staff",
+            "content" => "role",
+            "link" => "rolecontroller",
+            "nama"=>"Role",
+            "icon" => "fa-solid fa-user-headset",
          ]
       ];
       $CI->rolemodels->set_menu($menu);
