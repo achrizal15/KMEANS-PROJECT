@@ -1,6 +1,7 @@
 <?php
 class RoleController extends CI_Controller
 {
+
    public function __construct()
    {
       parent::__construct();
@@ -31,8 +32,8 @@ class RoleController extends CI_Controller
    public function add()
    {
       $role_akses = $this->input->post("role_akses");
-      $this->rm->create(["nama"=>$this->input->post("nama")]);
-     $id_role= $this->db->insert_id();
+      $this->rm->create(["nama" => $this->input->post("nama")]);
+      $id_role = $this->db->insert_id();
       if ($role_akses) {
          foreach ($role_akses as $key => $value) {
             $data = ["role_id" => $id_role, "akses_id" => $value];
@@ -53,7 +54,7 @@ class RoleController extends CI_Controller
             $this->ram->add($data);
          }
       }
-      $this->rm->perbarui($this->input->post("id"),["nama"=>$this->input->post("nama")]);
+      $this->rm->perbarui($this->input->post("id"), ["nama" => $this->input->post("nama")]);
       $this->session->set_flashdata("message", "Data berhasil diperbarui.");
       redirect(base_url("rolecontroller"));
    }

@@ -7,11 +7,8 @@ class Home extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library("session");
-		// $this->load->model("roleaksesmodels", "ram");
-		// $this->load->model("produkmodels", "pm");
-		// $this->load->model("trstokmasukmodels", "tsm");
-		// $this->load->model("trstokkeluarmodels", "tsk");
 		$this->load->library("main_libraries");
+		list_menu();
 		is_login("home");
 	}
 	public function index()

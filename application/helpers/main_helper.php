@@ -5,11 +5,46 @@ if (!function_exists("active_sidebar")) {
    {
       $CI = &get_instance();
       if ($params == $CI->uri->segment(1)) {
-
          return "active";
       }
    }
 }
+if (!function_exists("list_menu")) {
+   function list_menu()
+   {
+      $CI = &get_instance();
+      $CI->load->model("rolemodels");
+      $menu = [
+         [
+            "title" => "Home",
+            "content" => "home",
+            "icon" => "fa-solid fa-gauge",
+            "link" => base_url(),
+            "submenu" => false
+         ],
+         [
+            "title" => "Manage Staff",
+            "content" => "managestaff",
+            "icon" => "fa-solid fa-user-headset",
+            "link" => base_url(),
+            "submenu" => true,
+            "listsubmenu" => [
+               [
+                  "title" => "Role",
+                  "link" => "rolecontroller"
+               ],
+               [
+                  "title" => "User",
+                  "link" => "usercontroller"
+               ]
+            ]
+         ]
+      ];
+      $CI->rolemodels->set_menu($menu);
+      return $menu;
+   }
+}
+
 if (!function_exists("custom_alert_messages")) {
    function custom_alert_messages($type, $message)
    {

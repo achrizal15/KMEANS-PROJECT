@@ -10,7 +10,7 @@ class Roleaksesmodels extends CI_Model
       }
       return $result;
    }
-   public function get_roles_akses($role_id, $akses_id=null)
+   public function get_roles_akses($role_id, $akses_id = null)
    {
 
       $alias = [
@@ -24,15 +24,21 @@ class Roleaksesmodels extends CI_Model
       }
       $this->db->select($select);
       $this->db->from("role_akses ra");
-      $this->db->join("role r","r.id=ra.role_id");
-      $this->db->join("akses a","a.id=ra.akses_id");
+      $this->db->join("role r", "r.id=ra.role_id");
+      $this->db->join("akses a", "a.id=ra.akses_id");
       $this->db->where("ra.role_id", $role_id);
       if ($akses_id != null) {
          $this->db->where("a.nama", $akses_id);
       }
-      return $this->db->get()->row();
+      $menuresult = $this->db->get()->row();
+      if (!$menuresult) {
+         $subres =    $this->db->get_where("sub_menu", ["nama" => $akses_id])->row();
+         return $subres;
+      }
+      return $menuresult;
    }
-   public function add($data){
-      $this->db->insert("role_akses",$data);
+   public function add($data)
+   {
+      $this->db->insert("role_akses", $data);
    }
 }
