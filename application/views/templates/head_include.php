@@ -1,4 +1,4 @@
-<title>BUN STOCK BARANG</title>
+<title>BIMBEL SASCHIO</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <meta id="base_url" content="<?= base_url() ?>">
@@ -26,8 +26,6 @@
 <link href="<?= base_url() ?>assets/css/bootstrap-custom.min.css" rel="stylesheet" type="text/css" />
 <link href="<?= base_url() ?>assets/css/app.min.css" rel="stylesheet" type="text/css" />
 <link href="<?= base_url() ?>assets/css/style.css" rel="stylesheet" type="text/css" />
-
-
 <!-- Favicon -->
 <link rel="shortcut icon" href="<?= base_url() ?>assets/images/bun.png">
 <script src="https://kit.fontawesome.com/bb21b3c852.js" crossorigin="anonymous"></script>
