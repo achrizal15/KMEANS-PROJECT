@@ -7,7 +7,7 @@
             <?php if ($value["group"] == null) :  ?>
                <?php if (show_menu($value["nama"])) :  ?>
                   <li>
-                     <a href="<?= base_url() ?>" class="<?= active_sidebar($value["link"]) ?>">
+                     <a href="<?= base_url($value["link"]) ?>" class="<?= active_sidebar($value["link"]) ?>">
                         <i class="<?= $value['icon'] ?>" style="font-size: 18px;"></i>
                         <span class="nama" style="font-weight: bold;">
                            <?= $value["nama"]  ?>

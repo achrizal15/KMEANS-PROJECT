@@ -1,6 +1,6 @@
 <?php
 
-class Distributormodels extends CI_Model
+class Materimodels extends CI_Model
 {
    public function setAliasColumn($column, $alias)
    {
@@ -13,40 +13,48 @@ class Distributormodels extends CI_Model
    }
    public function get_all()
    {
-      $this->db->select("*");
-      $this->db->from("distributor");
-      $this->db->order_by("created_at","desc");
+      $alias = [
+         ["table" => "materi", "alias" => "m"],
+         // ["table" => "role", "alias" => "r"]
+      ];
+      $select="";
+      foreach ($alias as $key) {
+         $select .= implode(',', $this->setAliasColumn($key['table'], $key['alias'])) . ",";
+      }
+      $this->db->select($select);
+      $this->db->from("materi as m");
+      // $this->db->join("role as r","r.id=u.role_id","left");
       return $this->db->get()->result();
    }
 
    public function delete($id)
    {
-      $this->db->delete("distributor", ["id" => $id]);
+      $this->db->delete("user", ["id" => $id]);
       return $this->db->affected_rows();
    }
    public function get($id = "")
    {
       $this->db->select("*");
-      $this->db->from("distributor");
+      $this->db->from("user");
       $this->db->where("id", $id);
       return $this->db->get()->row();
    }
    public function get_last()
    {
       $this->db->select("*");
-      $this->db->from("produk");
+      $this->db->from("user");
       $this->db->order_by("id", "desc");
       return $this->db->get()->row();
    }
    public function perbarui($id, $data)
    {
-      $this->db->update("distributor", $data, ["id" => $id]);
+      $this->db->update("user", $data, ["id" => $id]);
       return $this->db->affected_rows();
    }
    public function create($data)
    {
       $data["created_at"] = date("Y-m-d H:i:s", strtotime("now"));
-      $this->db->insert("distributor", $data);
+      $this->db->insert("user", $data);
       return $this->db->affected_rows();
    }
 }

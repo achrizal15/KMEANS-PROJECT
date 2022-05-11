@@ -14,7 +14,8 @@ class Rolemodels extends CI_Model
    public function set_menu($menus)
    {
       foreach ($menus as $menu) {
-         if ($this->db->get_where("akses", ["content" => $menu["content"]])->row() == null) {
+         $akses=$this->db->get_where("akses", ["content" => $menu["content"]])->row();
+         if ($akses == null) {
             $this->db->insert("akses", [
                "nama" => $menu["nama"],
                "content" => $menu["content"],
@@ -23,6 +24,15 @@ class Rolemodels extends CI_Model
                "group"=>$menu["group"],
                "created_at" => date("Y-m-d H:i:s", strtotime("now"))
             ]);
+         }else{
+            $this->db->update("akses",[
+               "nama" => $menu["nama"],
+               "content" => $menu["content"],
+               "icon" => $menu["icon"],
+               "link" => $menu["link"],
+               "group"=>$menu["group"],
+               "created_at" => date("Y-m-d H:i:s", strtotime("now"))
+            ],["id"=>$akses->id]);
          }
       }
    }

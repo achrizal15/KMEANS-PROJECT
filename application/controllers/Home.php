@@ -8,7 +8,6 @@ class Home extends CI_Controller
 		parent::__construct();
 		$this->load->library("session");
 		$this->load->library("main_libraries");
-		list_menu();
 		is_login("home");
 	}
 	public function index()

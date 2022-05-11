@@ -26,7 +26,7 @@ if (!function_exists("list_menu")) {
             "nama" => "Materi",
             "content" => "materi",
             "icon" => "fa-solid fa-square-poll-horizontal",
-            "link" => "materi",
+            "link" => "matericontroller",
             "group"=>null
          ],
          [
@@ -76,6 +76,7 @@ if (!function_exists("is_login")) {
       $CI = &get_instance();
       $CI->load->library("session");
       $CI->load->model("roleaksesmodels", "rak");
+      list_menu();
       if (!$CI->session->has_userdata("id")) {
          redirect(base_url("authcontroller"));
       } else {
