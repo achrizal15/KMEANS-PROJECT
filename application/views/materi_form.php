@@ -21,50 +21,45 @@
                <div class="card">
                   <div class="card-header">
                      <h3 class="card-title"><?= ucwords($aksi)  ?> Materi</h3>
-
                   </div>
                   <div class="card-body">
-                  <?php echo $this->session->flashdata("message") ? custom_alert_messages("error", $this->session->flashdata("message")) : "" ?>
-                     <form action="<?= base_url("usercontroller/") . $aksi ?>"data-parsley-validate novalidate method="post" enctype="multipart/form-data">
+                     <?php echo $this->session->flashdata("message") ? custom_alert_messages("error", $this->session->flashdata("message")) : "" ?>
+                     <form action="<?= base_url("matericontroller/") . $aksi ?>" data-parsley-validate novalidate method="post" enctype="multipart/form-data">
 
-                        <input type="text" hidden value="<?= isset($user) ? $user->id : "" ?>" name="id">
+                        <input type="text" hidden value="<?= isset($materi) ? $materi->id : "" ?>" name="id">
                         <div class="col-md-6 mb-3">
                            <label for="validationCustom02">Nama</label>
-                           <input type="text" required class="form-control" name="nama" value="<?= isset($user) ? $user->nama : "" ?>">
+                           <input type="text" required class="form-control" name="nama" value="<?= isset($materi) ? $materi->nama : "" ?>">
                            <div class="valid-feedback">
                               Looks good!
                            </div>
                         </div>
                         <div class="col-md-6 mb-3">
-                           <label for="validationCustom02">Email</label>
-                           <input type="email" <?= $aksi == "edit" ? "disabled" : "required" ?> class="form-control" name="email" value="<?= isset($user) ? $user->email : "" ?>" >
-                           <div class="valid-feedback">
-                              Looks good!
-                           </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                           <label for="validationCustom02">Role</label>
-                           <select name="role_id" class="form-control select-basic" id="select-role" required>
+                           <label for="validationCustom02">Tingkatan</label>
+                           <select name="tingkatan" data-parsley-errors-container=".tingkatanError" class="form-control select-basic" id="select-role" required>
                               <option selected value="" hidden>Pilih Satu</option>
-                              <?php foreach ($role as $value) :  ?>
-                                 <?php if ($user->role_id == $value->id) :  ?>
-                                    <option selected value="<?= $value->id ?>"><?=  ucwords($value->nama ) ?></option>
-                                 <?php else :  ?>
-                                    <option value="<?= $value->id ?>"><?=  ucwords($value->nama ) ?></option>
-                                 <?php endif;  ?>
-                              <?php endforeach;  ?>
+                              <?php if (isset($materi)) :  ?>
+                                 <option <?= $materi->tingkatan=="SD"?"selected":""  ?> value="SD">SD</option>
+                                 <option <?= $materi->tingkatan=="SMP"?"selected":""  ?> value="SMP">SMP</option>
+                                 <option <?= $materi->tingkatan=="SMA"?"selected":""  ?> value="SMA">SMA</option>
+                              <?php else : ?>
+                                 <option value="SD">SD</option>
+                                 <option value="SMP">SMP</option>
+                                 <option value="SMA">SMA</option>
+                              <?php endif  ?>
                            </select>
-                           <div class="invalid-feedback">Tidak boleh kosong</div>
+                           <span class="tingkatanError"></span>
                         </div>
                         <div class="col-md-6 mb-3">
-                           <label class="password"><?= $aksi=="edit"?"Masukkan Password Baru":"Password"  ?></label>
-                           <div class="password-strength-container">
-                              <input name="password" type="password" <?= $aksi == "edit" ? "" : "required" ?>  class="form-control" id="password-strength">
+                           <label for="validationCustom02">File Pendukung Materi <small>(Opsional)</small></label>
+                           <input type="file" class="dropify" name="doc" data-max-file-size="10000K" data-default-file="<?= isset($materi) ? base_url("assets/file/" . $materi->file) : "" ?>">
+                           <div class="valid-feedback">
+                              Looks good!
                            </div>
                         </div>
                         <div class="col-md-6 mb-3">
-                           <label class="password">Ulangi Password</label>                       
-                              <input  type="password" class="form-control"  data-parsley-equalto="#password-strength" >
+                           <label>Deskripsi <small>(opsional)</small></label>
+                           <textarea name="deskripsi" id="" class="form-control" placeholder="Tuliskan tentang materi ini"><?= isset($materi)?$materi->deskripsi:""  ?></textarea>
                         </div>
                         <div class="col-md-6">
                            <button type="submit" class="btn btn-primary">Simpan</button>

@@ -71,9 +71,8 @@ const userTypeHandler = function () {
    }
 }
 const materiTypeHandler = function () {
-   if ($("#user-table").length > 0) {
-      $("#user-table").DataTable()
-      $(document).on("click", "#delete-user", function () {
+   if ($("#materi-table").length > 0) {
+      $(document).on("click", "#delete-materi", function () {
          let id = $(this).data("id")
          let tr = $(this).parents("tr");
          Swal.fire({
@@ -88,7 +87,7 @@ const materiTypeHandler = function () {
             if (result.isConfirmed) {
                $.ajax({
                   type: "post",
-                  url: base_url + "usercontroller/delete",
+                  url: base_url + "matericontroller/delete",
                   data: { "id": id },
                   dataType: "json",
                   success: function (response) {
@@ -119,6 +118,7 @@ const initDatatable = () => {
 }
 $(document).ready(function () {
    initDatatable()
+   materiTypeHandler()
    userTypeHandler()
    roleTypeHandler()
 });

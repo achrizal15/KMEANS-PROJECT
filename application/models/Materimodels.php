@@ -29,13 +29,13 @@ class Materimodels extends CI_Model
 
    public function delete($id)
    {
-      $this->db->delete("user", ["id" => $id]);
+      $this->db->delete("materi", ["id" => $id]);
       return $this->db->affected_rows();
    }
    public function get($id = "")
    {
       $this->db->select("*");
-      $this->db->from("user");
+      $this->db->from("materi");
       $this->db->where("id", $id);
       return $this->db->get()->row();
    }
@@ -48,13 +48,13 @@ class Materimodels extends CI_Model
    }
    public function perbarui($id, $data)
    {
-      $this->db->update("user", $data, ["id" => $id]);
+      $this->db->update("materi", $data, ["id" => $id]);
       return $this->db->affected_rows();
    }
    public function create($data)
    {
       $data["created_at"] = date("Y-m-d H:i:s", strtotime("now"));
-      $this->db->insert("user", $data);
+      $this->db->insert("materi", $data);
       return $this->db->affected_rows();
    }
 }

@@ -20,6 +20,7 @@
 <link href="<?= base_url() ?>assets/plugins/datatables.net-colreorder-bs4/colreorder.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"> -->
 <link href="<?= base_url() ?>assets/plugins/select2/select2.min.css" rel="stylesheet">
+<link href="<?= base_url() ?>assets/plugins/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 <link href="<?= base_url() ?>assets/css/bootstrap-custom.min.css" rel="stylesheet" type="text/css" />
 <link href="<?= base_url() ?>assets/plugins/fontawesome6/pro/css/all.css" rel="stylesheet" type="text/css" />
 <link href="<?= base_url() ?>assets/css/app.min.css" rel="stylesheet" type="text/css" />
