@@ -4,7 +4,7 @@
          <?php
          $group = [];
          foreach (list_menu() as $key => $value) :  ?>
-            <?php if ($value["group"] == null) :  ?>
+            <?php if ($value["group"] == null ) :  ?>
                <?php if (show_menu($value["nama"])) :  ?>
                   <li>
                      <a href="<?= base_url($value["link"]) ?>" class="<?= active_sidebar($value["link"]) ?>">
@@ -45,9 +45,9 @@
                         </ul>
                      </div>
                   </li>
-               <?php endif;
-               $group[] = $value["group"];
-               ?>
+               <?php  $group[] = $value["group"];
+               endif;
+                           ?>
             <?php endif  ?>
          <?php endforeach;  ?>
       </ul>
