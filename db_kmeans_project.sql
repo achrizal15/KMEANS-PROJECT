@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 11 Bulan Mei 2022 pada 07.01
+-- Waktu pembuatan: 11 Bulan Mei 2022 pada 09.54
 -- Versi server: 10.4.21-MariaDB
 -- Versi PHP: 7.4.24
 
@@ -43,10 +43,10 @@ CREATE TABLE `akses` (
 --
 
 INSERT INTO `akses` (`id`, `nama`, `content`, `created_at`, `link`, `icon`, `submenu`, `group`) VALUES
-(17, 'Home', 'home', '2022-05-11 05:39:33', '', 'fa-solid fa-gauge', '', NULL),
-(18, 'User', 'user', '2022-05-11 05:39:33', 'usercontroller', 'fa-solid fa-user-headset', '', 'Manage Staff'),
-(19, 'Role', 'role', '2022-05-11 05:39:33', 'rolecontroller', 'fa-solid fa-user-headset', '', 'Manage Staff'),
-(21, 'Materi', 'materi', '2022-05-11 05:39:33', 'matericontroller', 'fa-solid fa-square-poll-horizontal', '', NULL);
+(17, 'Home', 'home', '2022-05-11 09:52:44', '', 'fa-solid fa-gauge', '', NULL),
+(18, 'User', 'user', '2022-05-11 09:52:44', 'usercontroller', 'fa-solid fa-user-headset', '', 'Manage Staff'),
+(19, 'Role', 'role', '2022-05-11 09:52:44', 'rolecontroller', 'fa-solid fa-user-headset', '', 'Manage Staff'),
+(21, 'Materi', 'materi', '2022-05-11 09:52:44', 'matericontroller', 'fa-solid fa-square-poll-horizontal', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -62,6 +62,13 @@ CREATE TABLE `materi` (
   `deskripsi` text NOT NULL,
   `file` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `materi`
+--
+
+INSERT INTO `materi` (`id`, `nama`, `tingkatan`, `created_at`, `deskripsi`, `file`) VALUES
+(28, 'Aljabar', 'SMP', '2022-05-11 09:51:15', 'Adu adu adu', 'ProposalPA_RendyFajarSetiawan_RevisiSudahSempro.rar');
 
 -- --------------------------------------------------------
 
@@ -175,7 +182,7 @@ ALTER TABLE `akses`
 -- AUTO_INCREMENT untuk tabel `materi`
 --
 ALTER TABLE `materi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT untuk tabel `role`
