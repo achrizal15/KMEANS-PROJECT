@@ -13,26 +13,34 @@ class Rolemodels extends CI_Model
    }
    public function set_menu($menus)
    {
+      $title = [];
       foreach ($menus as $menu) {
-         $akses=$this->db->get_where("akses", ["content" => $menu["content"]])->row();
+         $akses = $this->db->get_where("akses", ["content" => $menu["content"]])->row();
          if ($akses == null) {
             $this->db->insert("akses", [
                "nama" => $menu["nama"],
                "content" => $menu["content"],
                "icon" => $menu["icon"],
                "link" => $menu["link"],
-               "group"=>$menu["group"],
+               "group" => $menu["group"],
                "created_at" => date("Y-m-d H:i:s", strtotime("now"))
             ]);
-         }else{
-            $this->db->update("akses",[
+         } else {
+            $this->db->update("akses", [
                "nama" => $menu["nama"],
                "content" => $menu["content"],
                "icon" => $menu["icon"],
                "link" => $menu["link"],
-               "group"=>$menu["group"],
+               "group" => $menu["group"],
                "created_at" => date("Y-m-d H:i:s", strtotime("now"))
-            ],["id"=>$akses->id]);
+            ], ["id" => $akses->id]);
+         }
+         $title[] = $menu["content"];
+      }
+      $aksesAll = $this->get_all_akses();
+      foreach ($aksesAll as $key => $value) {
+         if (!in_array($value->content, $title)) {
+            $this->db->delete("akses", ["content" => $value->content]);
          }
       }
    }

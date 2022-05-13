@@ -9,6 +9,7 @@ if (!function_exists("active_sidebar")) {
       }
    }
 }
+// Ini adalah tempat menambah menu
 if (!function_exists("list_menu")) {
    function list_menu()
    {
