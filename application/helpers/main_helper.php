@@ -31,6 +31,13 @@ if (!function_exists("list_menu")) {
             "group"=>null
          ],
          [
+            "nama" => "Kelas",
+            "content" => "kelas",
+            "icon" => "fa-solid fa-window-frame",
+            "link" => "kelascontroller",
+            "group"=>null
+         ],
+         [
             "nama" => "User",
             "link" => "usercontroller",
             "icon" => "fa-solid fa-user-headset",
