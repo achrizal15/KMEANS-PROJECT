@@ -48,7 +48,7 @@ class Kelasmodels extends CI_Model
    }
    public function perbarui($id, $data)
    {
-      $this->db->update("materi", $data, ["id" => $id]);
+      $this->db->update("kelas", $data, ["id" => $id]);
       return $this->db->affected_rows();
    }
    public function create($data)

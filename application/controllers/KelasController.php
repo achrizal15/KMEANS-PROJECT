@@ -40,15 +40,10 @@ class KelasController extends CI_Controller
    {
       $id = $this->input->post("id");
       $data = $this->input->post();
-      if($_FILES["doc"]["name"]){
-         $this->main_libraries->uploadImage("file");
-         $this->upload->do_upload('doc');
-         $data["file"]= $this->upload->data("file_name");
-      }
       unset($data["id"]);
-      $this->mt->perbarui($id, $data);
+      $this->km->perbarui($id, $data);
       $this->session->set_flashdata("message", "Data berhasil diperbarui.");
-      redirect(base_url("matericontroller"));
+      redirect(base_url("kelascontroller"));
    }
    public function delete()
    {
