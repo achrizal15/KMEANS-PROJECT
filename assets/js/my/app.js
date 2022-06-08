@@ -151,6 +151,7 @@ const initDatatable = () => {
       }
    );
 }
+
 $(document).ready(function () {
    initDatatable()
    materiTypeHandler()

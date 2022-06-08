@@ -35,13 +35,25 @@
                            </div>
                         </div>
                         <div class="col-md-6 mb-3">
+                           <div class="row">
+                              <div class="col-md-6">
+                                 <label for="validationCustom02">Min Nilai Kompetensi</label>
+                                 <input type="number" min="0" required class="form-control" name="max nilai kompetensi" value="<?= isset($kelas) ? $kelas->nama : "" ?>">
+                              </div>
+                              <div class="col-md-6">
+                                 <label for="validationCustom02">Max Nilai Kompetensi</label>
+                                 <input type="number" min="0" required class="form-control" name="max nilai kompetensi" value="<?= isset($kelas) ? $kelas->nama : "" ?>">
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
                            <label for="validationCustom02">Tingkatan</label>
-                           <select name="tingkatan" data-parsley-errors-container=".tingkatanError" class="form-control select-basic" id="select-role" required>
+                           <select name="tingkatan" data-parsley-errors-container=".tingkatanError" class="form-control select-basic" id="select-tingkatan" required>
                               <option selected value="" hidden>Pilih Satu</option>
                               <?php if (isset($kelas)) :  ?>
-                                 <option <?= $kelas->tingkatan=="SD"?"selected":""  ?> value="SD">SD</option>
-                                 <option <?= $kelas->tingkatan=="SMP"?"selected":""  ?> value="SMP">SMP</option>
-                                 <option <?= $kelas->tingkatan=="SMA"?"selected":""  ?> value="SMA">SMA</option>
+                                 <option <?= $kelas->tingkatan == "SD" ? "selected" : ""  ?> value="SD">SD</option>
+                                 <option <?= $kelas->tingkatan == "SMP" ? "selected" : ""  ?> value="SMP">SMP</option>
+                                 <option <?= $kelas->tingkatan == "SMA" ? "selected" : ""  ?> value="SMA">SMA</option>
                               <?php else : ?>
                                  <option value="SD">SD</option>
                                  <option value="SMP">SMP</option>
@@ -52,10 +64,11 @@
                         </div>
                         <div class="col-md-6 mb-3">
                            <label for="validationCustom02">Guru</label>
-                           <select name="guru_id" data-parsley-errors-container=".guruError" class="form-control select-basic" id="select-role" required>
+                           <select name="guru_id" data-parsley-errors-container=".guruError" class="form-control select-basic" id="select-guru" required>
                               <option selected value="" hidden>Pilih Satu</option>
                               <?php foreach ($guru as $key => $value) : ?>
-                               <option value="<?= $value->uid?>"><?= $value->unama?></option> 
+                                 <?php if (strtolower($value->rnama) != "guru") continue;  ?>
+                                 <option value="<?= $value->uid ?>"><?= ucwords($value->unama) ?></option>
                               <?php endforeach ?>
                            </select>
                            <span class="guruError"></span>
