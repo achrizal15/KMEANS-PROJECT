@@ -105,6 +105,50 @@ const materiTypeHandler = function () {
       })
    }
 }
+const pembelajaranTypeHandler = function () {
+   if ($("#pembelajaran-table").length > 0) {
+      const idHandlerTugas=$("#tugasHandler")
+      $(document).on("click", "#delete-pembelajaran", function () {
+         let id = $(this).data("id")
+         let tr = $(this).parents("tr");
+         Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+         }).then((result) => {
+            if (result.isConfirmed) {
+               $.ajax({
+                  type: "post",
+                  url: base_url + "pembelajarancontroller/delete",
+                  data: { "id": id },
+                  dataType: "json",
+                  success: function (response) {
+                     Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                     )
+                     tr.remove();
+                  }
+               });
+
+            }
+         })
+      })
+   }
+   $(document).on("change","#tugasHandler",function(){
+      if($(this).prop("checked")){
+         $("#formTugas").css("visibility","visible")
+
+      } else {
+         $("#formTugas").css("visibility","hidden")
+      }
+   })
+}
 const kelasTypeHandler = function () {
    if ($("#kelas-table").length > 0) {
       $(document).on("click", "#delete-kelas", function () {
@@ -155,6 +199,7 @@ const initDatatable = () => {
 $(document).ready(function () {
    initDatatable()
    materiTypeHandler()
+   pembelajaranTypeHandler()
    kelasTypeHandler()
    userTypeHandler()
    roleTypeHandler()
