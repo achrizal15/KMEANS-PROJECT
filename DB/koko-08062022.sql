@@ -1,0 +1,3 @@
+ALTER TABLE `kelas`
+ADD `hari` VARCHAR(255) NOT NULL AFTER `guru_id`,
+ADD `waktu` VARCHAR(255) NOT NULL AFTER `hari`;

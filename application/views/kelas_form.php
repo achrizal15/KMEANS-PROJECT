@@ -34,16 +34,26 @@
                               Looks good!
                            </div>
                         </div>
+                        
                         <div class="col-md-6 mb-3">
-                           <div class="row">
-                              <div class="col-md-6">
-                                 <label for="validationCustom02">Min Nilai Kompetensi</label>
-                                 <input type="number" min="0" required class="form-control" name="max nilai kompetensi" value="<?= isset($kelas) ? $kelas->nama : "" ?>">
-                              </div>
-                              <div class="col-md-6">
-                                 <label for="validationCustom02">Max Nilai Kompetensi</label>
-                                 <input type="number" min="0" required class="form-control" name="max nilai kompetensi" value="<?= isset($kelas) ? $kelas->nama : "" ?>">
-                              </div>
+                           <label for="validationCustom02">Hari</label>
+                           <select name="hari" data-parsley-errors-container=".hariError" class="form-control select-basic" id="select-hari" required>
+                              <option selected value="" hidden>Pilih Satu</option>
+                              <option value="Senin" <?= isset($kelas) && $kelas->hari == "Senin" ? "selected" : "" ?>>Senin</option>
+                              <option value="Selasa" <?= isset($kelas) && $kelas->hari == "Selasa" ? "selected" : "" ?>>Selasa</option>
+                              <option value="Rabu" <?= isset($kelas) && $kelas->hari == "Rabu" ? "selected" : "" ?>>Rabu</option>
+                              <option value="Kamis" <?= isset($kelas) && $kelas->hari == "Kamis" ? "selected" : "" ?>>Kamis</option>
+                              <option value="Jumat" <?= isset($kelas) && $kelas->hari == "Jumat" ? "selected" : "" ?>>Jumat</option>
+                              <option value="Sabtu" <?= isset($kelas) && $kelas->hari == "Sabtu" ? "selected" : "" ?>>Sabtu</option>
+                              <option value="Minggu" <?= isset($kelas) && $kelas->hari == "Minggu" ? "selected" : "" ?>>Minggu</option>
+                           </select>
+                           <span class="hariError"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                           <label for="validationCustom02">Waktu</label>
+                           <input type="time" required class="form-control" name="waktu" value="<?= isset($kelas) ? $kelas->waktu : "" ?>">
+                           <div class="valid-feedback">
+                              Looks good!
                            </div>
                         </div>
                         <div class="col-md-6 mb-3">
@@ -68,7 +78,7 @@
                               <option selected value="" hidden>Pilih Satu</option>
                               <?php foreach ($guru as $key => $value) : ?>
                                  <?php if (strtolower($value->rnama) != "guru") continue;  ?>
-                                 <option value="<?= $value->uid ?>"><?= ucwords($value->unama) ?></option>
+                                 <option <?=isset($kelas)&& $kelas->guru_id==$value->uid?"selected":"" ?> value="<?= $value->uid ?>"><?= ucwords($value->unama) ?></option>
                               <?php endforeach ?>
                            </select>
                            <span class="guruError"></span>
