@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 11 Bulan Mei 2022 pada 09.54
+-- Waktu pembuatan: 08 Jun 2022 pada 12.17
 -- Versi server: 10.4.21-MariaDB
 -- Versi PHP: 7.4.24
 
@@ -43,10 +43,49 @@ CREATE TABLE `akses` (
 --
 
 INSERT INTO `akses` (`id`, `nama`, `content`, `created_at`, `link`, `icon`, `submenu`, `group`) VALUES
-(17, 'Home', 'home', '2022-05-11 09:52:44', '', 'fa-solid fa-gauge', '', NULL),
-(18, 'User', 'user', '2022-05-11 09:52:44', 'usercontroller', 'fa-solid fa-user-headset', '', 'Manage Staff'),
-(19, 'Role', 'role', '2022-05-11 09:52:44', 'rolecontroller', 'fa-solid fa-user-headset', '', 'Manage Staff'),
-(21, 'Materi', 'materi', '2022-05-11 09:52:44', 'matericontroller', 'fa-solid fa-square-poll-horizontal', '', NULL);
+(32, 'Role', 'role', '2022-06-08 06:10:20', 'rolecontroller', 'fa-solid fa-user-headset', '', 'Manage Staff'),
+(33, 'Home', 'home', '2022-06-08 06:10:20', '', 'fa-solid fa-gauge', '', NULL),
+(34, 'Materi', 'materi', '2022-06-08 06:10:20', 'matericontroller', 'fa-solid fa-square-poll-horizontal', '', NULL),
+(35, 'User', 'user', '2022-06-08 06:10:20', 'usercontroller', 'fa-solid fa-user-headset', '', 'Manage Staff'),
+(37, 'Kelas', 'kelas', '2022-06-08 06:10:20', 'kelascontroller', 'fa-solid fa-window-frame', '', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `jam_pelajaran`
+--
+
+CREATE TABLE `jam_pelajaran` (
+  `id` int(11) NOT NULL,
+  `materi` varchar(255) NOT NULL,
+  `jam_pelajaran` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` datetime NOT NULL,
+  `kelas_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `kelas`
+--
+
+CREATE TABLE `kelas` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `tingkatan` varchar(255) NOT NULL,
+  `guru_id` int(11) NOT NULL,
+  `hari` varchar(255) NOT NULL,
+  `waktu` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `kelas`
+--
+
+INSERT INTO `kelas` (`id`, `nama`, `created_at`, `tingkatan`, `guru_id`, `hari`, `waktu`) VALUES
+(2, 'A', '2022-06-08 05:26:07', 'SD', 19, 'Selasa', '13:10'),
+(3, 'C', '2022-06-08 06:09:39', 'SMP', 19, 'Senin', '13:09');
 
 -- --------------------------------------------------------
 
@@ -69,6 +108,37 @@ CREATE TABLE `materi` (
 
 INSERT INTO `materi` (`id`, `nama`, `tingkatan`, `created_at`, `deskripsi`, `file`) VALUES
 (28, 'Aljabar', 'SMP', '2022-05-11 09:51:15', 'Adu adu adu', 'ProposalPA_RendyFajarSetiawan_RevisiSudahSempro.rar');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pembelajaran`
+--
+
+CREATE TABLE `pembelajaran` (
+  `id` int(11) NOT NULL,
+  `guru_id` int(11) NOT NULL,
+  `kelas_id` int(11) NOT NULL,
+  `materi_id` int(11) NOT NULL,
+  `file` varchar(255) NOT NULL,
+  `deskripsi` text NOT NULL,
+  `tugas_id` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pengumpulan_tugas`
+--
+
+CREATE TABLE `pengumpulan_tugas` (
+  `id` int(11) NOT NULL,
+  `siswa_id` int(11) NOT NULL,
+  `kelas_id` int(11) NOT NULL,
+  `tugas_id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -106,15 +176,29 @@ CREATE TABLE `role_akses` (
 --
 
 INSERT INTO `role_akses` (`akses_id`, `role_id`) VALUES
-(17, 1),
-(18, 1),
-(19, 1),
-(20, 1),
-(21, 1),
-(17, 18),
-(19, 18),
-(18, 18),
-(21, 18);
+(32, 1),
+(33, 1),
+(34, 1),
+(35, 1),
+(32, 18),
+(34, 18),
+(37, 18),
+(33, 18),
+(35, 18),
+(37, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tugas`
+--
+
+CREATE TABLE `tugas` (
+  `id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `judul` varchar(255) NOT NULL,
+  `deskripsi` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -137,8 +221,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `nama`, `email`, `password`, `role_id`, `created_at`) VALUES
 (15, 'root', 'root@gmail.com', '$2y$10$ITjNrFRnoA5fJYNzg9shM.7XPIWcRseYd5kjwzjiQwVMWk7g73J9.', 1, '2022-04-30 05:24:49'),
-(19, 'guru', 'guru@gmail.com', '$2y$10$Nv5vP6YWgCbMXkFvzNz3Se/64inltPk9KCI1rIvujojjCFG3R/mi2', 18, '2022-05-11 04:43:27'),
-(35, 'assakk', 'adskj@gmail.com', '$2y$10$LhZ5nA743SlNz1C9vgGRoeakAIqJ8GrkHRo5xJnwdxykyITmrchj6', 1, '2022-05-11 05:39:33');
+(19, 'guru', 'guru@gmail.com', '$2y$10$Nv5vP6YWgCbMXkFvzNz3Se/64inltPk9KCI1rIvujojjCFG3R/mi2', 18, '2022-05-11 04:43:27');
 
 --
 -- Indexes for dumped tables
@@ -151,15 +234,45 @@ ALTER TABLE `akses`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `jam_pelajaran`
+--
+ALTER TABLE `jam_pelajaran`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `kelas`
+--
+ALTER TABLE `kelas`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `materi`
 --
 ALTER TABLE `materi`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `pembelajaran`
+--
+ALTER TABLE `pembelajaran`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `pengumpulan_tugas`
+--
+ALTER TABLE `pengumpulan_tugas`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `role`
 --
 ALTER TABLE `role`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `tugas`
+--
+ALTER TABLE `tugas`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -176,7 +289,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `akses`
 --
 ALTER TABLE `akses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+
+--
+-- AUTO_INCREMENT untuk tabel `jam_pelajaran`
+--
+ALTER TABLE `jam_pelajaran`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `kelas`
+--
+ALTER TABLE `kelas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `materi`
@@ -185,10 +310,28 @@ ALTER TABLE `materi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
+-- AUTO_INCREMENT untuk tabel `pembelajaran`
+--
+ALTER TABLE `pembelajaran`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `pengumpulan_tugas`
+--
+ALTER TABLE `pengumpulan_tugas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT untuk tabel `role`
 --
 ALTER TABLE `role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT untuk tabel `tugas`
+--
+ALTER TABLE `tugas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
