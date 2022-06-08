@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 08 Jun 2022 pada 12.17
+-- Waktu pembuatan: 08 Jun 2022 pada 12.22
 -- Versi server: 10.4.21-MariaDB
 -- Versi PHP: 7.4.24
 
@@ -43,11 +43,12 @@ CREATE TABLE `akses` (
 --
 
 INSERT INTO `akses` (`id`, `nama`, `content`, `created_at`, `link`, `icon`, `submenu`, `group`) VALUES
-(32, 'Role', 'role', '2022-06-08 06:10:20', 'rolecontroller', 'fa-solid fa-user-headset', '', 'Manage Staff'),
-(33, 'Home', 'home', '2022-06-08 06:10:20', '', 'fa-solid fa-gauge', '', NULL),
-(34, 'Materi', 'materi', '2022-06-08 06:10:20', 'matericontroller', 'fa-solid fa-square-poll-horizontal', '', NULL),
-(35, 'User', 'user', '2022-06-08 06:10:20', 'usercontroller', 'fa-solid fa-user-headset', '', 'Manage Staff'),
-(37, 'Kelas', 'kelas', '2022-06-08 06:10:20', 'kelascontroller', 'fa-solid fa-window-frame', '', NULL);
+(32, 'Role', 'role', '2022-06-08 12:22:45', 'rolecontroller', 'fa-solid fa-user-headset', '', 'Manage Staff'),
+(33, 'Home', 'home', '2022-06-08 12:22:45', '', 'fa-solid fa-gauge', '', NULL),
+(34, 'Materi', 'materi', '2022-06-08 12:22:45', 'matericontroller', 'fa-solid fa-square-poll-horizontal', '', NULL),
+(35, 'User', 'user', '2022-06-08 12:22:45', 'usercontroller', 'fa-solid fa-user-headset', '', 'Manage Staff'),
+(37, 'Kelas', 'kelas', '2022-06-08 12:22:45', 'kelascontroller', 'fa-solid fa-window-frame', '', NULL),
+(38, 'Pembelajaran', 'pembelajaran', '2022-06-08 12:22:45', 'pembelajarancontroller', 'fa-solid fa-users', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -180,12 +181,10 @@ INSERT INTO `role_akses` (`akses_id`, `role_id`) VALUES
 (33, 1),
 (34, 1),
 (35, 1),
-(32, 18),
-(34, 18),
-(37, 18),
+(37, 1),
+(38, 1),
 (33, 18),
-(35, 18),
-(37, 1);
+(38, 18);
 
 -- --------------------------------------------------------
 
@@ -289,7 +288,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `akses`
 --
 ALTER TABLE `akses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT untuk tabel `jam_pelajaran`
