@@ -27,6 +27,8 @@
                         <?php echo $this->session->flashdata("message") ? custom_alert_messages("error", $this->session->flashdata("message")) : "" ?>
                         <form action="<?= base_url("pembelajarancontroller/") . $aksi ?>" data-parsley-validate
                             novalidate method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="pembelajaran_id" value="<?= isset($pembelajaran)?$pembelajaran->id:""?>">
+                            <input type="hidden" name="tugas_id" value="<?= isset($tugas)?$tugas->id:""?>">
 
                             <div class="row">
                                 <div class="col-md-6 ">
@@ -70,12 +72,12 @@
                                     <input type="hidden" name="guru_id" value=<?= $this->session->userdata("id")  ?>>
                                     <div class=" mb-3">
                                         <label>Deskripsi <small>(opsional)</small></label>
-                                        <textarea name="deskripsi" id="" class="form-control"
+                                        <textarea name="deskripsi_pembelajaran" id="" class="form-control"
                                             placeholder="Tuliskan tentang materi ini"><?= isset($pembelajaran)?$pembelajaran->deskripsi:""  ?></textarea>
                                     </div>
 
                                     <div class="col-md-6 mb-3">
-                                        <input type="checkbox" id="tugasHandler">
+                                        <input  type="checkbox" <?= isset($tugas)?'checked':""?> id="tugasHandler">
                                         <label for="tugasHandler">
                                             Berikan tugas
                                         </label>
@@ -86,15 +88,15 @@
                                         <a href="" class="btn btn-danger">Reset</a>
                                     </div>
                                 </div>
-                                <div class="col-md-6 " style="visibility:hidden" id="formTugas">
+                                <div class="col-md-6 " style="visibility: <?= isset($tugas)?'':"hidden"?>" id="formTugas">
                                    <h3>Tugas</h3>
                                    <div class=" mb-3">
                                         <label>Judul</label>
-                                        <input name="judul" id="" class="form-control"><?= isset($tugas->judul)?$tugas->judul:""  ?>
+                                        <input name="judul" id="" class="form-control" value="<?= isset($tugas->judul)?$tugas->judul:""  ?>"> 
                                     </div>
                                    <div class=" mb-3">
                                         <label>Deskripsi</label>
-                                        <textarea name="deskripsi" id="" class="form-control"><?= isset($tugas->deskripsi)?$tugas->deskripsi:""  ?> </textarea>
+                                        <textarea name="deskripsi_tugas" id="" class="form-control"><?= isset($tugas->deskripsi)?$tugas->deskripsi:""  ?> </textarea>
                                     </div>
                                 </div>
                             </div>

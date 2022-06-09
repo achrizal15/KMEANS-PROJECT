@@ -39,7 +39,7 @@ class Tugasmodels extends CI_Model
    public function get($id = "")
    {
       $this->db->select("*");
-      $this->db->from("pembelajaran");
+      $this->db->from("tugas");
       $this->db->where("id", $id);
       return $this->db->get()->row();
    }
@@ -52,7 +52,7 @@ class Tugasmodels extends CI_Model
    }
    public function perbarui($id, $data)
    {
-      $this->db->update("pembelajaran", $data, ["id" => $id]);
+      $this->db->update("tugas", $data, ["id" => $id]);
       return $this->db->affected_rows();
    }
    public function create($data)
