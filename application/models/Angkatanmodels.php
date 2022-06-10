@@ -14,20 +14,14 @@ class Angkatanmodels extends CI_Model
    public function get_all()
    {
       $alias = [
-         ["table" => "angkatan", "alias" => "p"],
-         ["table" => "user", "alias" => "s"],
-         ["table" => "kelas", "alias" => "k"],
-         ["table" => "materi", "alias" => "m"]
+         ["table" => "angkatan", "alias" => "a"]
       ];
       $select="";
       foreach ($alias as $key) {
          $select .= implode(',', $this->setAliasColumn($key['table'], $key['alias'])) . ",";
       }
       $this->db->select($select);
-      $this->db->from("angkatan as p");
-      $this->db->join("user as s","s.id=p.guru_id");
-      $this->db->join("kelas as k","k.id=p.kelas_id");
-      $this->db->join("materi as m","m.id=p.materi_id");
+      $this->db->from("angkatan as a");
       return $this->db->get()->result();
    }
 

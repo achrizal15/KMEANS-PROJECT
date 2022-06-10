@@ -8,7 +8,7 @@ class AngkatanController extends CI_Controller
       parent::__construct();
       $this->load->library(["main_libraries", 'session', "form_validation"]);
       $this->load->model("angkatanmodels", "am");
-      $this->load->model("siswamodels", "sm");
+      // $this->load->model("siswamodels", "sm");
       is_login("angkatan");
    }
    public function index()
@@ -18,7 +18,6 @@ class AngkatanController extends CI_Controller
    }
    public function action($params = "add", $id = "")
    {
-      $data['angkatan'] = $this->am->get_all();
       $data["aksi"] = strtolower($params);
       if ($params == "edit") {
          $data["angkatan"] = $this->am->get($id);
@@ -41,7 +40,7 @@ class AngkatanController extends CI_Controller
    {
       $id = $this->input->post("id");
       $data = $this->input->post();
-      unset($data["id"]);
+      // unset($data["id"]);
       $this->am->perbarui($id, $data);
       $this->session->set_flashdata("message", "Data berhasil diperbarui.");
       redirect(base_url("angkatancontroller"));
