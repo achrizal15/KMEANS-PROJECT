@@ -45,6 +45,13 @@ if (!function_exists("list_menu")) {
             "group"=>null
          ],
          [
+            "nama" => "Angkatan",
+            "content" => "angkatan",
+            "icon" => "fa-solid fa-school",
+            "link" => "angkatancontroller",
+            "group"=>null
+         ],
+         [
             "nama" => "User",
             "link" => "usercontroller",
             "icon" => "fa-solid fa-user-headset",
