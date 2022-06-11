@@ -5,7 +5,7 @@
          $group = [];
          foreach (list_menu() as $key => $value) :  ?>
             <?php if ($value["group"] == null ) :  ?>
-               <?php if (show_menu($value["nama"])) :  ?>
+               <?php if (show_menu($value["content"])) :  ?>
                   <li>
                      <a href="<?= base_url($value["link"]) ?>" class="<?= active_sidebar($value["link"]) ?>">
                         <i class="<?= $value['icon'] ?>" style="font-size: 18px;"></i>
@@ -20,7 +20,7 @@
                if (in_array($value['group'], $group)) {
                   continue;
                }
-               if (show_menu($value["nama"])) :  ?>
+               if (show_menu($value["content"])) :  ?>
                   <?php
                   $grouplink = "";
                   foreach (list_menu() as $sub) {
@@ -29,13 +29,13 @@
                      }
                   }  ?>
                   <li class="panel">
-                     <a href="#<?= $value["nama"] ?>" style="font-weight: bold;" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="<?= $grouplink ?>">
+                     <a href="#<?= $value["content"] ?>" style="font-weight: bold;" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="<?= $grouplink ?>">
                         <i class="<?= $value['icon'] ?>" style="font-size: 18px;"></i> <span class="title"><?= $value["group"]  ?></span> <i class="icon-submenu ti-angle-left"></i></a>
-                     <div id="<?= $value["nama"] ?>" class="<?= $grouplink == "active" ? "" : "collapse" ?>">
+                     <div id="<?= $value["content"] ?>" class="<?= $grouplink == "active" ? "" : "collapse" ?>">
                         <ul class="submenu">
                            <?php foreach (list_menu() as $sub) :  ?>
                               <?php
-                              if (show_menu($sub["nama"]) != "has") {
+                              if (show_menu($sub["content"]) != "has") {
                                  continue;
                               }
                               if ($sub["group"] == $value["group"]) :  ?>

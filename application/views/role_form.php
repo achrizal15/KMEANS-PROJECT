@@ -51,7 +51,7 @@
                                              <input type="checkbox" name="role_akses[]" value="<?= $val->id ?>">
                                           <?php endif;  ?>
                                           <i data-swon-text="ON" data-swoff-text="OFF"></i>
-                                          <?= ucwords($val->content)  ?>
+                                          <?= ucwords($val->nama)  ?>
                                        </label>
                                     <?php endif;  ?>
                                  <?php endforeach  ?>
@@ -62,12 +62,12 @@
                                        <?php if ($k % 2 != 0) :  ?>
                                           <label class="switch-input mb-3">
                                              <?php if (isset($role->id)) :  ?>
-                                                <input type="checkbox" name="role_akses[]" <?= $this->ram->get_roles_akses($role->id, $val->nama) ? "checked" : "" ?> value="<?= $val->id ?>">
+                                                <input type="checkbox" name="role_akses[]" <?= $this->ram->get_roles_akses($role->id, $val->content) ? "checked" : "" ?> value="<?= $val->id ?>">
                                              <?php else :  ?>
                                                 <input type="checkbox" name="role_akses[]" value="<?= $val->id ?>">
                                              <?php endif;  ?>
                                              <i data-swon-text="ON" data-swoff-text="OFF"></i>
-                                             <?= ucwords($val->content)  ?>
+                                             <?= ucwords($val->nama)  ?>
                                           </label>
                                        <?php endif;  ?>
                                  <?php endforeach  ?>

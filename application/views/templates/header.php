@@ -7,7 +7,10 @@
 
 <body>
    <!-- WRAPPER -->
-   <div id="wrapper" style="background-image: url('<?= $this->uri->segment(2)=="login"? base_url('assets/images/bg-log.jpg'):''?>');">
+   <?php 
+   $bUrl=["login","landing"]
+   ?>
+   <div id="wrapper" style="background-image: url('<?=  in_array($this->uri->segment(2),$bUrl)? base_url('assets/images/bg-log.jpg'):''?>');">
 
       <?php if (isset($blank)) :  ?>
          <?php if ($blank == false) : ?>

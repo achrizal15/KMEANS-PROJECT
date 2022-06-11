@@ -52,12 +52,19 @@ if (!function_exists("list_menu")) {
             "group"=>null
          ],
          [
+            "nama" => "Soal Tes",
+            "link" => "soaltescontroller",
+            "icon" => "fa-solid fa-list-dropdown",
+            "content" => "soaltes",
+            "group" => "Manage Tes",
+         ],
+         [
             "nama" => "User",
             "link" => "usercontroller",
             "icon" => "fa-solid fa-user-headset",
             "content" => "user",
             "group" => "Manage Staff",
-         ],
+         ],       
          [
             "group" => "Manage Staff",
             "content" => "role",

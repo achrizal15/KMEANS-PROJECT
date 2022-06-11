@@ -44,13 +44,14 @@
                                  <tr>
                                     <td><?= ucwords($v->nama)  ?></td>
                                     <?php foreach(list_menu()as $menu) : ?>
-                                    <td><?= $this->ram->get_roles_akses($v->id, $menu["content"]) ? "YES" : "NO" ?></td>
+                                    <td>
+                                       <?= $this->ram->get_roles_akses($v->id, $menu["content"]) ? "YES" : "NO" ?></td>
                                     <?php endforeach  ?>
                                     <td class="align-middle"><?= date("d-m-Y", strtotime($v->created_at))  ?></td>
                                     <td class="align-middle" width="130px">
-                                       <?php if($v->id!=1):  ?>
+                                      
                                        <a href="<?= base_url("rolecontroller/action/edit/" . $v->id) ?>" class="btn btn-warning text-white" title="Edit"><i class="fas fa-edit"></i><span class="sr-only">EDIT</span></a>                                   
-                                       <a id="delete-role" data-id="<?= $v->id ?>" class="btn btn-danger text-white" title="Delete"><i class="fa fa-trash-o"></i> <span class="sr-only">Delete</span></a>    <?php endif;  ?>
+                                       <a id="delete-role" data-id="<?= $v->id ?>" class="btn btn-danger text-white" title="Delete"><i class="fa fa-trash-o"></i> <span class="sr-only">Delete</span></a>    
                                     </td>
                                  </tr>
                               <?php endforeach;  ?>

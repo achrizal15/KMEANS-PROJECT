@@ -28,7 +28,7 @@ class Roleaksesmodels extends CI_Model
       $this->db->join("akses a", "a.id=ra.akses_id");
       $this->db->where("ra.role_id", $role_id);
       if ($akses_id != null) {
-         $this->db->where("a.nama", $akses_id);
+         $this->db->where("a.content", $akses_id);
       }
       $menuresult = $this->db->get()->row();
 
