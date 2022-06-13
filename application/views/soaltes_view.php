@@ -2,7 +2,6 @@
 
   <!-- MAIN CONTENT -->
   <div class="main-content">
-
     <div class="content-heading">
       <div class="heading-left">
         <h1 class="page-title">Selamat datang <?= $this->session->userdata("nama")  ?></h1>
