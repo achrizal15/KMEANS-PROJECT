@@ -10,6 +10,7 @@ class AuthController extends CI_Controller
       $this->load->library('form_validation');
       $this->load->model("authmodels", "am");
       $this->load->model("angkatanmodels");
+      $this->load->model("siswamodels","sm");
    }
    public function index()
    {
@@ -31,8 +32,17 @@ class AuthController extends CI_Controller
       if (!$data['angkatan']) {
          redirect("/");
       }
-      echo 1;
+      // echo 1;
       // $this->main_libraries->innerview("form_register_siswa", [], true);
+      $this->main_libraries->innerview("register_form",$data,true);
+   }
+   public function add()
+   {
+      $data = $this->input->post();
+      // echo json_encode($data);exit; // sama dengan dd
+      $this->sm->create($data);
+      $this->session->set_flashdata("message", "Berhasil Mendaftar");
+      redirect(base_url("authcontroller/register_siswa"));
    }
    public function login()
    {

@@ -52,6 +52,13 @@ if (!function_exists("list_menu")) {
             "group"=>null
          ],
          [
+            "nama" => "Siswa",
+            "link" => "siswacontroller",
+            "icon" => "fa-solid fa-user-graduate",
+            "content" => "siswa",
+            "group" => null,
+         ],
+         [
             "nama" => "Soal Tes",
             "link" => "soaltescontroller",
             "icon" => "fa-solid fa-list-dropdown",
