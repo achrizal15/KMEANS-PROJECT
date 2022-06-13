@@ -57,7 +57,7 @@
                 <td><?= date("Y-m-d", strtotime($a->aawal_pendaftaran)) ?></td>
                 <td><?= date("Y-m-d", strtotime($a->aakhir_pendaftaran)) ?></td>
                 <td><?php if (date("Y-m-d", strtotime($a->aawal_pendaftaran)) <= date("Y-m-d")) :  ?>
-                    <a href="<?= base_url('authcontroller/register_siswa/'.$a->aid) ?>">Daftar</a>
+                    <a href="<?= base_url('authcontroller/register_siswa/').$a->aid ?>">Daftar</a>
                   <?php endif; ?>
                 </td>
               </tr>
