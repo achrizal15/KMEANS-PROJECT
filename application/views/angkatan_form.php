@@ -63,20 +63,7 @@
                               Looks good!
                            </div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                           <label for="validationCustom02">Status</label>
-                           <select name="status" data-parsley-errors-container=".statusError" class="form-control select-basic" id="select-role" required>
-                              <option selected value="" hidden>Pilih Satu</option>
-                              <?php if (isset($angkatan)) :  ?>
-                                 <option <?= $angkatan->status=="Aktif"?"selected":""  ?> value="Aktif">Aktif</option>
-                                 <option <?= $angkatan->status=="Tidak Aktif"?"selected":""  ?> value="Tidak Aktif">Tidak Aktif</option>
-                              <?php else : ?>
-                                 <option value="Aktif">Aktif</option>
-                                 <option value="Tidak Aktif">Tidak Aktif</option>
-                              <?php endif  ?>
-                           </select>
-                           <span class="statusError"></span>
-                        </div>
+                        <input type="text" hidden value="<?= isset($angkatan) ? $angkatan->status : "Aktif" ?>" name="status">
                         <div class="col-md-6">
                            <button type="submit" class="btn btn-primary">Simpan</button>
                            <a href="" class="btn btn-danger">Reset</a>

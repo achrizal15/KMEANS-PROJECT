@@ -36,7 +36,6 @@
                       <th>AKHIR PENDAFTARAN</th>
                       <th>AWAL PERIODE</th>
                       <th>AKHIR PERIODE</th>
-                      <th>STATUS</th>
                       <th class="text-nowrap">CREATED AT</th>
                       <th>ACTION</th>
                     </tr>
@@ -49,7 +48,6 @@
                         <td class="align-middle"><?= date("d-m-Y", strtotime($value->aakhir_pendaftaran))  ?></td>
                         <td class="align-middle"><?= date("d-m-Y", strtotime($value->aawal_periode))  ?></td>
                         <td class="align-middle"><?= date("d-m-Y", strtotime($value->aakhir_periode))  ?></td>
-                        <td class="align-middle"><?= $value->astatus?></td>
                         <td class="align-middle"><?= date("d-m-Y", strtotime($value->acreated_at))  ?></td>
                         <td class="align-middle" width="150px">
                           <a href="<?= base_url("angkatancontroller/action/edit/" . $value->aid) ?>" class="btn btn-warning text-white" title="Edit"><i class="fas fa-edit"></i><span class="sr-only">EDIT</span></a>

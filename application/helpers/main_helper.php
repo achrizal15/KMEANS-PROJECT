@@ -38,7 +38,7 @@ if (!function_exists("list_menu")) {
             "group"=>null
          ],
          [
-            "nama" => "Pembelajaran",
+            "nama" => "Jam Pelajaran",
             "content" => "pembelajaran",
             "icon" => "fa-solid fa-users",
             "link" => "pembelajarancontroller",

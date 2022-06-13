@@ -22,7 +22,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Daftar Pembelajaran</h3>
+              <h3 class="card-title">Daftar Jam Pembelajaran</h3>
             </div>
             <div class="card-body">
               <?php echo $this->session->flashdata("message") ? custom_alert_messages("", $this->session->flashdata("message")) : "" ?>

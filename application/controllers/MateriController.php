@@ -28,6 +28,11 @@ class MateriController extends CI_Controller
    }
    public function add()
    {
+      $rules = [
+         ["field" => "nama", "label" => "Nama", "rules" => "required|is_unique[materi.nama]"],
+      ];
+      $this->form_validation->set_rules($rules);
+      if ($this->form_validation->run() != false) {
       $data = $this->input->post();
       if($_FILES["doc"]["name"]){
          $this->main_libraries->uploadImage("file");
@@ -37,6 +42,10 @@ class MateriController extends CI_Controller
       $this->mt->create($data);
       $this->session->set_flashdata("message", "Data ditambahkan");
       redirect(base_url("matericontroller"));
+   } else {
+      $this->session->set_flashdata("message",validation_errors());
+     redirect(base_url("matericontroller/action/add"));
+   }
    }
    public function edit()
    {
