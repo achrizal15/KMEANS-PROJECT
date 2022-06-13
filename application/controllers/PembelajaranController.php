@@ -38,23 +38,24 @@ class PembelajaranController extends CI_Controller
    public function add()
    {
       $data_tugas = [
-         "judul"=>$this->input->post("judul"),
-         "deskripsi"=>$this->input->post("deskripsi"),
+         "judul" => $this->input->post("judul"),
+         "deskripsi" => $this->input->post("deskripsi_tugas"),
       ];
-
-      $this->tm->create($data_tugas);
+      if ($data_tugas['judul'] != '' && $data_tugas['deskripsi'] != '') {
+         $this->tm->create($data_tugas);
+      }
       $tugas_id = $this->db->insert_id();
       $data = [
-         "materi_id"=>$this->input->post("materi_id"),
-         "kelas_id"=>$this->input->post("kelas_id"),
-         "guru_id"=>$this->input->post("guru_id"),
-         "tugas_id"=>$tugas_id,
-         "deskripsi"=>$this->input->post("deskripsi"),
+         "materi_id" => $this->input->post("materi_id"),
+         "kelas_id" => $this->input->post("kelas_id"),
+         "guru_id" => $this->input->post("guru_id"),
+         "tugas_id" => $tugas_id,
+         "deskripsi" => $this->input->post("deskripsi_pembelajaran"),
       ];
-      if($_FILES["doc"]["name"]){
+      if ($_FILES["doc"]["name"]) {
          $this->main_libraries->uploadImage("file");
          $this->upload->do_upload('doc');
-         $data["file"]= $this->upload->data("file_name");
+         $data["file"] = $this->upload->data("file_name");
       }
       // echo json_encode($data);exit; // sama dengan dd
       $this->pm->create($data);
@@ -66,28 +67,28 @@ class PembelajaranController extends CI_Controller
       $id = $this->input->post("pembelajaran_id");
       $tugas_id = $this->input->post("tugas_id");
       $data = [
-         "materi_id"=>$this->input->post("materi_id"),
-         "kelas_id"=>$this->input->post("kelas_id"),
-         "guru_id"=>$this->input->post("guru_id"),
-         "deskripsi"=>$this->input->post("deskripsi_pembelajaran"),
+         "materi_id" => $this->input->post("materi_id"),
+         "kelas_id" => $this->input->post("kelas_id"),
+         "guru_id" => $this->input->post("guru_id"),
+         "deskripsi" => $this->input->post("deskripsi_pembelajaran"),
       ];
-      if($_FILES["doc"]["name"]){
+      if ($_FILES["doc"]["name"]) {
          $this->main_libraries->uploadImage("file");
          $this->upload->do_upload('doc');
-         $data["file"]= $this->upload->data("file_name");
+         $data["file"] = $this->upload->data("file_name");
       }
       $data_tugas = [
-     "judul"=>$this->input->post("judul"),
-     "deskripsi"=>$this->input->post("deskripsi_tugas"),
-  ];
-       if ($tugas_id == '') {
-      $this->tm->create($data_tugas);
-      $data["tugas_id"]=$this->db->insert_id();
-       } else {
-
-          $this->tm->perbarui($tugas_id, $data_tugas);
-       }
-
+         "judul" => $this->input->post("judul"),
+         "deskripsi" => $this->input->post("deskripsi_tugas"),
+      ];
+      if ($data_tugas['judul'] != '' && $data_tugas['deskripsi'] != '') {
+         if ($tugas_id == '') {
+            $this->tm->create($data_tugas);
+            $data["tugas_id"] = $this->db->insert_id();
+         } else {
+            $this->tm->perbarui($tugas_id, $data_tugas);
+         }
+      }
       $this->pm->perbarui($id, $data);
       $this->session->set_flashdata("message", "Data berhasil diperbarui.");
       redirect(base_url("pembelajarancontroller"));

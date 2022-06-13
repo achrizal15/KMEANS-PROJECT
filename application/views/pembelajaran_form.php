@@ -38,7 +38,7 @@
                                             class="form-control select-basic" id="select-kelas" required>
                                             <option selected value="" hidden>Pilih Satu</option>
                                             <?php foreach ($kelas as $key => $value) : ?>
-                                            <?php if ($value->kguru_id!=$this->session->userdata("id"))continue?>
+                                            <?php if ($value->kguru_id!=$this->session->userdata("id") )continue?>
                                             <option value="<?= $value->kid ?>"
                                                 <?=isset($pembelajaran)&&$pembelajaran->kelas_id == $value->kid?"selected":""?>>
                                                 <?= $value->knama ?></option>
@@ -71,8 +71,8 @@
 
                                     <input type="hidden" name="guru_id" value=<?= $this->session->userdata("id")  ?>>
                                     <div class=" mb-3">
-                                        <label>Deskripsi <small>(opsional)</small></label>
-                                        <textarea name="deskripsi_pembelajaran" id="" class="form-control"
+                                        <label>Deskripsi</label>
+                                        <textarea required name="deskripsi_pembelajaran" id="" class="form-control"
                                             placeholder="Tuliskan tentang materi ini"><?= isset($pembelajaran)?$pembelajaran->deskripsi:""  ?></textarea>
                                     </div>
 

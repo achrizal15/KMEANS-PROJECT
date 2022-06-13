@@ -107,7 +107,7 @@ const materiTypeHandler = function () {
 }
 const pembelajaranTypeHandler = function () {
    if ($("#pembelajaran-table").length > 0) {
-      const idHandlerTugas=$("#tugasHandler")
+      const idHandlerTugas = $("#tugasHandler")
       $(document).on("click", "#delete-pembelajaran", function () {
          let id = $(this).data("id")
          let tr = $(this).parents("tr");
@@ -140,12 +140,12 @@ const pembelajaranTypeHandler = function () {
          })
       })
    }
-   $(document).on("change","#tugasHandler",function(){
-      if($(this).prop("checked")){
-         $("#formTugas").css("visibility","visible")
+   $(document).on("change", "#tugasHandler", function () {
+      if ($(this).prop("checked")) {
+         $("#formTugas").css("visibility", "visible")
 
       } else {
-         $("#formTugas").css("visibility","hidden")
+         $("#formTugas").css("visibility", "hidden")
       }
    })
 }
@@ -219,16 +219,62 @@ const angkatanTypeHandler = function () {
       })
    }
 }
+const soaltesTypeHandler = function () {
+   if ($("#soaltes-table").length > 0) {
+      $(document).on("click", "#delete-soaltes", function () {
+         let id = $(this).data("id")
+         let tr = $(this).parents("tr");
+         Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+         }).then((result) => {
+            if (result.isConfirmed) {
+               $.ajax({
+                  type: "post",
+                  url: base_url + "soaltescontroller/delete",
+                  data: { "id": id },
+                  dataType: "json",
+                  success: function (response) {
+                     Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                     )
+                     tr.remove();
+                  }
+               });
+
+            }
+         })
+      })
+   }
+}
 const initDatatable = () => {
    $(".table-bordered").css("width", "100%")
-   $(".table-bordered").DataTable(
+   const table = $(".table-bordered").DataTable(
       {
          lengthChange: false,
          ordering: false,
          scrollX: true,
-         searching: false,
       }
    );
+   $(document).on("submit", "#filter-table", function (e) {
+      e.preventDefault();
+      const form = $(this);
+      //get all values of the form
+      const formData = form.serializeArray();
+      //convert to array
+      const data = [];
+      for(let i = 0; i < formData.length; i++){
+         data.push(formData[i].value);
+      }
+      table.search(data.join(" ")).draw();
+   })
 }
 
 $(document).ready(function () {
@@ -236,6 +282,7 @@ $(document).ready(function () {
    materiTypeHandler()
    pembelajaranTypeHandler()
    kelasTypeHandler()
+   soaltesTypeHandler()
    angkatanTypeHandler()
    userTypeHandler()
    roleTypeHandler()

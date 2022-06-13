@@ -2,6 +2,10 @@ table.table-laporan.dataTable th {
   vertical-align: middle !important;
 }
 
+.dataTables_filter {
+  display: none;
+}
+
 .footer-filter {
   vertical-align: bottom !important;
   display: flex;
