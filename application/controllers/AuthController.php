@@ -10,7 +10,7 @@ class AuthController extends CI_Controller
       $this->load->library('form_validation');
       $this->load->model("authmodels", "am");
       $this->load->model("angkatanmodels");
-      $this->load->model("siswamodels","sm");
+      $this->load->model("siswamodels", "sm");
    }
    public function index()
    {
@@ -28,21 +28,64 @@ class AuthController extends CI_Controller
    }
    public function register_siswa($angkatan_id = null)
    {
+      if ($this->session->has_userdata("id")) {
+         redirect(base_url());
+      }
       $data['angkatan'] = $this->angkatanmodels->get($angkatan_id);
       if (!$data['angkatan']) {
          redirect("/");
       }
-      // echo 1;
-      // $this->main_libraries->innerview("form_register_siswa", [], true);
-      $this->main_libraries->innerview("register_form",$data,true);
+      $this->main_libraries->innerview("register_form", $data, true);
    }
-   public function add()
+   public function add_siswa()
    {
-      $data = $this->input->post();
-      // echo json_encode($data);exit; // sama dengan dd
-      $this->sm->create($data);
-      $this->session->set_flashdata("message", "Berhasil Mendaftar");
-      redirect(base_url("authcontroller/register_siswa"));
+      $rules = [
+         ["field" => "email", "label" => "Email", "rules" => "required|is_unique[siswa.email]"],
+      ];
+      $this->form_validation->set_rules($rules);
+      if ($this->form_validation->run() != false) {
+         $data = $this->input->post();
+         $data["password"]= password_hash($data['password'], PASSWORD_DEFAULT);
+         $this->sm->create($data);
+         $this->session->set_flashdata("message", "Berhasil Mendaftar");
+         $user_data = [
+            "id" =>$this->db->insert_id(),
+            "role" => "siswa",
+            "nama" => $data['nama'],
+            "email" => $data['email'],
+         ];
+         $this->session->set_userdata($user_data);
+         redirect(base_url("authcontroller/register_siswa"));
+      } else {
+         $this->session->set_flashdata("message", validation_errors());
+         redirect(base_url("authcontroller/register_siswa/" . $this->input->post("angkatan_id")));
+      }
+   }
+   public function auth_siswa(){
+      if ($this->session->has_userdata("id")) {
+         redirect(base_url());
+      }
+      $email = $this->input->post("email");
+      $password = $this->input->post("password");
+      $user = $this->sm->get(["email" => $email]);
+      if (!$user) {
+         $this->session->set_flashdata("message", "Login error");
+         redirect(base_url("authcontroller/login"));
+      } else {
+         if (password_verify($password, $user->password)) {
+            $user_data = [
+               "id" => $user->id,
+               "role" => $user->role_id,
+               "nama" => $user->nama,
+               "email" => $user->email,
+            ];
+            $this->session->set_userdata($user_data);
+            redirect(base_url());
+         } else {
+            $this->session->set_flashdata("message", "Password error");
+            redirect(base_url("authcontroller/login"));
+         }
+      }
    }
    public function login()
    {
@@ -74,7 +117,7 @@ class AuthController extends CI_Controller
                "id" => $user->id,
                "role" => $user->role_id,
                "nama" => $user->nama,
-               "email" => $user->email
+               "email" => $user->email,
             ];
             $this->session->set_userdata($user_data);
             redirect(base_url());

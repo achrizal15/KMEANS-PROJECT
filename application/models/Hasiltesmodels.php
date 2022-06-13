@@ -1,6 +1,6 @@
 <?php
 
-class Soaltesmodels extends CI_Model
+class Hasiltesmodels extends CI_Model
 {
    public function setAliasColumn($column, $alias)
    {
@@ -11,37 +11,38 @@ class Soaltesmodels extends CI_Model
       }
       return $result;
    }
-   public function get_all($where=[])
+   public function get_all()
    {
       $alias = [
-         ["table" => "soal_tes", "alias" => "s"],
-         ["table" => "materi", "alias" => "m"],
+         ["table" => "hasil_tes", "alias" => "s"],
+         ["table" => "soal_tes", "alias" => "st"],
+         ["table" => "soal_tes_pilihan_ganda", "alias" => "stp"],
       ];
       $select = "";
       foreach ($alias as $key) {
          $select .= implode(',', $this->setAliasColumn($key['table'], $key['alias'])) . ",";
       }
       $this->db->select($select);
-      $this->db->from("soal_tes as s");
-      $this->db->join("materi as m", "m.id=s.materi_id");
-      $this->db->where($where);
+      $this->db->from("hasil_tes as s");
+      $this->db->join("soal_tes as st", "st.id=s.soal_tes_id");
+      $this->db->join("soal_tes_pilihan_ganda as stp", "stp.id=s.jawaban");
       return $this->db->get()->result();
    }
 
    public function delete($id)
    {
-      $this->db->delete("soal_tes", ["id" => $id]);
+      $this->db->delete("hasil_tes", ["id" => $id]);
       return $this->db->affected_rows();
    }
-   public function get($id = "")
+   public function get($where=[])
    {
       $this->db->select("*");
-      $this->db->from("soal_tes");
-      $this->db->where("id", $id);
+      $this->db->from("hasil_tes");
+      $this->db->where($where);
       return $this->db->get()->row();
    }
-   public function delete_pilihan_ganda($soal_id){
-      $this->db->delete("soal_tes_pilihan_ganda", ["soal_id" => $soal_id]);
+   public function delete_pilihan_ganda($hasil_id){
+      $this->db->delete("hasil_tes_pilihan_ganda", ["hasil_id" => $hasil_id]);
       return $this->db->affected_rows();
    }
    public function get_last()
@@ -51,31 +52,31 @@ class Soaltesmodels extends CI_Model
       $this->db->order_by("id", "desc");
       return $this->db->get()->row();
    }
-   public function create_pilihan_ganda($id_soal, $data)
+   public function create_pilihan_ganda($id_hasil, $data)
    {
       foreach ($data as $item) {
-         $this->db->insert("soal_tes_pilihan_ganda", [
-            "soal_id" => $id_soal,
+         $this->db->insert("hasil_tes_pilihan_ganda", [
+            "hasil_id" => $id_hasil,
             "jawaban"=>$item,
             "created_at"=>date("Y-m-d H:i:s", strtotime("now")),
          ]);
       }
    }
-   public function get_pilihan_ganda($id_soal){
+   public function get_pilihan_ganda($id_hasil){
       $this->db->select("*");
-      $this->db->from("soal_tes_pilihan_ganda");
-      $this->db->where("soal_id", $id_soal);
+      $this->db->from("hasil_tes_pilihan_ganda");
+      $this->db->where("hasil_id", $id_hasil);
       return $this->db->get()->result();
    }
    public function perbarui($id, $data)
    {
-      $this->db->update("soal_tes", $data, ["id" => $id]);
+      $this->db->update("hasil_tes", $data, ["id" => $id]);
       return $this->db->affected_rows();
    }
    public function create($data)
    {
       $data["created_at"] = date("Y-m-d H:i:s", strtotime("now"));
-      $this->db->insert("soal_tes", $data);
+      $this->db->insert("hasil_tes", $data);
       return $this->db->affected_rows();
    }
 }

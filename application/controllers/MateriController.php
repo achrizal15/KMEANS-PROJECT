@@ -33,28 +33,28 @@ class MateriController extends CI_Controller
       ];
       $this->form_validation->set_rules($rules);
       if ($this->form_validation->run() != false) {
-      $data = $this->input->post();
-      if($_FILES["doc"]["name"]){
-         $this->main_libraries->uploadImage("file");
-         $this->upload->do_upload('doc');
-         $data["file"]= $this->upload->data("file_name");
+         $data = $this->input->post();
+         if ($_FILES["doc"]["name"]) {
+            $this->main_libraries->uploadImage("file");
+            $this->upload->do_upload('doc');
+            $data["file"] = $this->upload->data("file_name");
+         }
+         $this->mt->create($data);
+         $this->session->set_flashdata("message", "Data ditambahkan");
+         redirect(base_url("matericontroller"));
+      } else {
+         $this->session->set_flashdata("message", validation_errors());
+         redirect(base_url("matericontroller/action/add"));
       }
-      $this->mt->create($data);
-      $this->session->set_flashdata("message", "Data ditambahkan");
-      redirect(base_url("matericontroller"));
-   } else {
-      $this->session->set_flashdata("message",validation_errors());
-     redirect(base_url("matericontroller/action/add"));
-   }
    }
    public function edit()
    {
       $id = $this->input->post("id");
       $data = $this->input->post();
-      if($_FILES["doc"]["name"]){
+      if ($_FILES["doc"]["name"]) {
          $this->main_libraries->uploadImage("file");
          $this->upload->do_upload('doc');
-         $data["file"]= $this->upload->data("file_name");
+         $data["file"] = $this->upload->data("file_name");
       }
       unset($data["id"]);
       $this->mt->perbarui($id, $data);

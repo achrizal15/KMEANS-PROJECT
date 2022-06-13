@@ -8,7 +8,7 @@
 <body>
    <!-- WRAPPER -->
    <?php 
-   $bUrl=["login","landing","register_siswa"]
+   $bUrl=["login","landing","tes_akademik","register_siswa"]
    ?>
    <div id="wrapper" style="background-image: url('<?=  in_array($this->uri->segment(2),$bUrl)? base_url('assets/images/bg-log.jpg'):''?>');">
 

@@ -121,7 +121,7 @@
                     <?php foreach ($soaltest as $key => $value) : ?>
                       <tr>
                         <td class="align-middle"><?= $value->stingkatan  ?></td>
-                        <td class="align-middle"><?= $value->ssoal  ?></td>
+                        <td class="align-middle" ><div style="width: 200px;" class="text-truncate"><?= $value->ssoal  ?></div></td>
                         <td class="align-middle"><img width="100" src="<?= base_url("assets/file/$value->sfile") ?>" alt=""></td>
                         <td class="align-middle"><?= $value->sjawaban ?></td>
                         <td class="align-middle"><?= $value->mnama ?></td>

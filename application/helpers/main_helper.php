@@ -21,35 +21,35 @@ if (!function_exists("list_menu")) {
             "content" => "home",
             "icon" => "fa-solid fa-gauge",
             "link" => "",
-            "group"=>null
+            "group" => null
          ],
          [
             "nama" => "Materi",
             "content" => "materi",
             "icon" => "fa-solid fa-square-poll-horizontal",
             "link" => "matericontroller",
-            "group"=>null
+            "group" => null
          ],
          [
             "nama" => "Kelas",
             "content" => "kelas",
             "icon" => "fa-solid fa-window-frame",
             "link" => "kelascontroller",
-            "group"=>null
+            "group" => null
          ],
          [
             "nama" => "Jam Pelajaran",
             "content" => "pembelajaran",
             "icon" => "fa-solid fa-users",
             "link" => "pembelajarancontroller",
-            "group"=>null
+            "group" => null
          ],
          [
             "nama" => "Angkatan",
             "content" => "angkatan",
             "icon" => "fa-solid fa-school",
             "link" => "angkatancontroller",
-            "group"=>null
+            "group" => null
          ],
          [
             "nama" => "Siswa",
@@ -71,12 +71,12 @@ if (!function_exists("list_menu")) {
             "icon" => "fa-solid fa-user-headset",
             "content" => "user",
             "group" => "Manage Staff",
-         ],       
+         ],
          [
             "group" => "Manage Staff",
             "content" => "role",
             "link" => "rolecontroller",
-            "nama"=>"Role",
+            "nama" => "Role",
             "icon" => "fa-solid fa-user-headset",
          ]
       ];
@@ -116,10 +116,15 @@ if (!function_exists("is_login")) {
       if (!$CI->session->has_userdata("id")) {
          redirect(base_url("authcontroller"));
       } else {
-         $role_akses = $CI->rak->get_roles_akses($CI->session->userdata("role"), $controller);
-         if (!$role_akses) {
-            show_404();
+         if ($CI->session->userdata("role") === "siswa") {
+            redirect(base_url("home/landing_siswa"));
+         }else{
+            $role_akses = $CI->rak->get_roles_akses($CI->session->userdata("role"), $controller);
+            if (!$role_akses) {
+               show_404();
+            }
          }
+    
       }
    }
 }

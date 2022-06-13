@@ -2,9 +2,9 @@
     <div class="card shadow">
         <div class="card-body p-5">
             <h5 class="text-center mb-5"> REGISTER SISWA</h5>
-            <form action="<?= base_url("authcontroller/add") ?>" data-parsley-validate novalidate method="post"
-                enctype="multipart/form-data">
-                <input type="hidden" value="<?php echo $angkatan->id?>" name="angkatan_id">
+            <?php echo $this->session->flashdata("message") ? custom_alert_messages("error", $this->session->flashdata("message")) : "" ?>
+            <form action="<?= base_url("authcontroller/add_siswa") ?>" data-parsley-validate novalidate method="post" enctype="multipart/form-data">
+                <input type="hidden" value="<?php echo $angkatan->id ?>" name="angkatan_id">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -45,14 +45,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                           <label for="validationCustom02">Tingkatan</label>
-                           <select name="tingkatan" data-parsley-errors-container=".tingkatanError" class="form-control select-basic" id="select-role" required>
-                              <option selected value="" hidden>Pilih Satu</option>
-                                 <option value="SD">SD</option>
-                                 <option value="SMP">SMP</option>
-                                 <option value="SMA">SMA</option>
-                           </select>
-                           <span class="tingkatanError"></span>
+                            <label for="validationCustom02">Tingkatan</label>
+                            <select name="tingkatan" data-parsley-errors-container=".tingkatanError" class="form-control select-basic" id="select-role" required>
+                                <option selected value="" hidden>Pilih Satu</option>
+                                <option value="SD">SD</option>
+                                <option value="SMP">SMP</option>
+                                <option value="SMA">SMA</option>
+                            </select>
+                            <span class="tingkatanError"></span>
                         </div>
                     </div>
 

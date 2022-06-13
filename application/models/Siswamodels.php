@@ -35,7 +35,7 @@ class Siswamodels extends CI_Model
    public function get($id = "")
    {
       $this->db->select("*");
-      $this->db->from("kelas");
+      $this->db->from("siswa");
       $this->db->where("id", $id);
       return $this->db->get()->row();
    }
