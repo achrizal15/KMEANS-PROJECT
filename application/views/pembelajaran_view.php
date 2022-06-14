@@ -31,6 +31,7 @@
                 <table class="table table-bordered" id="pembelajaran-table">
                   <thead>
                     <tr>
+                      <th>PERTEMUAN</th>
                       <th>GURU</th>
                       <th>TINGKATAN</th>
                       <th>MATERI</th>
@@ -44,7 +45,8 @@
                   <tbody>
                     <?php foreach ($pembelajaran as $key => $value) : ?>
                       <tr>
-                        <td class="align-middle"><?= ucwords($value->snama)  ?></td>
+                        <td class="align-middle"><?= ucwords($value->pnama)  ?></td>
+                        <td class="align-middle"><?= $value->snama  ?></td>
                         <td class="align-middle"><?= $value->ktingkatan  ?></td>
                         <td class="align-middle"><?= $value->mnama  ?></td>
                         <td class="align-middle">
@@ -53,7 +55,7 @@
                           <?php endif  ?>
                         </td>
                         <td class="align-middle"><?= ucwords($value->pdeskripsi)  ?></td>
-                        <td class="align-middle"></td>
+                        <td class="align-middle"><?= $value->tjudul  ?></td>
                         <td class="align-middle"><?= date("d-m-Y", strtotime($value->pcreated_at))  ?></td>
                         <td class="align-middle" width="150px">
                           <a href="<?= base_url("pembelajarancontroller/action/edit/" . $value->pid) ?>" class="btn btn-warning text-white" title="Edit"><i class="fas fa-edit"></i><span class="sr-only">EDIT</span></a>

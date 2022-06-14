@@ -17,7 +17,8 @@ class Pembelajaranmodels extends CI_Model
          ["table" => "pembelajaran", "alias" => "p"],
          ["table" => "user", "alias" => "s"],
          ["table" => "kelas", "alias" => "k"],
-         ["table" => "materi", "alias" => "m"]
+         ["table" => "materi", "alias" => "m"],
+         ["table" => "tugas", "alias" => "t"]
       ];
       $select="";
       foreach ($alias as $key) {
@@ -28,6 +29,7 @@ class Pembelajaranmodels extends CI_Model
       $this->db->join("user as s","s.id=p.guru_id");
       $this->db->join("kelas as k","k.id=p.kelas_id");
       $this->db->join("materi as m","m.id=p.materi_id");
+      $this->db->join("tugas as t","t.id=p.tugas_id");
       return $this->db->get()->result();
    }
 
