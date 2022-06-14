@@ -26,18 +26,30 @@
               Manage
             </div>
             <div class="card-body">
-              <form action="">
+              <form id="form-manage-data-kmeans">
+                <div class="form-group">
+                  <label for="validationCustom02">Angkatan</label>
+                  <select name="angkatan" data-parsley-errors-container=".angkatanError" class="form-control select-basic" id="select-angkatan" required>
+                    <option selected value="" hidden>Pilih Satu</option>
+                    <?php foreach ($angkatan as $av) :  ?>
+                      <option value="<?= $av->aid ?>"><?= $av->aangkatan ?></option>
+                    <?php endforeach;  ?>
+                  </select>
+                  <span class="angkatanError"></span>
+                </div>
                 <div class="form-group">
                   <label for="validationCustom02">Tingkatan</label>
-                  <select name="nama" data-parsley-errors-container=".namaError" class="form-control select-basic" id="select-nama" required>
+                  <select name="tingkatan" data-parsley-errors-container=".tingkatanError" class="form-control select-basic" id="select-tingkatan" required>
                     <option selected value="" hidden>Pilih Satu</option>
+                    <option value="SD">SD</option>
+                    <option value="SMP">SMP</option>
+                    <option value="SMA">SMA</option>
                   </select>
-                  <span class="namaError"></span>
+                  <span class="tingkatanError"></span>
                 </div>
-                <div class="form-group">
-                  <label for="">Angkatan</label>
-                  <input type="text" class="form-control" name="nis" id="nis" placeholder="NIS">
-                </div>
+
+                <button class="btn btn-info btn-block">Tampilkan Data</button>
+                <button class="btn btn-warning btn-block" type="button" id="generate-kmeans">GENERATE KMEANS</button>
               </form>
             </div>
           </div>
@@ -49,33 +61,10 @@
             </div>
             <div class="card-body">
               <?php echo $this->session->flashdata("message") ? custom_alert_messages("", $this->session->flashdata("message")) : "" ?>
-              <div class="table-responsive">
-                <table class="table table-bordered" id="siswa-table">
-                  <thead>
-                    <tr>
-                      <th>NAMA</th>
-                      <th>ALAMAT</th>
-                      <th>ASAL SEKOLAH</th>
-                      <th>ANGKATAN</th>
-                      <th class="text-nowrap">CREATED AT</th>
-                      <th>ACTION</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php foreach ($siswa as $key => $value) : ?>
-                      <tr>
-                        <td class="align-middle"><?= ucwords($value->snama)  ?></td>
-                        <td class="align-middle"><?= $value->salamat  ?></td>
-                        <td class="align-middle"><?= $value->sasal_sekolah  ?></td>
-                        <td class="align-middle"><?= $value->aangkatan  ?></td>
-                        <td class="align-middle"><?= date("d-m-Y", strtotime($value->screated_at))  ?></td>
-                        <td class="align-middle" width="150px">
-                          <a id="delete-siswa" data-id="<?= $value->sid ?>" class="btn btn-danger text-white" title="Delete"><i class="fa fa-trash-o"></i> <span class="sr-only">Delete</span></a>
-                        </td>
-                      </tr>
-                    <?php endforeach;  ?>
-                  </tbody>
-                </table>
+              <div class="table-responsive" id="siswa-pendaftar-table">
+                      <h6 class="text-center">
+                        Data belum ditampilkan
+                      </h6>
               </div>
             </div>
           </div>

@@ -8,7 +8,6 @@ class AngkatanController extends CI_Controller
       parent::__construct();
       $this->load->library(["main_libraries", 'session', "form_validation"]);
       $this->load->model("angkatanmodels", "am");
-      // $this->load->model("siswamodels", "sm");
       is_login("angkatan");
    }
    public function index()

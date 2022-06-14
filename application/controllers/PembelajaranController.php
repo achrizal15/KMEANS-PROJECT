@@ -46,6 +46,7 @@ class PembelajaranController extends CI_Controller
       }
       $tugas_id = $this->db->insert_id();
       $data = [
+         "nama" => $this->input->post("nama"),
          "materi_id" => $this->input->post("materi_id"),
          "kelas_id" => $this->input->post("kelas_id"),
          "guru_id" => $this->input->post("guru_id"),
@@ -67,6 +68,7 @@ class PembelajaranController extends CI_Controller
       $id = $this->input->post("pembelajaran_id");
       $tugas_id = $this->input->post("tugas_id");
       $data = [
+         "nama" => $this->input->post("nama"),
          "materi_id" => $this->input->post("materi_id"),
          "kelas_id" => $this->input->post("kelas_id"),
          "guru_id" => $this->input->post("guru_id"),

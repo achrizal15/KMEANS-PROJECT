@@ -14,6 +14,7 @@ class Home extends CI_Controller
 		$this->load->model("nilaitesmodels");
 		$this->load->model("angkatanmodels");
 		$this->load->model("materimodels");
+		$this->load->model("pembelajaranmodels");
 	}
 	public function index()
 	{
@@ -22,13 +23,15 @@ class Home extends CI_Controller
 	}
 	public function landing_siswa()
 	{
+		$data["pembelajaran"] = $this->pembelajaranmodels->get_all();
 		$siswa_id = $this->session->userdata("id");
 		$hasilTes = $this->hasiltesmodels->get(["id_siswa" => $siswa_id]);
 		if ($hasilTes == null) {
 			redirect(base_url("home/tes_akademik"));
 			return false;
 		}
-		$this->main_libraries->innerview("siswa/landing", []);
+		// var_dump($data["pembelajaran"]);exit;
+		$this->main_libraries->innerview("siswa/landing",$data);
 	}
 	public function tes_akademik()
 	{
