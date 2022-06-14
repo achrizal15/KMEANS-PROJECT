@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 13 Jun 2022 pada 07.06
--- Versi server: 10.4.11-MariaDB
--- Versi PHP: 7.4.2
+-- Waktu pembuatan: 14 Jun 2022 pada 08.19
+-- Versi server: 10.4.21-MariaDB
+-- Versi PHP: 7.4.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -44,14 +43,17 @@ CREATE TABLE `akses` (
 --
 
 INSERT INTO `akses` (`id`, `nama`, `content`, `created_at`, `link`, `icon`, `submenu`, `group`) VALUES
-(32, 'Role', 'role', '2022-06-13 07:04:50', 'rolecontroller', 'fa-solid fa-user-headset', '', 'Manage Staff'),
-(33, 'Home', 'home', '2022-06-13 07:04:50', '', 'fa-solid fa-gauge', '', NULL),
-(34, 'Materi', 'materi', '2022-06-13 07:04:50', 'matericontroller', 'fa-solid fa-square-poll-horizontal', '', NULL),
-(35, 'User', 'user', '2022-06-13 07:04:50', 'usercontroller', 'fa-solid fa-user-headset', '', 'Manage Staff'),
-(37, 'Kelas', 'kelas', '2022-06-13 07:04:50', 'kelascontroller', 'fa-solid fa-window-frame', '', NULL),
-(38, 'Jam Pelajaran', 'pembelajaran', '2022-06-13 07:04:50', 'pembelajarancontroller', 'fa-solid fa-users', '', NULL),
-(39, 'Angkatan', 'angkatan', '2022-06-13 07:04:50', 'angkatancontroller', 'fa-solid fa-school', '', NULL),
-(43, 'Soal Tes', 'soaltes', '2022-06-13 07:04:50', 'soaltescontroller', 'fa-solid fa-list-dropdown', '', 'Manage Tes');
+(32, 'Role', 'role', '2022-06-14 08:18:42', 'rolecontroller', 'fa-solid fa-user-headset', '', 'Manage Staff'),
+(33, 'Home', 'home', '2022-06-14 08:18:42', '', 'fa-solid fa-gauge', '', NULL),
+(34, 'Materi', 'materi', '2022-06-14 08:18:42', 'matericontroller', 'fa-solid fa-square-poll-horizontal', '', NULL),
+(35, 'User', 'user', '2022-06-14 08:18:42', 'usercontroller', 'fa-solid fa-user-headset', '', 'Manage Staff'),
+(37, 'Kelas', 'kelas', '2022-06-14 08:18:42', 'kelascontroller', 'fa-solid fa-window-frame', '', NULL),
+(38, 'Jam Pelajaran', 'pembelajaran', '2022-06-14 08:18:42', 'pembelajarancontroller', 'fa-solid fa-users', '', NULL),
+(39, 'Angkatan', 'angkatan', '2022-06-14 08:18:42', 'angkatancontroller', 'fa-solid fa-school', '', NULL),
+(43, 'Soal Tes', 'soaltes', '2022-06-14 08:18:42', 'soaltescontroller', 'fa-solid fa-list-dropdown', '', 'Manage Tes'),
+(45, 'Siswa', 'siswa', '2022-06-14 08:18:42', 'siswacontroller', 'fa-solid fa-user-graduate', '', NULL),
+(46, 'Nilai Tes', 'nilaites', '2022-06-14 08:18:42', 'soaltescontroller/nilai', 'fa-solid fa-list-dropdown', '', 'Manage Tes'),
+(51, 'Penerimaan Siswa', 'penerimaan', '2022-06-14 08:18:42', 'penerimaancontroller', 'fa-solid fa-screen-users', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -61,7 +63,7 @@ INSERT INTO `akses` (`id`, `nama`, `content`, `created_at`, `link`, `icon`, `sub
 
 CREATE TABLE `angkatan` (
   `id` int(11) NOT NULL,
-  `angkatan` int(11) NOT NULL,
+  `angkatan` varchar(255) NOT NULL,
   `awal_pendaftaran` datetime NOT NULL,
   `akhir_pendaftaran` datetime NOT NULL,
   `awal_periode` datetime NOT NULL,
@@ -75,8 +77,7 @@ CREATE TABLE `angkatan` (
 --
 
 INSERT INTO `angkatan` (`id`, `angkatan`, `awal_pendaftaran`, `akhir_pendaftaran`, `awal_periode`, `akhir_periode`, `status`, `created_at`) VALUES
-(1, 2022, '2022-06-11 00:00:00', '2022-06-12 00:00:00', '2022-06-12 00:00:00', '2022-12-10 00:00:00', 'Aktif', '2022-06-10 12:20:43'),
-(3, 2021, '2022-06-01 00:00:00', '2022-06-13 00:00:00', '2022-06-01 00:00:00', '2022-06-13 00:00:00', 'Aktif', '2022-06-13 07:04:44');
+(3, '2021', '2022-06-01 00:00:00', '2022-06-14 00:00:00', '2022-06-01 00:00:00', '2022-07-13 00:00:00', 'Aktif', '2022-06-13 07:04:44');
 
 -- --------------------------------------------------------
 
@@ -85,11 +86,72 @@ INSERT INTO `angkatan` (`id`, `angkatan`, `awal_pendaftaran`, `akhir_pendaftaran
 --
 
 CREATE TABLE `hasil_tes` (
-  `id` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL,
   `id_soal` int(11) NOT NULL,
   `id_siswa` int(11) NOT NULL,
-  `jawaban` varchar(255) NOT NULL
+  `jawaban` varchar(255) DEFAULT NULL,
+  `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `hasil_tes`
+--
+
+INSERT INTO `hasil_tes` (`id`, `id_soal`, `id_siswa`, `jawaban`, `created_at`) VALUES
+(1, 18, 5, '58', '2022-06-14 02:38:53'),
+(2, 19, 5, '62', '2022-06-14 02:38:54'),
+(3, 20, 5, '65', '2022-06-14 02:38:54'),
+(4, 21, 5, '68', '2022-06-14 02:38:54'),
+(5, 22, 5, '70', '2022-06-14 02:38:54'),
+(6, 23, 5, '73', '2022-06-14 02:38:54'),
+(7, 24, 5, '76', '2022-06-14 02:38:54'),
+(8, 25, 5, '80', '2022-06-14 02:38:54'),
+(9, 26, 5, '83', '2022-06-14 02:38:54'),
+(10, 18, 6, '59', '2022-06-14 03:54:10'),
+(11, 19, 6, '62', '2022-06-14 03:54:10'),
+(12, 20, 6, '65', '2022-06-14 03:54:10'),
+(13, 21, 6, '68', '2022-06-14 03:54:10'),
+(14, 22, 6, '70', '2022-06-14 03:54:10'),
+(15, 23, 6, '72', '2022-06-14 03:54:10'),
+(16, 24, 6, '77', '2022-06-14 03:54:10'),
+(17, 25, 6, '80', '2022-06-14 03:54:10'),
+(18, 26, 6, '83', '2022-06-14 03:54:10'),
+(19, 18, 7, '58', '2022-06-14 03:56:44'),
+(20, 19, 7, '62', '2022-06-14 03:56:44'),
+(21, 20, 7, '65', '2022-06-14 03:56:44'),
+(22, 21, 7, '66', '2022-06-14 03:56:44'),
+(23, 22, 7, '71', '2022-06-14 03:56:44'),
+(24, 23, 7, '73', '2022-06-14 03:56:44'),
+(25, 24, 7, '76', '2022-06-14 03:56:44'),
+(26, 25, 7, '80', '2022-06-14 03:56:44'),
+(27, 26, 7, '83', '2022-06-14 03:56:44'),
+(28, 18, 8, '59', '2022-06-14 04:00:44'),
+(29, 19, 8, '62', '2022-06-14 04:00:44'),
+(30, 20, 8, '65', '2022-06-14 04:00:44'),
+(31, 21, 8, '66', '2022-06-14 04:00:44'),
+(32, 22, 8, '69', '2022-06-14 04:00:44'),
+(33, 23, 8, '74', '2022-06-14 04:00:44'),
+(34, 24, 8, '76', '2022-06-14 04:00:44'),
+(35, 25, 8, '80', '2022-06-14 04:00:44'),
+(36, 26, 8, '83', '2022-06-14 04:00:44'),
+(37, 18, 9, '58', '2022-06-14 04:02:56'),
+(38, 19, 9, '62', '2022-06-14 04:02:56'),
+(39, 20, 9, '65', '2022-06-14 04:02:56'),
+(40, 21, 9, '67', '2022-06-14 04:02:56'),
+(41, 22, 9, '70', '2022-06-14 04:02:56'),
+(42, 23, 9, '72', '2022-06-14 04:02:56'),
+(43, 24, 9, '77', '2022-06-14 04:02:56'),
+(44, 25, 9, '80', '2022-06-14 04:02:56'),
+(45, 26, 9, '83', '2022-06-14 04:02:56'),
+(46, 9, 10, '31', '2022-06-14 08:15:21'),
+(47, 10, 10, NULL, '2022-06-14 08:15:21'),
+(48, 11, 10, '36', '2022-06-14 08:15:21'),
+(49, 12, 10, '40', '2022-06-14 08:15:21'),
+(50, 13, 10, '44', '2022-06-14 08:15:21'),
+(51, 14, 10, '47', '2022-06-14 08:15:21'),
+(52, 15, 10, '48', '2022-06-14 08:15:21'),
+(53, 16, 10, NULL, '2022-06-14 08:15:21'),
+(54, 17, 10, NULL, '2022-06-14 08:15:21');
 
 -- --------------------------------------------------------
 
@@ -127,8 +189,9 @@ CREATE TABLE `kelas` (
 
 INSERT INTO `kelas` (`id`, `nama`, `created_at`, `tingkatan`, `guru_id`, `hari`, `waktu`) VALUES
 (2, 'A', '2022-06-08 05:26:07', 'SD', 19, 'Selasa', '13:10'),
-(3, 'C', '2022-06-08 06:09:39', 'SMP', 19, 'Senin', '13:09'),
-(4, 'B', '2022-06-11 15:27:29', 'SD', 36, 'Senin', '12:30');
+(3, 'B', '2022-06-08 06:09:39', 'SMP', 19, 'Senin', '13:09'),
+(6, 'B', '2022-06-14 05:43:38', 'SD', 19, 'Senin', '12:12'),
+(8, 'A', '2022-06-14 05:51:10', 'SMP', 19, 'Selasa', '12:12');
 
 -- --------------------------------------------------------
 
@@ -159,6 +222,45 @@ INSERT INTO `materi` (`id`, `nama`, `tingkatan`, `created_at`, `deskripsi`, `fil
 (36, 'Pertidaksamaan Linear', 'SMA', '2022-06-13 05:08:16', 'Pertidaksamaan Linear', ''),
 (37, 'logaritma', 'SMA', '2022-06-13 05:09:00', 'logaritma', ''),
 (38, ' Mean, Median, Modus', 'SMA', '2022-06-13 05:10:18', ' Mean, Median, Modus', '');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `nilai_tes`
+--
+
+CREATE TABLE `nilai_tes` (
+  `id` int(11) NOT NULL,
+  `materi` varchar(255) NOT NULL,
+  `materi_id` int(11) DEFAULT NULL,
+  `nilai` varchar(255) NOT NULL,
+  `siswa_id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `nilai_tes`
+--
+
+INSERT INTO `nilai_tes` (`id`, `materi`, `materi_id`, `nilai`, `siswa_id`, `created_at`) VALUES
+(1, 'bilangan ', 33, '66', 5, '2022-06-14 03:14:18'),
+(2, 'Aljabar', 34, '33', 5, '2022-06-14 03:14:18'),
+(3, 'Garis dan Sudut', 35, '66', 5, '2022-06-14 03:14:18'),
+(4, 'bilangan ', 33, '99', 6, '2022-06-14 03:54:11'),
+(5, 'Aljabar', 34, '33', 6, '2022-06-14 03:54:11'),
+(6, 'Garis dan Sudut', 35, '99', 6, '2022-06-14 03:54:11'),
+(7, 'bilangan ', 33, '66', 7, '2022-06-14 03:56:44'),
+(8, 'Aljabar', 34, '33', 7, '2022-06-14 03:56:45'),
+(9, 'Garis dan Sudut', 35, '66', 7, '2022-06-14 03:56:45'),
+(10, 'bilangan ', 33, '99', 8, '2022-06-14 04:00:45'),
+(11, 'Aljabar', 34, '33', 8, '2022-06-14 04:00:45'),
+(12, 'Garis dan Sudut', 35, '66', 8, '2022-06-14 04:00:45'),
+(13, 'bilangan ', 33, '66', 9, '2022-06-14 04:02:57'),
+(14, 'Aljabar', 34, '0', 9, '2022-06-14 04:02:57'),
+(15, 'Garis dan Sudut', 35, '99', 9, '2022-06-14 04:02:57'),
+(16, 'Operasi Hitung', 30, '0', 10, '2022-06-14 08:15:22'),
+(17, 'Kelipatan dan Faktor', 31, '66', 10, '2022-06-14 08:15:22'),
+(18, 'Bangun Datar Sederhana', 32, '0', 10, '2022-06-14 08:15:22');
 
 -- --------------------------------------------------------
 
@@ -251,14 +353,6 @@ CREATE TABLE `role_akses` (
 --
 
 INSERT INTO `role_akses` (`akses_id`, `role_id`) VALUES
-(32, 1),
-(34, 1),
-(37, 1),
-(39, 1),
-(33, 1),
-(35, 1),
-(38, 1),
-(43, 1),
 (32, 18),
 (34, 18),
 (37, 18),
@@ -266,7 +360,18 @@ INSERT INTO `role_akses` (`akses_id`, `role_id`) VALUES
 (33, 18),
 (35, 18),
 (38, 18),
-(43, 18);
+(43, 18),
+(32, 1),
+(34, 1),
+(37, 1),
+(39, 1),
+(45, 1),
+(51, 1),
+(33, 1),
+(35, 1),
+(38, 1),
+(43, 1),
+(46, 1);
 
 -- --------------------------------------------------------
 
@@ -282,9 +387,22 @@ CREATE TABLE `siswa` (
   `alamat` varchar(255) NOT NULL,
   `asal_sekolah` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `angkata_id` int(11) NOT NULL,
-  `tingkatan` enum('SD','SMP','SMA','') NOT NULL
+  `angkatan_id` int(11) NOT NULL,
+  `tingkatan` enum('SD','SMP','SMA','') NOT NULL,
+  `status` enum('NON ACTIVE','ACTIVE','','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `siswa`
+--
+
+INSERT INTO `siswa` (`id`, `nama`, `email`, `password`, `alamat`, `asal_sekolah`, `created_at`, `angkatan_id`, `tingkatan`, `status`) VALUES
+(5, 'koko', 'koko@gmail.com', '$2y$10$VFZkaUknK7BxfTyx1GUaCOA5AXRjv6G1URchz6wQR./KkI36gh12O', 'kemiren', 'bwi', '2022-06-13 19:34:38', 3, 'SMP', 'NON ACTIVE'),
+(6, 'ACH RIZAL', 'ach@gmail.com', '$2y$10$tO39TbEJJlUBlWaXhz9Mx.xP0KkjlXwbUAvIC7mZWsPZT3xGsZivW', 'kemiren', 'ASP', '2022-06-13 20:53:37', 3, 'SMP', 'NON ACTIVE'),
+(7, 'Kusnul', 'husnul@gmail.com', '$2y$10$TxnVTnWtoWUpNWilGxnyi.olQQ/bIWGpokAnChVJ2j2UVBpHzd7Ry', 'grojakan', 'SJK', '2022-06-13 20:56:18', 3, 'SMP', 'NON ACTIVE'),
+(8, 'Ayu Wulan', 'ay@gmail.com', '$2y$10$qmRi9U0dlzSgvErLdfjt9.a0BSZvsyDfrYgRVHNREfMi8yYjQ4Koe', 'bwi', 'SMPEK', '2022-06-13 21:00:21', 3, 'SMP', 'NON ACTIVE'),
+(9, 'Junaide', 'juna@gmail.com', '$2y$10$R.2VrQixs9LetFVZs02wS.tDm0m1PBYnNAa8T2x7/xquBgh8hnCSu', 'kem', 'SMEA', '2022-06-13 21:02:19', 3, 'SMP', 'NON ACTIVE'),
+(10, 'Dika', 'dik@gmail.com', '$2y$10$G9M6ycrDu1Hzv.OIQLGAQ.rUdMaKcqoI9N4atNImWuWQpWlKRflAS', 'akso', 'aksod', '2022-06-14 01:15:01', 3, 'SD', 'NON ACTIVE');
 
 -- --------------------------------------------------------
 
@@ -509,6 +627,12 @@ ALTER TABLE `angkatan`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `hasil_tes`
+--
+ALTER TABLE `hasil_tes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `jam_pelajaran`
 --
 ALTER TABLE `jam_pelajaran`
@@ -524,6 +648,12 @@ ALTER TABLE `kelas`
 -- Indeks untuk tabel `materi`
 --
 ALTER TABLE `materi`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `nilai_tes`
+--
+ALTER TABLE `nilai_tes`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -588,13 +718,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `akses`
 --
 ALTER TABLE `akses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT untuk tabel `angkatan`
 --
 ALTER TABLE `angkatan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT untuk tabel `hasil_tes`
+--
+ALTER TABLE `hasil_tes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT untuk tabel `jam_pelajaran`
@@ -606,13 +742,19 @@ ALTER TABLE `jam_pelajaran`
 -- AUTO_INCREMENT untuk tabel `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `materi`
 --
 ALTER TABLE `materi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
+--
+-- AUTO_INCREMENT untuk tabel `nilai_tes`
+--
+ALTER TABLE `nilai_tes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `pembelajaran`
@@ -642,7 +784,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT untuk tabel `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `soal_tes`
