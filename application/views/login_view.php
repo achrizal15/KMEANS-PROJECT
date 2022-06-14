@@ -4,12 +4,12 @@
       <div class="header">
         <!-- <div class="logo text-center">E Learning</div> -->
         <div class="logo text-center">BIMBEL SASCHIO</div>
-        <p class="lead">LOGIN</p>
+        <p class="lead">LOGIN <?= $auth=='auth'?" STAFF":" SISWA"  ?></p>
         <div>
           <?php echo $this->session->flashdata("message") ? custom_alert_messages("error", $this->session->flashdata("message")) : "" ?>
         </div>
       </div>
-      <form autocomplete="off" class="form-auth-small" method="POST" data-parsley-validate action="<?= base_url("authcontroller/auth") ?>">
+      <form autocomplete="off" class="form-auth-small" method="POST" data-parsley-validate action="<?= base_url("authcontroller/$auth") ?>">
         <div class="form-group">
           <label for="signup-email" class="control-label sr-only">Email</label>
           <input type="email" class="form-control" name="email" id="signup-email" placeholder="Your email" required>

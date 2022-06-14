@@ -28,18 +28,47 @@ class KelasController extends CI_Controller
       }
       $this->main_libraries->innerview("kelas_form", $data);
    }
+   private function check_kelas()
+   {
+      $tingkatan = $this->input->post('tingkatan'); // get first name
+      $nama = $this->input->post('nama'); // get last name
+      $this->db->select('id');
+      $this->db->from('kelas');
+      $this->db->where('nama', $nama);
+      $this->db->where('tingkatan', $tingkatan);
+      $query = $this->db->get();
+      $num = $query->num_rows();
+      if ($num > 0) {
+         return FALSE;
+      } else {
+         return TRUE;
+      }
+   }
    public function add()
    {
       $data = $this->input->post();
-      // echo json_encode($data);exit; // sama dengan dd
-      $this->km->create($data);
-      $this->session->set_flashdata("message", "Data ditambahkan");
-      redirect(base_url("kelascontroller"));
+
+      if ($this->check_kelas() != false) {
+         $this->km->create($data);
+         $this->session->set_flashdata("message", "Data ditambahkan");
+         redirect(base_url("kelascontroller"));
+      } else {
+         $this->session->set_flashdata("message","Data sudah ada");
+         redirect(base_url("kelascontroller/action/add"));
+      }
    }
    public function edit()
    {
       $id = $this->input->post("id");
       $data = $this->input->post();
+      $kelas=$this->km->get($id);
+      if($data['nama']!=$kelas->nama || $data['tingkatan']!=$kelas->tingkatan){
+         if ($this->check_kelas() == false) {
+            $this->session->set_flashdata("message","Data sudah ada");
+            redirect(base_url("kelascontroller/action/edit/".$id));
+            return false;
+         }
+      }
       unset($data["id"]);
       $this->km->perbarui($id, $data);
       $this->session->set_flashdata("message", "Data berhasil diperbarui.");

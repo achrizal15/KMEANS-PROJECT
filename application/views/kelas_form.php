@@ -27,14 +27,17 @@
                      <form action="<?= base_url("kelascontroller/") . $aksi ?>" data-parsley-validate novalidate method="post" enctype="multipart/form-data">
 
                         <input type="text" hidden value="<?= isset($kelas) ? $kelas->id : "" ?>" name="id">
+                        <?php $a_zname = range("A", "Z");  ?>
                         <div class="col-md-6 mb-3">
                            <label for="validationCustom02">Nama</label>
-                           <input type="text" required class="form-control" name="nama" value="<?= isset($kelas) ? $kelas->nama : "" ?>">
-                           <div class="valid-feedback">
-                              Looks good!
-                           </div>
+                           <select name="nama" data-parsley-errors-container=".namaError" class="form-control select-basic" id="select-nama" required>
+                              <option selected value="" hidden>Pilih Satu</option>
+                              <?php foreach ($a_zname as $kn) :  ?>
+                                 <option value="<?=$kn?>" <?= isset($kelas) && $kelas->nama == $kn ? "selected" : "" ?>><?=$kn?></option>
+                              <?php endforeach;  ?>
+                           </select>
+                           <span class="namaError"></span>
                         </div>
-                        
                         <div class="col-md-6 mb-3">
                            <label for="validationCustom02">Hari</label>
                            <select name="hari" data-parsley-errors-container=".hariError" class="form-control select-basic" id="select-hari" required>
@@ -78,7 +81,7 @@
                               <option selected value="" hidden>Pilih Satu</option>
                               <?php foreach ($guru as $key => $value) : ?>
                                  <?php if (strtolower($value->rnama) != "guru") continue;  ?>
-                                 <option <?=isset($kelas)&& $kelas->guru_id==$value->uid?"selected":"" ?> value="<?= $value->uid ?>"><?= ucwords($value->unama) ?></option>
+                                 <option <?= isset($kelas) && $kelas->guru_id == $value->uid ? "selected" : "" ?> value="<?= $value->uid ?>"><?= ucwords($value->unama) ?></option>
                               <?php endforeach ?>
                            </select>
                            <span class="guruError"></span>

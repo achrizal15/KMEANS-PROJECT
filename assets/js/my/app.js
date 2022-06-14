@@ -253,6 +253,19 @@ const soaltesTypeHandler = function () {
          })
       })
    }
+   if(typeof datamateri !== "undefined"){
+      $(document).on("change","#select-tingkatan",function(){
+         const value=$(this).val()
+         $('#select-materi').empty()
+         for (let index = 0; index < datamateri.length; index++) {
+            const element = datamateri[index];
+            if(element.mtingkatan==value){
+               $('#select-materi').append(`<option value="${element.mid}">${element.mnama.toUpperCase()} (${value})</option>`)
+            }
+         }
+      })
+   }
+
 }
 const initDatatable = () => {
    $(".table-bordered").css("width", "100%")

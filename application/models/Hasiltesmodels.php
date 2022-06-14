@@ -11,7 +11,7 @@ class Hasiltesmodels extends CI_Model
       }
       return $result;
    }
-   public function get_all()
+   public function get_all($where = [])
    {
       $alias = [
          ["table" => "hasil_tes", "alias" => "s"],
@@ -24,8 +24,9 @@ class Hasiltesmodels extends CI_Model
       }
       $this->db->select($select);
       $this->db->from("hasil_tes as s");
-      $this->db->join("soal_tes as st", "st.id=s.soal_tes_id");
+      $this->db->join("soal_tes as st", "st.id=s.id_soal");
       $this->db->join("soal_tes_pilihan_ganda as stp", "stp.id=s.jawaban");
+      $this->db->where($where);
       return $this->db->get()->result();
    }
 
@@ -34,14 +35,15 @@ class Hasiltesmodels extends CI_Model
       $this->db->delete("hasil_tes", ["id" => $id]);
       return $this->db->affected_rows();
    }
-   public function get($where=[])
+   public function get($where = [])
    {
       $this->db->select("*");
       $this->db->from("hasil_tes");
       $this->db->where($where);
       return $this->db->get()->row();
    }
-   public function delete_pilihan_ganda($hasil_id){
+   public function delete_pilihan_ganda($hasil_id)
+   {
       $this->db->delete("hasil_tes_pilihan_ganda", ["hasil_id" => $hasil_id]);
       return $this->db->affected_rows();
    }
@@ -57,12 +59,13 @@ class Hasiltesmodels extends CI_Model
       foreach ($data as $item) {
          $this->db->insert("hasil_tes_pilihan_ganda", [
             "hasil_id" => $id_hasil,
-            "jawaban"=>$item,
-            "created_at"=>date("Y-m-d H:i:s", strtotime("now")),
+            "jawaban" => $item,
+            "created_at" => date("Y-m-d H:i:s", strtotime("now")),
          ]);
       }
    }
-   public function get_pilihan_ganda($id_hasil){
+   public function get_pilihan_ganda($id_hasil)
+   {
       $this->db->select("*");
       $this->db->from("hasil_tes_pilihan_ganda");
       $this->db->where("hasil_id", $id_hasil);

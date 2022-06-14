@@ -1,7 +1,7 @@
 <?php
 
 
-class SiswaController extends CI_Controller
+class PenerimaanController extends CI_Controller
 {
    public function __construct()
    {
@@ -9,12 +9,14 @@ class SiswaController extends CI_Controller
       $this->load->library(["main_libraries", 'session', "form_validation"]);
       $this->load->model("siswamodels", "sm");
       $this->load->model("angkatanmodels", "am");
-      is_login("siswa");
+      $this->load->model("kelasmodels", "km");
+      is_login("penerimaan");
    }
    public function index()
    {
       $data["siswa"] = $this->sm->get_all();
-      $this->main_libraries->innerview("siswa_view", $data);
+      $data['kelas'] = $this->km->get_all();
+      $this->main_libraries->innerview("penerimaan_view", $data);
    }
    public function action($params = "add", $id = "")
    {
@@ -36,7 +38,7 @@ class SiswaController extends CI_Controller
       $this->session->set_flashdata("message", "Data ditambahkan");
       redirect(base_url("siswacontroller"));
    }
-   
+
    public function edit()
    {
       $id = $this->input->post("id");

@@ -47,10 +47,10 @@
                         </li>
                         <input type="hidden" name="item[<?=$ks?>][soal]" value="<?=$s->sid?>">
                         <?php $jawaban = $this->soaltesmodels->get_pilihan_ganda($s->sid);
+                        shuffle($jawaban);
                         foreach ($jawaban as $key => $item) :  ?>
                             <div class="form-check" style="margin-bottom: <?= $key == 2 ? '20px' : '' ?> ;">
-                         <input class="form-check-input" id="jawaban<?= $ks . $key ?>" type="radio" name="item[<?= $ks ?>][jawaban]" value="<?= $item->id ?>">
-                      
+                         <input class="form-check-input" id="jawaban<?= $ks . $key ?>" type="radio" name="item[<?= $ks ?>][jawaban]" value="<?= $item->id ?>">                      
                                 <label class="form-check-label" for="jawaban<?= $ks . $key ?>">
                                     <?= $item->jawaban ?>
                                 </label>

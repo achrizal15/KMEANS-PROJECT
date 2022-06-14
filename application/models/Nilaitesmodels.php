@@ -1,6 +1,6 @@
 <?php
 
-class Materimodels extends CI_Model
+class Nilaitesmodels extends CI_Model
 {
    public function setAliasColumn($column, $alias)
    {
@@ -11,50 +11,55 @@ class Materimodels extends CI_Model
       }
       return $result;
    }
-   public function get_all($where=[])
+   public function get_all($where = [])
    {
       $alias = [
-         ["table" => "materi", "alias" => "m"],
-         // ["table" => "role", "alias" => "r"]
+         ["table" => "nilai_tes", "alias" => "n"],
       ];
-      $select="";
+      $select = "";
       foreach ($alias as $key) {
          $select .= implode(',', $this->setAliasColumn($key['table'], $key['alias'])) . ",";
       }
       $this->db->select($select);
-      $this->db->from("materi as m");
-      // $this->db->join("role as r","r.id=u.role_id","left");
+      $this->db->from("nilai_tes as n");
+      $this->db->where($where);
       return $this->db->get()->result();
    }
 
    public function delete($id)
    {
-      $this->db->delete("materi", ["id" => $id]);
+      $this->db->delete("nilai_tes", ["id" => $id]);
       return $this->db->affected_rows();
    }
-   public function get($id = "")
+   public function get($where = [])
    {
       $this->db->select("*");
-      $this->db->from("materi");
-      $this->db->where("id", $id);
+      $this->db->from("nilai_tes");
+      $this->db->where($where);
       return $this->db->get()->row();
+   }
+   public function delete_pilihan_ganda($nilai_id)
+   {
+      $this->db->delete("nilai_tes_pilihan_ganda", ["nilai_id" => $nilai_id]);
+      return $this->db->affected_rows();
    }
    public function get_last()
    {
       $this->db->select("*");
-      $this->db->from("user");
+      $this->db->from("nilai_tes");
       $this->db->order_by("id", "desc");
       return $this->db->get()->row();
    }
+
    public function perbarui($id, $data)
    {
-      $this->db->update("materi", $data, ["id" => $id]);
+      $this->db->update("nilai_tes", $data, ["id" => $id]);
       return $this->db->affected_rows();
    }
    public function create($data)
    {
       $data["created_at"] = date("Y-m-d H:i:s", strtotime("now"));
-      $this->db->insert("materi", $data);
+      $this->db->insert("nilai_tes", $data);
       return $this->db->affected_rows();
    }
 }

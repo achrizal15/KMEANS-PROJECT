@@ -59,10 +59,24 @@ if (!function_exists("list_menu")) {
             "group" => null,
          ],
          [
+            "nama" => "Penerimaan Siswa",
+            "link" => "penerimaancontroller",
+            "icon" => "fa-solid fa-screen-users",
+            "content" => "penerimaan",
+            "group" => null,
+         ],
+         [
             "nama" => "Soal Tes",
             "link" => "soaltescontroller",
             "icon" => "fa-solid fa-list-dropdown",
             "content" => "soaltes",
+            "group" => "Manage Tes",
+         ],
+         [
+            "nama" => "Nilai Tes",
+            "link" => "soaltescontroller/nilai",
+            "icon" => "fa-solid fa-list-dropdown",
+            "content" => "nilaites",
             "group" => "Manage Tes",
          ],
          [

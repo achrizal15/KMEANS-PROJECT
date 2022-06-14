@@ -16,12 +16,14 @@
       </a>
     </div>
     <div class="col-md-6">
+      <a href="<?= base_url('authcontroller/login/siswa') ?>">
       <div class="card">
         <div class="card-body text-center text-primary">
           <i class="fa-solid fa-user-graduate" style="font-size: 100px;"></i>
           <h5 class="text-center mt-2">SISWA</h5>
         </div>
       </div>
+      </a>
     </div>
 
   </div>

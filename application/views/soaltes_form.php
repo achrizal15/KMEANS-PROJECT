@@ -84,6 +84,11 @@
                            <select name="materi_id" data-parsley-errors-container=".materiError" class="form-control select-basic" id="select-materi" required>
                               <option selected value="" hidden>Pilih Satu</option>
                               <?php foreach ($materi as $key => $value) : ?>
+                                 <?php if(isset($soaltes)){
+                                    if($soaltes->tingkatan!=$value->mtingkatan){
+                                       continue;
+                                    }
+                                 }  ?>
                                  <option <?= isset($soaltes) && $soaltes->materi_id == $value->mid ? "selected" : "" ?> value="<?= $value->mid ?>"><?= ucwords($value->mnama) ?> (<?= $value->mtingkatan  ?>)</option>
                               <?php endforeach ?>
                            </select>
@@ -108,3 +113,6 @@
    <!-- END MAIN CONTENT -->
 
 </div>
+<script>
+   const datamateri=<?= json_encode($materi) ?>;
+</script>

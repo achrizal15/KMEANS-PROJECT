@@ -45,11 +45,11 @@ class AuthController extends CI_Controller
       $this->form_validation->set_rules($rules);
       if ($this->form_validation->run() != false) {
          $data = $this->input->post();
-         $data["password"]= password_hash($data['password'], PASSWORD_DEFAULT);
+         $data["password"] = password_hash($data['password'], PASSWORD_DEFAULT);
          $this->sm->create($data);
          $this->session->set_flashdata("message", "Berhasil Mendaftar");
          $user_data = [
-            "id" =>$this->db->insert_id(),
+            "id" => $this->db->insert_id(),
             "role" => "siswa",
             "nama" => $data['nama'],
             "email" => $data['email'],
@@ -61,13 +61,14 @@ class AuthController extends CI_Controller
          redirect(base_url("authcontroller/register_siswa/" . $this->input->post("angkatan_id")));
       }
    }
-   public function auth_siswa(){
+   public function auth_siswa()
+   {
       if ($this->session->has_userdata("id")) {
          redirect(base_url());
       }
       $email = $this->input->post("email");
       $password = $this->input->post("password");
-      $user = $this->sm->get(["email" => $email]);
+      $user = $this->db->get_where("siswa", ["email" => $email])->row();
       if (!$user) {
          $this->session->set_flashdata("message", "Login error");
          redirect(base_url("authcontroller/login"));
@@ -75,24 +76,25 @@ class AuthController extends CI_Controller
          if (password_verify($password, $user->password)) {
             $user_data = [
                "id" => $user->id,
-               "role" => $user->role_id,
+               "role" => "siswa",
                "nama" => $user->nama,
                "email" => $user->email,
             ];
             $this->session->set_userdata($user_data);
-            redirect(base_url());
+            redirect(base_url("home/landing_siswa"));
          } else {
             $this->session->set_flashdata("message", "Password error");
-            redirect(base_url("authcontroller/login"));
+            redirect(base_url("authcontroller/login/siswa"));
          }
       }
    }
-   public function login()
+   public function login($role = 'staff')
    {
       if ($this->session->has_userdata("id")) {
          redirect(base_url());
       }
-      $this->main_libraries->innerview("login_view", [], true);
+      $data['auth'] = $role == "siswa" ? "auth_siswa" : 'auth';
+      $this->main_libraries->innerview("login_view", $data, true);
    }
 
    public function logout()
