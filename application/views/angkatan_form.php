@@ -63,7 +63,7 @@
                               Looks good!
                            </div>
                         </div>
-                        <input type="text" hidden value="<?= isset($angkatan) ? $angkatan->status : "Aktif" ?>" name="status">
+                        <input type="text" hidden value="<?= isset($angkatan) ? $angkatan->status : "pendaftaran" ?>" name="status">
                         <div class="col-md-6">
                            <button type="submit" class="btn btn-primary">Simpan</button>
                            <a href="" class="btn btn-danger">Reset</a>

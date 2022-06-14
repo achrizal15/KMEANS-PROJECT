@@ -11,7 +11,7 @@ class Siswamodels extends CI_Model
       }
       return $result;
    }
-   public function get_all()
+   public function get_all($where=[])
    {
       $alias = [
          ["table" => "siswa", "alias" => "s"],
@@ -24,6 +24,7 @@ class Siswamodels extends CI_Model
       $this->db->select($select);
       $this->db->from("siswa as s");
       $this->db->join("angkatan as a","a.id=s.angkatan_id");
+      $this->db->where($where);
       return $this->db->get()->result();
    }
 

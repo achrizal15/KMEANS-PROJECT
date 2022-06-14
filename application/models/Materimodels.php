@@ -23,7 +23,7 @@ class Materimodels extends CI_Model
       }
       $this->db->select($select);
       $this->db->from("materi as m");
-      // $this->db->join("role as r","r.id=u.role_id","left");
+      $this->db->where($where);
       return $this->db->get()->result();
    }
 
