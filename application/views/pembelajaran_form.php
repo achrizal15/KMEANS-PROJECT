@@ -47,7 +47,7 @@
                                             <?php if ($value->kguru_id!=$this->session->userdata("id") )continue?>
                                             <option value="<?= $value->kid ?>"
                                                 <?=isset($pembelajaran)&&$pembelajaran->kelas_id == $value->kid?"selected":""?>>
-                                                <?= $value->knama ?></option>
+                                                <?= $value->knama." ($value->ktingkatan)" ?></option>
                                             <?php endforeach ?>
                                         </select>
                                         <span class="kelasError"></span>

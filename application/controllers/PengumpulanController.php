@@ -1,7 +1,7 @@
 <?php
 
 
-class PembelajaranController extends CI_Controller
+class PengumpulanController extends CI_Controller
 {
    public function __construct()
    {
@@ -13,12 +13,12 @@ class PembelajaranController extends CI_Controller
       $this->load->model("kelasmodels", "km");
       $this->load->model("materimodels", "mt");
       $this->load->model("tugasmodels", "tm");
-      is_login("pembelajaran");
+      // is_login("pembelajaran");
    }
    public function index()
    {
       $data["pembelajaran"] = $this->pm->get_all();
-      $this->main_libraries->innerview("pengumpulan_view", $data);
+      $this->main_libraries->innerview("pengumpulan_form", $data);
    }
    public function action($params = "add", $id = "")
    {

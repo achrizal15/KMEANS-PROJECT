@@ -21,16 +21,64 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title"><?= ucwords($aksi)  ?> MATERI </h3>
+                        <h3 class="card-title"> MATERI </h3>
                     </div>
                     <div class="card-body">
                         <?php echo $this->session->flashdata("message") ? custom_alert_messages("error", $this->session->flashdata("message")) : "" ?>
-                        <div class="container">
-                            <?php foreach ($pertemuan as $key => $value) : ?>
-                                <h3><?= ucwords($value->snama)  ?></h3>
+                        <div class="materi mb-2">
+                            <?php foreach ($pembelajaran as $key => $value) : ?>
+                            <h3><?= ucwords($value->pnama)  ?></h3>
+                            <table>
+                                <tr>
+                                    <td>FILE </td>
+                                    <td>:</td>
+                                    <td><?php if ($value->pfile) :  ?>
+                                        <a href="<?=base_url("assets/file/$value->pfile")?>"><i class="fa-solid fa-file-pdf"></i> Download</a>
+                                        <?php endif  ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>DESKRIPSI </td>
+                                    <td>:</td>
+                                    <td><?=($value->pdeskripsi)?></td>
+                                </tr>
+                                <tr>
+                                    <td>TUGAS </td>
+                                    <td>:</td>
+                                    <td><?=($value->tdeskripsi)?></td>
+                                </tr>
+                            </table>
 
                             <?php endforeach;  ?>
-                            
+
+                        </div>
+                        <hr>
+                        <div class="tugas mt-2">
+                            <?php foreach ($pembelajaran as $key => $value) : ?>
+                            <h3>Pengumpulan Tugas</h3>
+                            <table>
+                                <tr>
+                                    <td>FILE </td>
+                                    <td>:</td>
+                                    <td><?php if ($value->pfile) :  ?>
+                                        <a href="<?=base_url("assets/file/$value->pfile")?>"><i class="fa-solid fa-file-pdf"></i> Download</a>
+                                        <?php endif  ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>DESKRIPSI </td>
+                                    <td>:</td>
+                                    <td><?=($value->pdeskripsi)?></td>
+                                </tr>
+                                <tr>
+                                    <td>TUGAS </td>
+                                    <td>:</td>
+                                    <td><?=($value->tdeskripsi)?></td>
+                                </tr>
+                            </table>
+
+                            <?php endforeach;  ?>
+
                         </div>
                     </div>
                 </div>

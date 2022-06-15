@@ -31,7 +31,7 @@
                             <h5 class="card-title"><?= $value->mnama ?></h5>
                             <p class="card-text"><?= $value->pdeskripsi ?>.
                             </p>
-                            <a href="#" class="btn btn-primary">Selengkapnya</a>
+                            <a href="<?= base_url("pengumpulancontroller/index/") ?>" class="btn btn-primary">Selengkapnya</a>
                         </div>
                         <div class="card-footer text-muted">
                             2 days ago
