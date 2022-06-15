@@ -48,10 +48,6 @@
                 <div class="form-group">
                   <label for="validationCustom02">Tingkatan</label>
                   <select name="tingkatan" data-parsley-errors-container=".tingkatanError" class="form-control dont-change select-basic" id="select-tingkatan" required>
-                    <option selected value="" hidden>Pilih Satu</option>
-                    <option value="SD">SD</option>
-                    <option value="SMP">SMP</option>
-                    <option value="SMA">SMA</option>
                   </select>
                   <span class="tingkatanError"></span>
                 </div>
