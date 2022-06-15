@@ -11,7 +11,7 @@ class Kelasmodels extends CI_Model
       }
       return $result;
    }
-   public function get_all()
+   public function get_all($where=[])
    {
       $alias = [
          ["table" => "kelas", "alias" => "k"],
@@ -24,6 +24,7 @@ class Kelasmodels extends CI_Model
       $this->db->select($select);
       $this->db->from("kelas as k");
       $this->db->join("user as s","s.id=k.guru_id");
+      $this->db->where($where);
       return $this->db->get()->result();
    }
 

@@ -107,7 +107,6 @@ const materiTypeHandler = function () {
 }
 const pembelajaranTypeHandler = function () {
    if ($("#pembelajaran-table").length > 0) {
-      const idHandlerTugas = $("#tugasHandler")
       $(document).on("click", "#delete-pembelajaran", function () {
          let id = $(this).data("id")
          let tr = $(this).parents("tr");
@@ -271,8 +270,10 @@ const soaltesTypeHandler = function () {
 const PenerimaanTypeHandler = function () {
    if ($("#form-manage-data-kmeans").length == 0) return false;
    $('#generate-kmeans').hide()
-   $(document).on("change", "select", function () {
+   $(".select-c").hide()
+   $(document).on("change", ".dont-change", function () {
       $('#generate-kmeans').hide()
+      $(".select-c").hide()
       $('#siswa-pendaftar-table').html('<h6 class="text-center">Data belum ditampilkan</h6>')
    })
    $(document).on("submit", "#form-manage-data-kmeans", function (e) {
@@ -289,9 +290,22 @@ const PenerimaanTypeHandler = function () {
          dataType: "json",
          success: function (response) {
             let table = "";
-            if (response.siswa.length >= 5) {
+            if (response.siswa.length >= 5 && response.kelas.length >= 2) {
                $('#generate-kmeans').show()
-               table += '<small class="text-danger">2 Cluster diambil dari data 2 teratas.</small>'
+               $(".select-c").show()
+               $("#select-c1").empty()
+               $("#select-c2").empty()
+               for (let index = 0; index < response.kelas.length; index++) {
+                  const e = response.kelas[index];
+                  if (index % 2 == 0) {
+                     $("#select-c1").append(`<option value="${e.kid}">${e.knama.toUpperCase()} Kelas</option>`)
+                  } else {
+                     $("#select-c2").append(`<option value="${e.kid}">${e.knama.toUpperCase()} Kelas</option>`)
+                  }
+               }
+               table += `
+               <small class="text-danger">2 Cluster diambil dari data 2 teratas.</small>
+               `
             } else {
                $('#generate-kmeans').hide()
                table += "<h6>Data tidak cukup untuk melakukan kmeans</h6>"
@@ -321,6 +335,8 @@ const PenerimaanTypeHandler = function () {
    $(document).on("click", "#generate-kmeans", function () {
       const tingkatan = $("#select-tingkatan").val()
       const angkatan = $("#select-angkatan").val()
+      const c1 = $("#select-c1").val()
+      const c2 = $("#select-c2").val()
       Swal.fire({
          title: 'Anda yakin?',
          text: "Pastikan pendaftaran sudah ditutup untuk mengelompokkan siswa dengan KMEANS!",
@@ -331,7 +347,51 @@ const PenerimaanTypeHandler = function () {
          confirmButtonText: 'Lanjutkan!'
       }).then((result) => {
          if (result.isConfirmed) {
-            console.log(1)
+            $.ajax({
+               type: "get",
+               url: `${base_url}/penerimaancontroller/kmeans_method/${angkatan}/${tingkatan}/${c1}/${c2}`,
+               dataType: "json",
+               success: function (res) {
+                  const kmeans = res.kmeans
+                  const materi = res.materi
+                  const kelasc1 = res.c1
+                  const kelasc2 = res.c2
+                  const siswa = res.siswa
+                  for (let index = 0; index < kmeans.length; index++) {
+                     const item = kmeans[index];
+                     let table = `<div class="mb-3">
+                                 <h6>Iterasi : ${index + 1}</h6>
+                                 <h6>Rasio : ${item.rasio}</h6>
+                                 <table class="table">
+                                 <thead>
+                                       <tr class="table-info">
+                                       <th>NAMA</th>
+                                       <th>${kelasc1.nama}</th>
+                                       <th>${kelasc2.nama}</th>
+                                       <th>HASIL</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>`
+                     for (let s = 0; s < siswa.length; s++) {
+                        const human = siswa[s];
+                        table += `<tr> 
+                                 <td>${human.snama}</td>`
+                        for (let k = 0; k < item.execute.length; k++) {
+                           const exc = item.execute[k]
+                           if (exc.id == human.sid) {
+                              const hasil=exc.cluster['cluster0']<=exc.cluster['cluster1']?`${kelasc1.nama}`:`${kelasc2.nama}`
+                              table += `<td>${exc.cluster['cluster0']}</td><td>${exc.cluster['cluster1']}</td>
+                                    <td>Kelas ${hasil}</td>
+                                     </tr>`                              
+                           }
+                        }
+                     }
+                     table += `</tbody> <hr></div>`
+                     $('.item-kmeans').append(table)
+                  }
+
+               }
+            });
          }
       })
    })
