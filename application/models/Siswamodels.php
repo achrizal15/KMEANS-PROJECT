@@ -30,7 +30,7 @@ class Siswamodels extends CI_Model
    public function get_all_penerimaan($where = [])
    {
       $this->db->select("*");
-      $this->db->from("siswa as s");
+      $this->db->from("penerimaan");
       $this->db->where($where);
       return $this->db->get()->result();
    }

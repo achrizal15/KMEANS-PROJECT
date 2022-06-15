@@ -271,6 +271,28 @@ const PenerimaanTypeHandler = function () {
    if ($("#form-manage-data-kmeans").length == 0) return false;
    $('#generate-kmeans').hide()
    $(".select-c").hide()
+   $(document).on("change", "#select-angkatan", function () {
+      const value = $(this).val()
+      $('#select-tingkatan').empty()
+      $.ajax({
+         type: "get",
+         url: `${base_url}/penerimaancontroller/ambil_penerimaan/${value}`,
+         dataType: "json",
+         success: function (res) {
+            const tingkatan = ["SD", "SMP", "SMA"];
+            for (let index = 0; index < res.length; index++) {
+               const e = res[index];
+               if (tingkatan.includes(e.tingkatan)) {
+                  tingkatan.splice(tingkatan.indexOf(e.tingkatan), 1)
+               };
+            }
+        for (let index = 0; index < tingkatan.length; index++) {
+            const e = tingkatan[index];
+         $('#select-tingkatan').append(`<option value="${e}">${e.toUpperCase()}</option>`)}
+         }
+      });
+
+   })
    $(document).on("change", ".dont-change", function () {
       $('#generate-kmeans').hide()
       $(".select-c").hide()
@@ -356,7 +378,7 @@ const PenerimaanTypeHandler = function () {
                   const kelasc1 = res.c1
                   const kelasc2 = res.c2
                   const siswa = res.siswa
-                  let form_html=`<input type='hidden' name='angkatan' value='${angkatan}'>
+                  let form_html = `<input type='hidden' name='angkatan' value='${angkatan}'>
                                 <input type='hidden' name='tingkatan' value='${tingkatan}'>`;
                   for (let index = 0; index < kmeans.length; index++) {
                      const item = kmeans[index];
@@ -386,8 +408,8 @@ const PenerimaanTypeHandler = function () {
                            if (exc.id == human.sid) {
                               const hasil = exc.cluster['cluster0'] <= exc.cluster['cluster1'] ? `${kelasc1.nama}` : `${kelasc2.nama}`
                               const hasil_kelas = exc.cluster['cluster0'] <= exc.cluster['cluster1'] ? `${kelasc1.id}` : `${kelasc2.id}`
-                              if(index==kmeans.length-1){
-                                 form_html+=`<input type="hidden" name="data[${k}][kelas]" value="${hasil_kelas}">
+                              if (index == kmeans.length - 1) {
+                                 form_html += `<input type="hidden" name="data[${k}][kelas]" value="${hasil_kelas}">
                                  <input type="hidden" name="data[${k}][siswa]" value="${human.sid}">`
                               }
                               table += `<td>${exc.cluster['cluster0']}</td><td>${exc.cluster['cluster1']}</td>

@@ -35,6 +35,9 @@ class PenerimaanController extends CI_Controller
       $this->session->set_flashdata("message", "Berhasil melakukan penerimaan siswa");
       redirect(base_url("penerimaancontroller"));
    }
+   public function ambil_penerimaan($angkatan_id){
+ echo json_encode($this->sm->get_all_penerimaan(["angkatan_id"=>$angkatan_id]));
+   }
    public function penerimaan_get_data($angkatan, $tingkatan)
    {
       $siswa = $this->sm->get_all(["s.angkatan_id" => $angkatan, "s.tingkatan" => $tingkatan]);
