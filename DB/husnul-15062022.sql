@@ -1,0 +1,1 @@
+ALTER TABLE `pembelajaran` ADD `nama` VARCHAR(255) NOT NULL AFTER `id`;
