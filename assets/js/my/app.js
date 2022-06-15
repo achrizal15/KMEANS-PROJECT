@@ -353,14 +353,19 @@ const PenerimaanTypeHandler = function () {
                dataType: "json",
                success: function (res) {
                   const kmeans = res.kmeans
-                  const materi = res.materi
                   const kelasc1 = res.c1
                   const kelasc2 = res.c2
                   const siswa = res.siswa
+                  let form_html=`<input type='hidden' name='angkatan' value='${angkatan}'>
+                                <input type='hidden' name='tingkatan' value='${tingkatan}'>`;
                   for (let index = 0; index < kmeans.length; index++) {
                      const item = kmeans[index];
-                     let table = `<div class="mb-3">
-                                 <h6>Iterasi : ${index + 1}</h6>
+                     let table = `<div class="mb-3">`
+                     if (index == 0) {
+                        table += `<a href='' class='btn btn-danger text-white mb-3'><i class="fa-solid fa-arrows-rotate"></i></a>
+                                    <button class='btn btn-success text-white mb-3' id='submit-save-kmeans'><i class="fa-solid fa-floppy-disk-circle-arrow-right"></i></button>`
+                     }
+                     table += `<h6>Iterasi : ${index + 1}</h6>
                                  <h6>Rasio : ${item.rasio}</h6>
                                  <table class="table">
                                  <thead>
@@ -379,21 +384,32 @@ const PenerimaanTypeHandler = function () {
                         for (let k = 0; k < item.execute.length; k++) {
                            const exc = item.execute[k]
                            if (exc.id == human.sid) {
-                              const hasil=exc.cluster['cluster0']<=exc.cluster['cluster1']?`${kelasc1.nama}`:`${kelasc2.nama}`
+                              const hasil = exc.cluster['cluster0'] <= exc.cluster['cluster1'] ? `${kelasc1.nama}` : `${kelasc2.nama}`
+                              const hasil_kelas = exc.cluster['cluster0'] <= exc.cluster['cluster1'] ? `${kelasc1.id}` : `${kelasc2.id}`
+                              if(index==kmeans.length-1){
+                                 form_html+=`<input type="hidden" name="data[${k}][kelas]" value="${hasil_kelas}">
+                                 <input type="hidden" name="data[${k}][siswa]" value="${human.sid}">`
+                              }
                               table += `<td>${exc.cluster['cluster0']}</td><td>${exc.cluster['cluster1']}</td>
-                                    <td>Kelas ${hasil}</td>
-                                     </tr>`                              
+                                     <td>Kelas ${hasil}</td>
+                                     </tr>`
                            }
                         }
                      }
                      table += `</tbody> <hr></div>`
                      $('.item-kmeans').append(table)
+                     $('#save-kmeans').append(form_html)
+                     $("#form-manage-data-kmeans").find("button").attr("disabled", true)
+                     $("#form-manage-data-kmeans").find("select").attr("disabled", true)
                   }
 
                }
             });
          }
       })
+   })
+   $(document).on("click", "#submit-save-kmeans", function () {
+      $("#save-kmeans").submit()
    })
 }
 const initDatatable = () => {

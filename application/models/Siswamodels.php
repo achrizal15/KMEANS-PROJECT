@@ -11,21 +11,34 @@ class Siswamodels extends CI_Model
       }
       return $result;
    }
-   public function get_all($where=[])
+   public function get_all($where = [])
    {
       $alias = [
          ["table" => "siswa", "alias" => "s"],
          ["table" => "angkatan", "alias" => "a"]
       ];
-      $select="";
+      $select = "";
       foreach ($alias as $key) {
          $select .= implode(',', $this->setAliasColumn($key['table'], $key['alias'])) . ",";
       }
       $this->db->select($select);
       $this->db->from("siswa as s");
-      $this->db->join("angkatan as a","a.id=s.angkatan_id");
+      $this->db->join("angkatan as a", "a.id=s.angkatan_id");
       $this->db->where($where);
       return $this->db->get()->result();
+   }
+   public function get_all_penerimaan($where = [])
+   {
+      $this->db->select("*");
+      $this->db->from("siswa as s");
+      $this->db->where($where);
+      return $this->db->get()->result();
+   }
+   public function create_penerimaan($data)
+   {
+      $data["created_at"] = date("Y-m-d H:i:s", strtotime("now"));
+      $this->db->insert("penerimaan", $data);
+      return $this->db->affected_rows();
    }
 
    public function delete($id)
@@ -49,7 +62,7 @@ class Siswamodels extends CI_Model
    }
    public function perbarui($id, $data)
    {
-      $this->db->update("kelas", $data, ["id" => $id]);
+      $this->db->update("siswa", $data, ["id" => $id]);
       return $this->db->affected_rows();
    }
    public function create($data)

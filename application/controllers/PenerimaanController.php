@@ -21,6 +21,20 @@ class PenerimaanController extends CI_Controller
       $data['angkatan'] = $this->am->get_all();
       $this->main_libraries->innerview("penerimaan_view", $data);
    }
+   public function update_kelas()
+   {
+      $data = $this->input->post();
+      $penerimaan = [
+         "tingkatan" => $data["tingkatan"],
+         "angkatan_id" => $data["angkatan"],
+      ];
+      foreach($data['data'] as $siswa){
+         $this->sm->perbarui($siswa['siswa'], ['kelas_id' => $siswa["kelas"],"status"=>"ACTIVE"]);
+      }
+      $this->sm->create_penerimaan($penerimaan);
+      $this->session->set_flashdata("message", "Berhasil melakukan penerimaan siswa");
+      redirect(base_url("penerimaancontroller"));
+   }
    public function penerimaan_get_data($angkatan, $tingkatan)
    {
       $siswa = $this->sm->get_all(["s.angkatan_id" => $angkatan, "s.tingkatan" => $tingkatan]);
@@ -92,6 +106,7 @@ class PenerimaanController extends CI_Controller
       }
       return ["mcv" => $mcv, "terkecil" => $terkecil, "checked" => $checked];
    }
+
    private function count_average($data, $checked, $pusat_cluster)
    {
       $average = [];

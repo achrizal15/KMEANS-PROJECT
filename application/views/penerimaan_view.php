@@ -18,6 +18,10 @@
 
     <div class="container-fluid">
       <div class="card mb-5">
+      <?php echo $this->session->flashdata("message") ? custom_alert_messages("", $this->session->flashdata("message")) : "" ?>
+        <form action="<?=base_url('penerimaancontroller/update_kelas')?>" id="save-kmeans" method="POST">
+
+        </form>
         <div class="card-body item-kmeans">
       
         </div>
@@ -76,7 +80,6 @@
               <h3 class="card-title">Daftar Siswa</h3>
             </div>
             <div class="card-body">
-              <?php echo $this->session->flashdata("message") ? custom_alert_messages("", $this->session->flashdata("message")) : "" ?>
               <div class="table-responsive" id="siswa-pendaftar-table">
                 <h6 class="text-center">
                   Data belum ditampilkan
