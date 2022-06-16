@@ -74,7 +74,7 @@ if (!function_exists("list_menu")) {
          ],
          [
             "nama" => "Nilai Tes",
-            "link" => "soaltescontroller/nilai",
+            "link" => "nilaitescontroller",
             "icon" => "fa-solid fa-list-dropdown",
             "content" => "nilaites",
             "group" => "Manage Tes",

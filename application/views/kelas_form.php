@@ -32,9 +32,10 @@
                            <label for="validationCustom02">Nama</label>
                            <select name="nama" data-parsley-errors-container=".namaError" class="form-control select-basic" id="select-nama" required>
                               <option selected value="" hidden>Pilih Satu</option>
-                              <?php foreach ($a_zname as $kn) :  ?>
-                                 <option value="<?=$kn?>" <?= isset($kelas) && $kelas->nama == $kn ? "selected" : "" ?>><?=$kn?></option>
-                              <?php endforeach;  ?>
+
+                              <option value="TINGKAT LANJUT" <?= isset($kelas) && $kelas->nama == "TINGKAT LANJUT" ? "selected" : "" ?>>TINGKAT LANJUT</option>
+                              <option value="TINGKAT MENENGAH" <?= isset($kelas) && $kelas->nama == "TINGKAT MENENGAH" ? "selected" : "" ?>>TINGKAT MENENGAH</option>
+
                            </select>
                            <span class="namaError"></span>
                         </div>

@@ -355,9 +355,9 @@ const PenerimaanTypeHandler = function () {
                for (let index = 0; index < response.kelas.length; index++) {
                   const e = response.kelas[index];
                   if (index % 2 == 0) {
-                     $("#select-c1").append(`<option value="${e.kid}">${e.knama.toUpperCase()} Kelas</option>`)
+                     $("#select-c1").append(`<option value="${e.kid}">${e.knama.toUpperCase()}</option>`)
                   } else {
-                     $("#select-c2").append(`<option value="${e.kid}">${e.knama.toUpperCase()} Kelas</option>`)
+                     $("#select-c2").append(`<option value="${e.kid}">${e.knama.toUpperCase()}</option>`)
                   }
                }
                table += `
@@ -449,7 +449,7 @@ const PenerimaanTypeHandler = function () {
                                  <input type="hidden" name="data[${k}][siswa]" value="${human.sid}">`
                               }
                               table += `<td>${exc.cluster['cluster0']}</td><td>${exc.cluster['cluster1']}</td>
-                                     <td>Kelas ${hasil}</td>
+                                     <td> ${hasil}</td>
                                      </tr>`
                            }
                         }

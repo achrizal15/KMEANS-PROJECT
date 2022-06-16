@@ -28,15 +28,16 @@ class PenerimaanController extends CI_Controller
          "tingkatan" => $data["tingkatan"],
          "angkatan_id" => $data["angkatan"],
       ];
-      foreach($data['data'] as $siswa){
-         $this->sm->perbarui($siswa['siswa'], ['kelas_id' => $siswa["kelas"],"status"=>"ACTIVE"]);
+      foreach ($data['data'] as $siswa) {
+         $this->sm->perbarui($siswa['siswa'], ['kelas_id' => $siswa["kelas"], "status" => "ACTIVE"]);
       }
       $this->sm->create_penerimaan($penerimaan);
       $this->session->set_flashdata("message", "Berhasil melakukan penerimaan siswa");
       redirect(base_url("penerimaancontroller"));
    }
-   public function ambil_penerimaan($angkatan_id){
- echo json_encode($this->sm->get_all_penerimaan(["angkatan_id"=>$angkatan_id]));
+   public function ambil_penerimaan($angkatan_id)
+   {
+      echo json_encode($this->sm->get_all_penerimaan(["angkatan_id" => $angkatan_id]));
    }
    public function penerimaan_get_data($angkatan, $tingkatan)
    {

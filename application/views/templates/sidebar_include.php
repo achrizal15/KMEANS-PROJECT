@@ -4,7 +4,7 @@
          <?php
          $group = [];
          foreach (list_menu() as $key => $value) :  ?>
-            <?php if ($value["group"] == null ) :  ?>
+            <?php if ($value["group"] == null) :  ?>
                <?php if (show_menu($value["content"])) :  ?>
                   <li>
                      <a href="<?= base_url($value["link"]) ?>" class="<?= active_sidebar($value["link"]) ?>">
@@ -45,11 +45,46 @@
                         </ul>
                      </div>
                   </li>
-               <?php  $group[] = $value["group"];
+               <?php $group[] = $value["group"];
                endif;
-                           ?>
+               ?>
             <?php endif  ?>
          <?php endforeach;  ?>
+         <!-- siswa -->
+         <?php if ($this->session->userdata("role") == 'siswa') :  ?>
+            <li>
+               <a href="<?= base_url('/') ?>" class="<?= active_sidebar('/') ?>">
+                  <i class="fa-solid fa-gauge" style="font-size: 18px;"></i>
+                  <span class="nama" style="font-weight: bold;">
+                     Dashboard
+                  </span>
+               </a>
+            </li>
+            <!-- <li>
+               <a href="<?= base_url('/') ?>" class="<?= active_sidebar('/') ?>">
+                  <i class="fa-solid fa-list-check" style="font-size: 18px;"></i>
+                  <span class="nama" style="font-weight: bold;">
+                     Tugas
+                  </span>
+               </a>
+            </li> -->
+            <li>
+               <a href="<?= base_url('/') ?>" class="<?= active_sidebar('/') ?>">
+                  <i class="fa-solid fa-id-badge" style="font-size: 18px;"></i>
+                  <span class="nama" style="font-weight: bold;">
+                     Profil
+                  </span>
+               </a>
+            </li>
+            <li>
+               <a href="<?= base_url('/authcontroller/logout') ?>" class="<?= active_sidebar('/') ?>">
+                  <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 18px;"></i>
+                  <span class="nama" style="font-weight: bold;">
+                     Logout
+                  </span>
+               </a>
+            </li>
+         <?php endif  ?>
       </ul>
    </nav>
 </div>

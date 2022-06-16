@@ -30,7 +30,6 @@ class Home extends CI_Controller
 			redirect(base_url("home/tes_akademik"));
 			return false;
 		}
-		// var_dump($data["pembelajaran"]);exit;
 		$this->main_libraries->innerview("siswa/landing",$data);
 	}
 	public function tes_akademik()

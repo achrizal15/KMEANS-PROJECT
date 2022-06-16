@@ -21,65 +21,61 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title"> MATERI </h3>
+                        <h3 class="card-title"> <?= $pem->pnama  ?> </h3>
                     </div>
                     <div class="card-body">
-                        <?php echo $this->session->flashdata("message") ? custom_alert_messages("error", $this->session->flashdata("message")) : "" ?>
-                        <div class="materi mb-2">
-                            <?php foreach ($pembelajaran as $key => $value) : ?>
-                            <h3><?= ucwords($value->pnama)  ?></h3>
-                            <table>
-                                <tr>
-                                    <td>FILE </td>
-                                    <td>:</td>
-                                    <td><?php if ($value->pfile) :  ?>
-                                        <a href="<?=base_url("assets/file/$value->pfile")?>"><i class="fa-solid fa-file-pdf"></i> Download</a>
-                                        <?php endif  ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>DESKRIPSI </td>
-                                    <td>:</td>
-                                    <td><?=($value->pdeskripsi)?></td>
-                                </tr>
-                                <tr>
-                                    <td>TUGAS </td>
-                                    <td>:</td>
-                                    <td><?=($value->tdeskripsi)?></td>
-                                </tr>
-                            </table>
-
-                            <?php endforeach;  ?>
-
-                        </div>
-                        <hr>
-                        <div class="tugas mt-2">
-                            <?php foreach ($pembelajaran as $key => $value) : ?>
-                            <h3>Pengumpulan Tugas</h3>
-                            <table>
-                                <tr>
-                                    <td>FILE </td>
-                                    <td>:</td>
-                                    <td><?php if ($value->pfile) :  ?>
-                                        <a href="<?=base_url("assets/file/$value->pfile")?>"><i class="fa-solid fa-file-pdf"></i> Download</a>
-                                        <?php endif  ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>DESKRIPSI </td>
-                                    <td>:</td>
-                                    <td><?=($value->pdeskripsi)?></td>
-                                </tr>
-                                <tr>
-                                    <td>TUGAS </td>
-                                    <td>:</td>
-                                    <td><?=($value->tdeskripsi)?></td>
-                                </tr>
-                            </table>
-
-                            <?php endforeach;  ?>
-
-                        </div>
+                    <table>
+                                    <tr>
+                                        <td>Guru</td>
+                                        <td width="20px"> : </td>
+                                        <td><?= ucwords($pem->snama) ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Materi</td>
+                                        <td width="20px"> : </td>
+                                        <td><?= ucwords($pem->mnama) ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tugas</td>
+                                        <td width="20px"> : </td>
+                                        <td><?= $pem->tjudul ? "Ada tugas" : "Tidak ada tugas" ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tanggal Pertemuan</td>
+                                        <td width="20px"> : </td>
+                                        <td><?= date("d-m-Y",strtotime($pem->pcreated_at)) ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-top">Penjelasan Materi</td>
+                                        <td class="align-top" width="20px"> : </td>
+                                        <td>
+                                            <textarea class="form-control text-justify" cols="100" rows="10" readonly>
+                                                <?= $pem->pdeskripsi ?>
+                                            </textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-top">Judul Tugas</td>
+                                        <td class="align-top" width="20px"> : </td>
+                                        <td>
+                                            <?= $pem->tjudul ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-top">Jawaban anda</td>
+                                        <td class="align-top" width="20px"> : </td>
+                                        <td>
+                                            <textarea class="form-control text-justify" cols="100" rows="10"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-top">Upload File (Jika dibutuhkan)</td>
+                                        <td class="align-top" width="20px"> : </td>
+                                        <td> 
+                                        <input type="file" class="dropify" name="doc" data-max-file-size="10000K">
+                                        </td>
+                                    </tr>
+                                </table>
                     </div>
                 </div>
             </div>

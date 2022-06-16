@@ -21,33 +21,43 @@
             <!-- TOP METRICS -->
             <?php echo $this->session->flashdata("message") ? custom_alert_messages("success", $this->session->flashdata("message")) : "" ?>
             <div class="row">
-			<?php foreach ($pembelajaran as $key => $value) : ?>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="card text-left">
-                        <div class="card-header">
-						<?= $value->pnama ?>
-                        </div>
-                        <div class="card-body text-center">
-                            <h5 class="card-title"><?= $value->mnama ?></h5>
-                            <p class="card-text"><?= $value->pdeskripsi ?>.
-                            </p>
-                            <a href="<?= base_url("pengumpulancontroller/index/") ?>" class="btn btn-primary">Selengkapnya</a>
-                        </div>
-                        <div class="card-footer text-muted">
-                            2 days ago
+                <?php foreach ($pembelajaran as $key => $value) : ?>
+                    <div class="col-sm-12 col-lg-6">
+                        <div class="card text-left">
+                            <div class="card-header">
+                                <?= $value->pnama ?>
+                            </div>
+                            <div class="card-body">
+                                <table>
+                                    <tr>
+                                        <td>Guru</td>
+                                        <td width="20px"> : </td>
+                                        <td><?= ucwords($value->snama) ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Materi</td>
+                                        <td width="20px"> : </td>
+                                        <td><?= ucwords($value->mnama) ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tugas</td>
+                                        <td width="20px"> : </td>
+                                        <td><?= $value->tjudul ? "Ada tugas" : "Tidak ada tugas" ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tanggal Pertemuan</td>
+                                        <td width="20px"> : </td>
+                                        <td><?= date("d-m-Y",strtotime($value->pcreated_at)) ?></td>
+                                    </tr>
+
+                                </table>
+
+                                <a href="<?= base_url("pengumpulancontroller/pengumpulan/".$value->pid) ?>" class="btn btn-primary">Selengkapnya</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-				<?php endforeach;  ?>
-                <!-- <div class="col-sm-6 col-lg-3">
-					<div class="widget widget-metric_1 animate">
-						<span class="icon-wrapper custom-bg-purple"><i class="fa-solid fa-dolly"></i></span>
-						<div class="right">
-							<span class="value"><?= $stok_out  ?> <i class="change-icon change-up fa fa-sort-up text-indicator-green"></i></span>
-							<span class="title">STOK KELUAR <span class="change text-indicator-green"></span></span>
-						</div>
-					</div>
-				</div> -->
+                <?php endforeach;  ?>
+
             </div>
             <!-- END TOP METRICS -->
 

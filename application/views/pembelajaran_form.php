@@ -60,7 +60,7 @@
                                             <?php foreach ($materi as $key => $value) : ?>
                                             <option value="<?= $value->mid ?>"
                                                 <?= isset($pembelajaran) && $pembelajaran->materi_id == $value->mid ? "selected" : "" ?>>
-                                                <?= $value->mnama ?></option>
+                                                <?= ucwords($value->mnama) ?> (<?= $value->mtingkatan  ?>)</option>
                                             <?php endforeach ?>
                                         </select>
                                         <span class="materiError"></span>

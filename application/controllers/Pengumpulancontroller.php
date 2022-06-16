@@ -17,7 +17,11 @@ class PengumpulanController extends CI_Controller
    }
    public function index()
    {
-      $data["pembelajaran"] = $this->pm->get_all();
+    return show_404();
+   }
+   public function pengumpulan($p_id)
+   {
+      $data["pem"] = $this->pm->get_all(["p.id"=>$p_id])[0];
       $this->main_libraries->innerview("pengumpulan_form", $data);
    }
    public function action($params = "add", $id = "")

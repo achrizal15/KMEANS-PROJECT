@@ -33,7 +33,7 @@
                     <tr>
                       <th>PERTEMUAN</th>
                       <th>GURU</th>
-                      <th>TINGKATAN</th>
+                      <th>KELAS</th>
                       <th>MATERI</th>
                       <th>FILE</th>
                       <th>DESKRIPSI</th>
@@ -47,15 +47,15 @@
                       <tr>
                         <td class="align-middle"><?= ucwords($value->pnama)  ?></td>
                         <td class="align-middle"><?= $value->snama  ?></td>
-                        <td class="align-middle"><?= $value->ktingkatan  ?></td>
+                        <td class="align-middle"><?= $value->knama." ".$value->ktingkatan  ?></td>
                         <td class="align-middle"><?= $value->mnama  ?></td>
                         <td class="align-middle">
                           <?php if ($value->pfile) :  ?>
                             <a href="<?=base_url("assets/file/$value->pfile")?>">Download</a>
                           <?php endif  ?>
                         </td>
-                        <td class="align-middle"><?= ucwords($value->pdeskripsi)  ?></td>
-                        <td class="align-middle"><?= $value->tjudul  ?></td>
+                        <td class="align-middle"><div style="width: 200px;" class="text-truncate"><?= ucwords($value->pdeskripsi)  ?></div></td>
+                        <td class="align-middle"><div style="width: 200px;" class="text-truncate"><?= $value->tjudul  ?></div></td>
                         <td class="align-middle"><?= date("d-m-Y", strtotime($value->pcreated_at))  ?></td>
                         <td class="align-middle" width="150px">
                           <a href="<?= base_url("pembelajarancontroller/action/edit/" . $value->pid) ?>" class="btn btn-warning text-white" title="Edit"><i class="fas fa-edit"></i><span class="sr-only">EDIT</span></a>
