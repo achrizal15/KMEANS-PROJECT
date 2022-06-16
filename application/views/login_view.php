@@ -3,8 +3,10 @@
     <div class="content">
       <div class="header">
         <!-- <div class="logo text-center">E Learning</div> -->
-        <div class="logo text-center">BIMBEL SASCHIO</div>
-        <p class="lead">LOGIN <?= $auth=='auth'?" STAFF":" SISWA"  ?></p>
+        <div class="logo text-center">LOGIN <?= $auth == 'auth' ? " STAFF" : " SISWA"  ?></div>
+        <p class="lead">
+          IMPLEMENTASI METODE K-MEANS CLUSTERING UNTUK PENGELOMPOKAN KELAS SISWA PADA BIMBINGAN BELAJAR MATEMATIKA SACHIO BANYUWANGI
+        </p>
         <div>
           <?php echo $this->session->flashdata("message") ? custom_alert_messages("error", $this->session->flashdata("message")) : "" ?>
         </div>

@@ -18,12 +18,12 @@
 
     <div class="container-fluid">
       <div class="card mb-5">
-      <?php echo $this->session->flashdata("message") ? custom_alert_messages("", $this->session->flashdata("message")) : "" ?>
-        <form action="<?=base_url('penerimaancontroller/update_kelas')?>" id="save-kmeans" method="POST">
+        <?php echo $this->session->flashdata("message") ? custom_alert_messages("", $this->session->flashdata("message")) : "" ?>
+        <form action="<?= base_url('penerimaancontroller/update_kelas') ?>" id="save-kmeans" method="POST">
 
         </form>
         <div class="card-body item-kmeans">
-      
+
         </div>
       </div>
       <!-- TOP METRICS -->

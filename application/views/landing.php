@@ -1,7 +1,7 @@
 <div id="wrapper" class="container pt-5">
   <div class="card">
     <div class="card-body text-center">
-      <h5> SELAMAT DATANG DI ELERNING SISTEM SACHIO</h5>
+      <h5>IMPLEMENTASI METODE K-MEANS CLUSTERING UNTUK PENGELOMPOKAN KELAS SISWA PADA BIMBINGAN BELAJAR MATEMATIKA SACHIO BANYUWANGI</h5>
     </div>
   </div>
   <div class="row align-items-center mt-5">
