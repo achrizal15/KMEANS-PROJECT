@@ -19,6 +19,13 @@ class SoaltesController extends CI_Controller
       $data['materi'] = $this->mm->get_all();
       $this->main_libraries->innerview("soaltes_view", $data);
    }
+   public function nilai()
+   {
+      is_login("nilaites");
+      $data["soaltest"] = $this->sm->get_all();
+      $data['materi'] = $this->mm->get_all();
+      $this->main_libraries->innerview("soaltes_view", $data);
+   }
    public function action($params = "add", $id = "")
    {
       $data['materi'] = $this->mm->get_all();

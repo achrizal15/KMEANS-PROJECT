@@ -218,6 +218,41 @@ const angkatanTypeHandler = function () {
       })
    }
 }
+const siswaTypeHandler = function () {
+   if ($("#siswa-table").length > 0) {
+      $(document).on("click", "#delete-siswa", function () {
+         let id = $(this).data("id")
+         let tr = $(this).parents("tr");
+         Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+         }).then((result) => {
+            if (result.isConfirmed) {
+               $.ajax({
+                  type: "post",
+                  url: base_url + "siswacontroller/delete",
+                  data: { "id": id },
+                  dataType: "json",
+                  success: function (response) {
+                     Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                     )
+                     tr.remove();
+                  }
+               });
+
+            }
+         })
+      })
+   }
+}
 
 const soaltesTypeHandler = function () {
    if ($("#soaltes-table").length > 0) {
@@ -326,7 +361,8 @@ const PenerimaanTypeHandler = function () {
                   }
                }
                table += `
-               <small class="text-danger">2 Cluster diambil dari data 2 teratas.</small>
+               <small class="text-danger">2 Cluster diambil dari data 2 teratas.</small><br/>
+               <small class="text-danger">Iterasi akan berhenti jika rasio sebelumnya lebih kecil.</small><br/>
                `
             } else {
                $('#generate-kmeans').hide()
@@ -458,6 +494,7 @@ const initDatatable = () => {
 }
 
 $(document).ready(function () {
+   siswaTypeHandler()
    PenerimaanTypeHandler();
    initDatatable()
    materiTypeHandler()

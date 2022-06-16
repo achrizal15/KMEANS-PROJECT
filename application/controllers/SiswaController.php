@@ -14,6 +14,7 @@ class SiswaController extends CI_Controller
    public function index()
    {
       $data["siswa"] = $this->sm->get_all();
+      $data['angkatan']=$this->am->get_all();
       $this->main_libraries->innerview("siswa_view", $data);
    }
    public function action($params = "add", $id = "")

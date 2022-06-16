@@ -15,7 +15,8 @@ class Siswamodels extends CI_Model
    {
       $alias = [
          ["table" => "siswa", "alias" => "s"],
-         ["table" => "angkatan", "alias" => "a"]
+         ["table" => "angkatan", "alias" => "a"],
+         ["table" => "kelas", "alias" => "k"],
       ];
       $select = "";
       foreach ($alias as $key) {
@@ -24,6 +25,7 @@ class Siswamodels extends CI_Model
       $this->db->select($select);
       $this->db->from("siswa as s");
       $this->db->join("angkatan as a", "a.id=s.angkatan_id");
+      $this->db->join("kelas as k", "k.id=s.kelas_id",'left');
       $this->db->where($where);
       return $this->db->get()->result();
    }

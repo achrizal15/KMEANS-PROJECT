@@ -247,7 +247,7 @@ class PenerimaanController extends CI_Controller
             "new_cluster" => $new_cluster,
             "execute" => $execute
          ];
-         if ($result[$iterate]['rasio'] >= $rasio) {
+         if ($result[$iterate]['rasio'] <= $rasio) {
             return $result;
          } else {
             if ($iterate <= 5) {
