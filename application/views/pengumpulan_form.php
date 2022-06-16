@@ -65,7 +65,7 @@
                                         <td class="align-top">Jawaban anda</td>
                                         <td class="align-top" width="20px"> : </td>
                                         <td>
-                                            <textarea class="form-control text-justify" cols="100" rows="10"></textarea>
+                                            <textarea class="form-control text-justify" cols="100" rows="10" placeholder="Ketik jawaban anda disini."></textarea>
                                         </td>
                                     </tr>
                                     <tr>
