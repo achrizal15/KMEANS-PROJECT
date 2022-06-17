@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.9.7
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 15 Jun 2022 pada 11.05
--- Versi server: 10.4.21-MariaDB
--- Versi PHP: 7.4.24
+-- Host: localhost:3306
+-- Waktu pembuatan: 17 Jun 2022 pada 18.52
+-- Versi server: 10.3.33-MariaDB
+-- Versi PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_kmeans_project`
+-- Database: `udn139mz_kmeans_project`
 --
 
 -- --------------------------------------------------------
@@ -43,17 +44,17 @@ CREATE TABLE `akses` (
 --
 
 INSERT INTO `akses` (`id`, `nama`, `content`, `created_at`, `link`, `icon`, `submenu`, `group`) VALUES
-(32, 'Role', 'role', '2022-06-15 11:05:07', 'rolecontroller', 'fa-solid fa-user-headset', '', 'Manage Staff'),
-(33, 'Home', 'home', '2022-06-15 11:05:07', '', 'fa-solid fa-gauge', '', NULL),
-(34, 'Materi', 'materi', '2022-06-15 11:05:07', 'matericontroller', 'fa-solid fa-square-poll-horizontal', '', NULL),
-(35, 'User', 'user', '2022-06-15 11:05:07', 'usercontroller', 'fa-solid fa-user-headset', '', 'Manage Staff'),
-(37, 'Kelas', 'kelas', '2022-06-15 11:05:07', 'kelascontroller', 'fa-solid fa-window-frame', '', NULL),
-(38, 'Jam Pelajaran', 'pembelajaran', '2022-06-15 11:05:07', 'pembelajarancontroller', 'fa-solid fa-users', '', NULL),
-(39, 'Angkatan', 'angkatan', '2022-06-15 11:05:07', 'angkatancontroller', 'fa-solid fa-school', '', NULL),
-(43, 'Soal Tes', 'soaltes', '2022-06-15 11:05:07', 'soaltescontroller', 'fa-solid fa-list-dropdown', '', 'Manage Tes'),
-(45, 'Siswa', 'siswa', '2022-06-15 11:05:07', 'siswacontroller', 'fa-solid fa-user-graduate', '', NULL),
-(46, 'Nilai Tes', 'nilaites', '2022-06-15 11:05:07', 'soaltescontroller/nilai', 'fa-solid fa-list-dropdown', '', 'Manage Tes'),
-(51, 'Penerimaan Siswa', 'penerimaan', '2022-06-15 11:05:07', 'penerimaancontroller', 'fa-solid fa-screen-users', '', NULL);
+(32, 'Role', 'role', '2022-06-17 11:52:36', 'rolecontroller', 'fa-solid fa-user-headset', '', 'Manage Staff'),
+(33, 'Home', 'home', '2022-06-17 11:52:36', '', 'fa-solid fa-gauge', '', NULL),
+(34, 'Materi', 'materi', '2022-06-17 11:52:36', 'matericontroller', 'fa-solid fa-square-poll-horizontal', '', NULL),
+(35, 'User', 'user', '2022-06-17 11:52:36', 'usercontroller', 'fa-solid fa-user-headset', '', 'Manage Staff'),
+(37, 'Kelas', 'kelas', '2022-06-17 11:52:36', 'kelascontroller', 'fa-solid fa-window-frame', '', NULL),
+(38, 'Jam Pelajaran', 'pembelajaran', '2022-06-17 11:52:36', 'pembelajarancontroller', 'fa-solid fa-users', '', NULL),
+(39, 'Angkatan', 'angkatan', '2022-06-17 11:52:36', 'angkatancontroller', 'fa-solid fa-school', '', NULL),
+(43, 'Soal Tes', 'soaltes', '2022-06-17 11:52:36', 'soaltescontroller', 'fa-solid fa-list-dropdown', '', 'Manage Tes'),
+(45, 'Siswa', 'siswa', '2022-06-17 11:52:36', 'siswacontroller', 'fa-solid fa-user-graduate', '', NULL),
+(46, 'Nilai Tes', 'nilaites', '2022-06-17 11:52:36', 'nilaitescontroller', 'fa-solid fa-list-dropdown', '', 'Manage Tes'),
+(51, 'Penerimaan Siswa', 'penerimaan', '2022-06-17 11:52:36', 'penerimaancontroller', 'fa-solid fa-screen-users', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -77,7 +78,7 @@ CREATE TABLE `angkatan` (
 --
 
 INSERT INTO `angkatan` (`id`, `angkatan`, `awal_pendaftaran`, `akhir_pendaftaran`, `awal_periode`, `akhir_periode`, `status`, `created_at`) VALUES
-(3, '2021', '2022-06-01 00:00:00', '2022-06-15 00:00:00', '2022-06-01 00:00:00', '2022-07-13 00:00:00', 'pendaftaran', '2022-06-13 07:04:44');
+(3, '2022 Juli', '2022-06-01 00:00:00', '2022-06-20 00:00:00', '2022-06-20 00:00:00', '2022-07-13 00:00:00', 'pendaftaran', '2022-06-13 07:04:44');
 
 -- --------------------------------------------------------
 
@@ -98,69 +99,141 @@ CREATE TABLE `hasil_tes` (
 --
 
 INSERT INTO `hasil_tes` (`id`, `id_soal`, `id_siswa`, `jawaban`, `created_at`) VALUES
-(1, 18, 5, '58', '2022-06-14 02:38:53'),
-(2, 19, 5, '62', '2022-06-14 02:38:54'),
-(3, 20, 5, '65', '2022-06-14 02:38:54'),
-(4, 21, 5, '68', '2022-06-14 02:38:54'),
-(5, 22, 5, '70', '2022-06-14 02:38:54'),
-(6, 23, 5, '73', '2022-06-14 02:38:54'),
-(7, 24, 5, '76', '2022-06-14 02:38:54'),
-(8, 25, 5, '80', '2022-06-14 02:38:54'),
-(9, 26, 5, '83', '2022-06-14 02:38:54'),
-(10, 18, 6, '59', '2022-06-14 03:54:10'),
-(11, 19, 6, '62', '2022-06-14 03:54:10'),
-(12, 20, 6, '65', '2022-06-14 03:54:10'),
-(13, 21, 6, '68', '2022-06-14 03:54:10'),
-(14, 22, 6, '70', '2022-06-14 03:54:10'),
-(15, 23, 6, '72', '2022-06-14 03:54:10'),
-(16, 24, 6, '77', '2022-06-14 03:54:10'),
-(17, 25, 6, '80', '2022-06-14 03:54:10'),
-(18, 26, 6, '83', '2022-06-14 03:54:10'),
-(19, 18, 7, '58', '2022-06-14 03:56:44'),
-(20, 19, 7, '62', '2022-06-14 03:56:44'),
-(21, 20, 7, '65', '2022-06-14 03:56:44'),
-(22, 21, 7, '66', '2022-06-14 03:56:44'),
-(23, 22, 7, '71', '2022-06-14 03:56:44'),
-(24, 23, 7, '73', '2022-06-14 03:56:44'),
-(25, 24, 7, '76', '2022-06-14 03:56:44'),
-(26, 25, 7, '80', '2022-06-14 03:56:44'),
-(27, 26, 7, '83', '2022-06-14 03:56:44'),
-(28, 18, 8, '59', '2022-06-14 04:00:44'),
-(29, 19, 8, '62', '2022-06-14 04:00:44'),
-(30, 20, 8, '65', '2022-06-14 04:00:44'),
-(31, 21, 8, '66', '2022-06-14 04:00:44'),
-(32, 22, 8, '69', '2022-06-14 04:00:44'),
-(33, 23, 8, '74', '2022-06-14 04:00:44'),
-(34, 24, 8, '76', '2022-06-14 04:00:44'),
-(35, 25, 8, '80', '2022-06-14 04:00:44'),
-(36, 26, 8, '83', '2022-06-14 04:00:44'),
-(37, 18, 9, '58', '2022-06-14 04:02:56'),
-(38, 19, 9, '62', '2022-06-14 04:02:56'),
-(39, 20, 9, '65', '2022-06-14 04:02:56'),
-(40, 21, 9, '67', '2022-06-14 04:02:56'),
-(41, 22, 9, '70', '2022-06-14 04:02:56'),
-(42, 23, 9, '72', '2022-06-14 04:02:56'),
-(43, 24, 9, '77', '2022-06-14 04:02:56'),
-(44, 25, 9, '80', '2022-06-14 04:02:56'),
-(45, 26, 9, '83', '2022-06-14 04:02:56'),
-(46, 9, 10, '31', '2022-06-14 08:15:21'),
-(47, 10, 10, NULL, '2022-06-14 08:15:21'),
-(48, 11, 10, '36', '2022-06-14 08:15:21'),
-(49, 12, 10, '40', '2022-06-14 08:15:21'),
-(50, 13, 10, '44', '2022-06-14 08:15:21'),
-(51, 14, 10, '47', '2022-06-14 08:15:21'),
-(52, 15, 10, '48', '2022-06-14 08:15:21'),
-(53, 16, 10, NULL, '2022-06-14 08:15:21'),
-(54, 17, 10, NULL, '2022-06-14 08:15:21'),
-(55, 18, 11, '59', '2022-06-15 10:06:15'),
-(56, 19, 11, '62', '2022-06-15 10:06:15'),
-(57, 20, 11, '65', '2022-06-15 10:06:15'),
-(58, 21, 11, '68', '2022-06-15 10:06:15'),
-(59, 22, 11, '70', '2022-06-15 10:06:15'),
-(60, 23, 11, '72', '2022-06-15 10:06:15'),
-(61, 24, 11, '76', '2022-06-15 10:06:15'),
-(62, 25, 11, '80', '2022-06-15 10:06:15'),
-(63, 26, 11, '83', '2022-06-15 10:06:15');
+(1, 9, 1, '31', '2022-06-16 14:05:12'),
+(2, 10, 1, '35', '2022-06-16 14:05:12'),
+(3, 11, 1, '36', '2022-06-16 14:05:12'),
+(4, 12, 1, '41', '2022-06-16 14:05:12'),
+(5, 13, 1, '44', '2022-06-16 14:05:12'),
+(6, 14, 1, '45', '2022-06-16 14:05:12'),
+(7, 15, 1, '48', '2022-06-16 14:05:12'),
+(8, 16, 1, '51', '2022-06-16 14:05:12'),
+(9, 17, 1, '55', '2022-06-16 14:05:12'),
+(10, 9, 2, '31', '2022-06-16 14:59:46'),
+(11, 10, 2, '35', '2022-06-16 14:59:46'),
+(12, 11, 2, '36', '2022-06-16 14:59:46'),
+(13, 12, 2, '39', '2022-06-16 14:59:46'),
+(14, 13, 2, '44', '2022-06-16 14:59:46'),
+(15, 14, 2, '45', '2022-06-16 14:59:46'),
+(16, 15, 2, '48', '2022-06-16 14:59:46'),
+(17, 16, 2, '52', '2022-06-16 14:59:46'),
+(18, 17, 2, '54', '2022-06-16 14:59:46'),
+(19, 9, 3, '31', '2022-06-16 15:07:04'),
+(20, 10, 3, '34', '2022-06-16 15:07:04'),
+(21, 11, 3, '38', '2022-06-16 15:07:04'),
+(22, 12, 3, '39', '2022-06-16 15:07:04'),
+(23, 13, 3, '44', '2022-06-16 15:07:04'),
+(24, 14, 3, '46', '2022-06-16 15:07:04'),
+(25, 15, 3, '49', '2022-06-16 15:07:04'),
+(26, 16, 3, '53', '2022-06-16 15:07:04'),
+(27, 17, 3, '54', '2022-06-16 15:07:04'),
+(28, 9, 4, '32', '2022-06-16 15:09:40'),
+(29, 10, 4, NULL, '2022-06-16 15:09:40'),
+(30, 11, 4, '38', '2022-06-16 15:09:40'),
+(31, 12, 4, NULL, '2022-06-16 15:09:40'),
+(32, 13, 4, NULL, '2022-06-16 15:09:40'),
+(33, 14, 4, '47', '2022-06-16 15:09:40'),
+(34, 15, 4, NULL, '2022-06-16 15:09:40'),
+(35, 16, 4, '51', '2022-06-16 15:09:40'),
+(36, 17, 4, '55', '2022-06-16 15:09:40'),
+(37, 9, 5, '30', '2022-06-16 15:10:58'),
+(38, 10, 5, '34', '2022-06-16 15:10:58'),
+(39, 11, 5, '38', '2022-06-16 15:10:58'),
+(40, 12, 5, '41', '2022-06-16 15:10:58'),
+(41, 13, 5, '44', '2022-06-16 15:10:58'),
+(42, 14, 5, '47', '2022-06-16 15:10:58'),
+(43, 15, 5, '48', '2022-06-16 15:10:58'),
+(44, 16, 5, '51', '2022-06-16 15:10:58'),
+(45, 17, 5, '54', '2022-06-16 15:10:58'),
+(46, 9, 6, '30', '2022-06-16 15:12:10'),
+(47, 10, 6, '35', '2022-06-16 15:12:10'),
+(48, 11, 6, '38', '2022-06-16 15:12:10'),
+(49, 12, 6, '39', '2022-06-16 15:12:10'),
+(50, 13, 6, '44', '2022-06-16 15:12:10'),
+(51, 14, 6, '45', '2022-06-16 15:12:10'),
+(52, 15, 6, '48', '2022-06-16 15:12:10'),
+(53, 16, 6, '52', '2022-06-16 15:12:10'),
+(54, 17, 6, '56', '2022-06-16 15:12:10'),
+(55, 9, 7, '32', '2022-06-16 16:38:33'),
+(56, 10, 7, '35', '2022-06-16 16:38:33'),
+(57, 11, 7, '38', '2022-06-16 16:38:33'),
+(58, 12, 7, '41', '2022-06-16 16:38:33'),
+(59, 13, 7, '44', '2022-06-16 16:38:33'),
+(60, 14, 7, '45', '2022-06-16 16:38:33'),
+(61, 15, 7, '49', '2022-06-16 16:38:33'),
+(62, 16, 7, '53', '2022-06-16 16:38:33'),
+(63, 17, 7, '56', '2022-06-16 16:38:33'),
+(64, 18, 8, '57', '2022-06-16 16:43:27'),
+(65, 19, 8, '60', '2022-06-16 16:43:27'),
+(66, 20, 8, '64', '2022-06-16 16:43:27'),
+(67, 21, 8, '68', '2022-06-16 16:43:27'),
+(68, 22, 8, '70', '2022-06-16 16:43:27'),
+(69, 23, 8, '73', '2022-06-16 16:43:27'),
+(70, 24, 8, '75', '2022-06-16 16:43:27'),
+(71, 25, 8, '80', '2022-06-16 16:43:27'),
+(72, 26, 8, '82', '2022-06-16 16:43:27'),
+(73, 18, 9, '57', '2022-06-16 16:49:36'),
+(74, 19, 9, '60', '2022-06-16 16:49:36'),
+(75, 20, 9, '63', '2022-06-16 16:49:36'),
+(76, 21, 9, '68', '2022-06-16 16:49:36'),
+(77, 22, 9, '71', '2022-06-16 16:49:36'),
+(78, 23, 9, '74', '2022-06-16 16:49:36'),
+(79, 24, 9, '76', '2022-06-16 16:49:36'),
+(80, 25, 9, '80', '2022-06-16 16:49:36'),
+(81, 26, 9, '81', '2022-06-16 16:49:36'),
+(82, 18, 10, '59', '2022-06-16 16:51:16'),
+(83, 19, 10, '61', '2022-06-16 16:51:16'),
+(84, 20, 10, '63', '2022-06-16 16:51:16'),
+(85, 21, 10, '67', '2022-06-16 16:51:16'),
+(86, 22, 10, '70', '2022-06-16 16:51:16'),
+(87, 23, 10, NULL, '2022-06-16 16:51:16'),
+(88, 24, 10, '76', '2022-06-16 16:51:16'),
+(89, 25, 10, '78', '2022-06-16 16:51:16'),
+(90, 26, 10, '82', '2022-06-16 16:51:16'),
+(91, 9, 11, '32', '2022-06-16 17:27:35'),
+(92, 10, 11, '34', '2022-06-16 17:27:35'),
+(93, 11, 11, '38', '2022-06-16 17:27:35'),
+(94, 12, 11, '40', '2022-06-16 17:27:35'),
+(95, 13, 11, '42', '2022-06-16 17:27:35'),
+(96, 14, 11, '45', '2022-06-16 17:27:35'),
+(97, 15, 11, '48', '2022-06-16 17:27:35'),
+(98, 16, 11, '53', '2022-06-16 17:27:35'),
+(99, 17, 11, '56', '2022-06-16 17:27:35'),
+(100, 9, 12, '30', '2022-06-16 23:39:14'),
+(101, 10, 12, '33', '2022-06-16 23:39:14'),
+(102, 11, 12, '37', '2022-06-16 23:39:14'),
+(103, 12, 12, '41', '2022-06-16 23:39:14'),
+(104, 13, 12, '43', '2022-06-16 23:39:14'),
+(105, 14, 12, '45', '2022-06-16 23:39:14'),
+(106, 15, 12, '49', '2022-06-16 23:39:14'),
+(107, 16, 12, '52', '2022-06-16 23:39:14'),
+(108, 17, 12, '54', '2022-06-16 23:39:14'),
+(109, 38, 12, '124', '2022-06-16 23:39:14'),
+(110, 39, 12, '126', '2022-06-16 23:39:14'),
+(111, 40, 12, '131', '2022-06-16 23:39:14'),
+(112, 41, 12, '133', '2022-06-16 23:39:14'),
+(113, 42, 12, '136', '2022-06-16 23:39:14'),
+(114, 43, 12, '139', '2022-06-16 23:39:14'),
+(115, 44, 12, '142', '2022-06-16 23:39:14'),
+(116, 45, 12, '145', '2022-06-16 23:39:14'),
+(117, 46, 12, '147', '2022-06-16 23:39:14'),
+(118, 18, 13, '120', '2022-06-16 23:54:30'),
+(119, 19, 13, '61', '2022-06-16 23:54:30'),
+(120, 20, 13, '64', '2022-06-16 23:54:30'),
+(121, 21, 13, '67', '2022-06-16 23:54:30'),
+(122, 22, 13, '69', '2022-06-16 23:54:30'),
+(123, 23, 13, '74', '2022-06-16 23:54:30'),
+(124, 24, 13, '76', '2022-06-16 23:54:30'),
+(125, 25, 13, '78', '2022-06-16 23:54:30'),
+(126, 26, 13, '81', '2022-06-16 23:54:30'),
+(127, 18, 14, '122', '2022-06-17 01:24:26'),
+(128, 19, 14, '62', '2022-06-17 01:24:26'),
+(129, 20, 14, '65', '2022-06-17 01:24:26'),
+(130, 21, 14, '68', '2022-06-17 01:24:26'),
+(131, 22, 14, '69', '2022-06-17 01:24:26'),
+(132, 23, 14, '72', '2022-06-17 01:24:26'),
+(133, 24, 14, '76', '2022-06-17 01:24:26'),
+(134, 25, 14, '80', '2022-06-17 01:24:26'),
+(135, 26, 14, '83', '2022-06-17 01:24:26');
 
 -- --------------------------------------------------------
 
@@ -197,10 +270,12 @@ CREATE TABLE `kelas` (
 --
 
 INSERT INTO `kelas` (`id`, `nama`, `created_at`, `tingkatan`, `guru_id`, `hari`, `waktu`) VALUES
-(2, 'A', '2022-06-08 05:26:07', 'SD', 19, 'Selasa', '13:10'),
-(3, 'B', '2022-06-08 06:09:39', 'SMP', 19, 'Senin', '13:09'),
-(6, 'B', '2022-06-14 05:43:38', 'SD', 19, 'Senin', '12:12'),
-(8, 'A', '2022-06-14 05:51:10', 'SMP', 19, 'Selasa', '12:12');
+(11, 'TINGKAT LANJUT', '2022-06-16 14:07:46', 'SMP', 36, 'Selasa', '15:07'),
+(12, 'TINGKAT MENENGAH', '2022-06-16 14:08:38', 'SMP', 37, 'Kamis', '21:08'),
+(13, 'TINGKAT LANJUT', '2022-06-16 14:56:47', 'SD', 36, 'Kamis', '21:56'),
+(14, 'TINGKAT MENENGAH', '2022-06-16 14:57:31', 'SD', 37, 'Kamis', '21:57'),
+(15, 'TINGKAT LANJUT', '2022-06-16 14:58:00', 'SMA', 36, 'Jumat', '21:57'),
+(16, 'TINGKAT MENENGAH', '2022-06-16 14:58:17', 'SMA', 38, 'Jumat', '04:58');
 
 -- --------------------------------------------------------
 
@@ -252,27 +327,48 @@ CREATE TABLE `nilai_tes` (
 --
 
 INSERT INTO `nilai_tes` (`id`, `materi`, `materi_id`, `nilai`, `siswa_id`, `created_at`) VALUES
-(1, 'bilangan ', 33, '66', 5, '2022-06-14 03:14:18'),
-(2, 'Aljabar', 34, '33', 5, '2022-06-14 03:14:18'),
-(3, 'Garis dan Sudut', 35, '66', 5, '2022-06-14 03:14:18'),
-(4, 'bilangan ', 33, '99', 6, '2022-06-14 03:54:11'),
-(5, 'Aljabar', 34, '33', 6, '2022-06-14 03:54:11'),
-(6, 'Garis dan Sudut', 35, '99', 6, '2022-06-14 03:54:11'),
-(7, 'bilangan ', 33, '66', 7, '2022-06-14 03:56:44'),
-(8, 'Aljabar', 34, '33', 7, '2022-06-14 03:56:45'),
-(9, 'Garis dan Sudut', 35, '66', 7, '2022-06-14 03:56:45'),
-(10, 'bilangan ', 33, '99', 8, '2022-06-14 04:00:45'),
-(11, 'Aljabar', 34, '33', 8, '2022-06-14 04:00:45'),
-(12, 'Garis dan Sudut', 35, '66', 8, '2022-06-14 04:00:45'),
-(13, 'bilangan ', 33, '66', 9, '2022-06-14 04:02:57'),
-(14, 'Aljabar', 34, '0', 9, '2022-06-14 04:02:57'),
-(15, 'Garis dan Sudut', 35, '99', 9, '2022-06-14 04:02:57'),
-(16, 'Operasi Hitung', 30, '0', 10, '2022-06-14 08:15:22'),
-(17, 'Kelipatan dan Faktor', 31, '66', 10, '2022-06-14 08:15:22'),
-(18, 'Bangun Datar Sederhana', 32, '0', 10, '2022-06-14 08:15:22'),
-(19, 'bilangan ', 33, '99', 11, '2022-06-15 10:06:16'),
-(20, 'Aljabar', 34, '33', 11, '2022-06-15 10:06:16'),
-(21, 'Garis dan Sudut', 35, '66', 11, '2022-06-15 10:06:16');
+(1, 'Operasi Hitung', 30, '33', 1, '2022-06-16 14:05:12'),
+(2, 'Kelipatan dan Faktor', 31, '66', 1, '2022-06-16 14:05:12'),
+(3, 'Bangun Datar Sederhana', 32, '0', 1, '2022-06-16 14:05:12'),
+(4, 'Operasi Hitung', 30, '33', 2, '2022-06-16 14:59:46'),
+(5, 'Kelipatan dan Faktor', 31, '33', 2, '2022-06-16 14:59:46'),
+(6, 'Bangun Datar Sederhana', 32, '0', 2, '2022-06-16 14:59:46'),
+(7, 'Operasi Hitung', 30, '33', 3, '2022-06-16 15:07:04'),
+(8, 'Kelipatan dan Faktor', 31, '33', 3, '2022-06-16 15:07:04'),
+(9, 'Bangun Datar Sederhana', 32, '33', 3, '2022-06-16 15:07:04'),
+(10, 'Operasi Hitung', 30, '66', 4, '2022-06-16 15:09:40'),
+(11, 'Kelipatan dan Faktor', 31, '33', 4, '2022-06-16 15:09:40'),
+(12, 'Bangun Datar Sederhana', 32, '0', 4, '2022-06-16 15:09:40'),
+(13, 'Operasi Hitung', 30, '33', 5, '2022-06-16 15:10:58'),
+(14, 'Kelipatan dan Faktor', 31, '99', 5, '2022-06-16 15:10:58'),
+(15, 'Bangun Datar Sederhana', 32, '0', 5, '2022-06-16 15:10:58'),
+(16, 'Operasi Hitung', 30, '66', 6, '2022-06-16 15:12:10'),
+(17, 'Kelipatan dan Faktor', 31, '33', 6, '2022-06-16 15:12:10'),
+(18, 'Bangun Datar Sederhana', 32, '33', 6, '2022-06-16 15:12:10'),
+(19, 'Operasi Hitung', 30, '99', 7, '2022-06-16 16:38:33'),
+(20, 'Kelipatan dan Faktor', 31, '66', 7, '2022-06-16 16:38:34'),
+(21, 'Bangun Datar Sederhana', 32, '66', 7, '2022-06-16 16:38:34'),
+(22, 'bilangan ', 33, '0', 8, '2022-06-16 16:43:27'),
+(23, 'Aljabar', 34, '33', 8, '2022-06-16 16:43:27'),
+(24, 'Garis dan Sudut', 35, '33', 8, '2022-06-16 16:43:27'),
+(25, 'bilangan ', 33, '0', 9, '2022-06-16 16:49:36'),
+(26, 'Aljabar', 34, '99', 9, '2022-06-16 16:49:36'),
+(27, 'Garis dan Sudut', 35, '33', 9, '2022-06-16 16:49:36'),
+(28, 'bilangan ', 33, '33', 10, '2022-06-16 16:51:16'),
+(29, 'Aljabar', 34, '0', 10, '2022-06-16 16:51:16'),
+(30, 'Garis dan Sudut', 35, '0', 10, '2022-06-16 16:51:16'),
+(31, 'Operasi Hitung', 30, '66', 11, '2022-06-16 17:27:35'),
+(32, 'Kelipatan dan Faktor', 31, '0', 11, '2022-06-16 17:27:35'),
+(33, 'Bangun Datar Sederhana', 32, '66', 11, '2022-06-16 17:27:35'),
+(34, 'Operasi Hitung', 30, '10', 12, '2022-06-16 23:39:14'),
+(35, 'Kelipatan dan Faktor', 31, '20', 12, '2022-06-16 23:39:14'),
+(36, 'Bangun Datar Sederhana', 32, '0', 12, '2022-06-16 23:39:14'),
+(37, 'bilangan ', 33, '0', 13, '2022-06-16 23:54:30'),
+(38, 'Aljabar', 34, '33', 13, '2022-06-16 23:54:30'),
+(39, 'Garis dan Sudut', 35, '0', 13, '2022-06-16 23:54:30'),
+(40, 'bilangan ', 33, '99', 14, '2022-06-17 01:24:26'),
+(41, 'Aljabar', 34, '33', 14, '2022-06-17 01:24:26'),
+(42, 'Garis dan Sudut', 35, '66', 14, '2022-06-17 01:24:26');
 
 -- --------------------------------------------------------
 
@@ -297,7 +393,8 @@ CREATE TABLE `pembelajaran` (
 --
 
 INSERT INTO `pembelajaran` (`id`, `nama`, `guru_id`, `kelas_id`, `materi_id`, `file`, `deskripsi`, `tugas_id`, `created_at`) VALUES
-(4, '', 36, 4, 28, 'CamScanner1.zip', 'DIrubar', 0, '2022-06-11 15:36:58');
+(4, '', 36, 4, 28, 'CamScanner1.zip', 'DIrubar', 0, '2022-06-11 15:36:58'),
+(5, 'Pertemuan 5', 19, 2, 30, 'deret_angka.pdf', 'Pertemuan 5', 4, '2022-06-16 14:07:12');
 
 -- --------------------------------------------------------
 
@@ -312,13 +409,6 @@ CREATE TABLE `penerimaan` (
   `tingkatan` enum('SD','SMP','SMA','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `penerimaan`
---
-
-INSERT INTO `penerimaan` (`id`, `created_at`, `angkatan_id`, `tingkatan`) VALUES
-(8, '2022-06-15 11:05:02', 3, 'SMP');
-
 -- --------------------------------------------------------
 
 --
@@ -328,10 +418,11 @@ INSERT INTO `penerimaan` (`id`, `created_at`, `angkatan_id`, `tingkatan`) VALUES
 CREATE TABLE `pengumpulan_tugas` (
   `id` int(11) NOT NULL,
   `siswa_id` int(11) NOT NULL,
-  `kelas_id` int(11) NOT NULL,
-  `tugas_id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `pembelajaran_id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `file` varchar(255) DEFAULT NULL,
+  `jawaban` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -431,13 +522,20 @@ CREATE TABLE `siswa` (
 --
 
 INSERT INTO `siswa` (`id`, `nama`, `email`, `password`, `alamat`, `asal_sekolah`, `created_at`, `angkatan_id`, `tingkatan`, `status`, `kelas_id`) VALUES
-(5, 'koko', 'koko@gmail.com', '$2y$10$VFZkaUknK7BxfTyx1GUaCOA5AXRjv6G1URchz6wQR./KkI36gh12O', 'kemiren', 'bwi', '2022-06-15 09:00:04', 3, 'SMP', 'ACTIVE', 3),
-(6, 'ACH RIZAL', 'ach@gmail.com', '$2y$10$tO39TbEJJlUBlWaXhz9Mx.xP0KkjlXwbUAvIC7mZWsPZT3xGsZivW', 'kemiren', 'ASP', '2022-06-15 09:00:04', 3, 'SMP', 'ACTIVE', 8),
-(7, 'Kusnul', 'husnul@gmail.com', '$2y$10$TxnVTnWtoWUpNWilGxnyi.olQQ/bIWGpokAnChVJ2j2UVBpHzd7Ry', 'grojakan', 'SJK', '2022-06-15 09:00:05', 3, 'SMP', 'ACTIVE', 3),
-(8, 'Ayu Wulan', 'ay@gmail.com', '$2y$10$qmRi9U0dlzSgvErLdfjt9.a0BSZvsyDfrYgRVHNREfMi8yYjQ4Koe', 'bwi', 'SMPEK', '2022-06-15 09:00:05', 3, 'SMP', 'ACTIVE', 3),
-(9, 'Junaide', 'juna@gmail.com', '$2y$10$R.2VrQixs9LetFVZs02wS.tDm0m1PBYnNAa8T2x7/xquBgh8hnCSu', 'kem', 'SMEA', '2022-06-15 09:00:05', 3, 'SMP', 'ACTIVE', 3),
-(10, 'Dika', 'dik@gmail.com', '$2y$10$G9M6ycrDu1Hzv.OIQLGAQ.rUdMaKcqoI9N4atNImWuWQpWlKRflAS', 'akso', 'aksod', '2022-06-14 01:15:01', 3, 'SD', 'NON ACTIVE', NULL),
-(11, 'koko', 'siswa@gmail.com', '$2y$10$9xMxGdB/fz7pFl8Dr93AqepOS9JRMdNQCw/H6AXGVdr2V5KBNTyr6', 'bwoi', 'SMEA', '2022-06-15 09:00:05', 3, 'SMP', 'ACTIVE', 3);
+(1, 'Al', 'al@gmail.com', '$2y$10$Asp15al6CDf0jF5UI6X6XOwOFC6zFIVfp9.TzxNhj1n4uJ0VWAT5m', 'Grogol', 'Smeaneg', '2022-06-16 07:04:56', 3, 'SD', 'NON ACTIVE', NULL),
+(2, 'Rizal', 'achrizal@gmail.com', '$2y$10$75Wga8zhFxjRoguA.nzp6eXNBbsI2u3DGo5YZOFiVfJQMq8HOv5py', 'Jakarta', 'SMEA', '2022-06-16 07:59:33', 3, 'SD', 'NON ACTIVE', NULL),
+(3, 'koko', 'koko@gmail.com', '$2y$10$T8zNy4OF8cRjtfzORvj1OuHOLWlzFKEzweEBv3l/MkeCnS5I6WXWC', 'kemiren', 'SMEA', '2022-06-16 08:06:46', 3, 'SD', 'NON ACTIVE', NULL),
+(4, 'Alexander', 'alex@gmail.com', '$2y$10$85VruHvuxTe11FmA5Rp0Re/iUIU8NRN3BI8vFCXsk9xuqeSxo21ly', 'jakarta', 'SDK', '2022-06-16 08:09:29', 3, 'SD', 'NON ACTIVE', NULL),
+(5, 'Anindita', 'anin@yahoo.co.id', '$2y$10$HHdU1Ei/6x83FPJL5BcJieA7JfLloQKDIzV7pOt4KFDGw84a/x/My', 'kemiren', 'KDI', '2022-06-16 08:10:35', 3, 'SD', 'NON ACTIVE', NULL),
+(6, 'siswa Sd', 'siswasd@gmail.com', '$2y$10$GLoUJqP.wCHU2x0HmYVhNuEmu3AfjR55zPNLWeVFzucVpYvskPIuG', 'amerika', 'AMRIK', '2022-06-16 08:11:52', 3, 'SD', 'NON ACTIVE', NULL),
+(7, 'Nami', 'nami@yahu.com', '$2y$10$itsWOXmt1aOitrtNo3cN/ezSnAM6hSHkuXyG8UiRdX1Bp3hDqpeNO', 'Glagah', 'SMEA', '2022-06-16 09:38:20', 3, 'SD', 'NON ACTIVE', NULL),
+(8, 'Yoga', 'yoga123@gmail.com', '$2y$10$Kdjq8CLmyxcOcp/fQ2M4oex5/D59oWfYPSYPv6WIbpIfhlgjGk41K', 'jatimulyo', 'smp 1 malang', '2022-06-16 09:42:33', 3, 'SMP', 'NON ACTIVE', NULL),
+(9, 'randy', 'randy123@gmail.com', '$2y$10$qDP.s5dN0X/ENmes2TkbSe9JSTXZY7Q/..hFxudUoruQqfP1EQv2q', 'karangploso', 'smp 2 malang', '2022-06-16 09:48:44', 3, 'SMP', 'NON ACTIVE', NULL),
+(10, 'aris', 'aris123@gmail.com', '$2y$10$naI6t4hLhbb13.bNK.QDWe4wlQfJ1aI852KdEPJI8l2m/c.guscwi', 'blitar', 'smp 1 blitar', '2022-06-16 09:50:44', 3, 'SMP', 'NON ACTIVE', NULL),
+(11, 'Intan', 'intan@gmail.com', '$2y$10$mrnBYSzEcxyX8KMNkCQHl.cgw5XFpPXODX.MotJxy0MQLACRC1qVy', 'Kmean', 'SMEA', '2022-06-16 10:27:21', 3, 'SD', 'NON ACTIVE', NULL),
+(12, 'Arip', 'ar@gmail.com', '$2y$10$9PR21XTc8SUR37zV6/1tYOgGzTDFStwLef.VnExyKxXQ2lIiR0wS2', 'Cungiing', 'SMEA', '2022-06-16 16:38:38', 3, 'SD', 'NON ACTIVE', NULL),
+(13, 'Alena', 'alena@gmail.com', '$2y$10$Fix4Iwor.FRc6Icjk2qw0eJP6GgNDkBCoDGN8c5fm71vM.baAsT06', 'Glagah', 'SMEA', '2022-06-16 16:53:55', 3, 'SMP', 'NON ACTIVE', NULL),
+(14, 'ozi', 'ozzay@gmaii.com', '$2y$10$MS9H/F6IhIu6ng59TDhwiuRfElbjwi2Wf2mIdcbOxw0GBZ7wrBH6W', 'klatak', 'SMEPK', '2022-06-16 18:24:06', 3, 'SMP', 'NON ACTIVE', NULL);
 
 -- --------------------------------------------------------
 
@@ -471,7 +569,7 @@ INSERT INTO `soal_tes` (`id`, `soal`, `file`, `jawaban`, `materi_id`, `tingkatan
 (15, 'Panjang alas suatu segitiga adalah 12 cm dan tingginya 5 cm. Luas segitiga itu adalah...', NULL, '30 cm²', 32, 'SD', '2022-06-13 06:34:08'),
 (16, 'Luas sebuah segitiga adalah 135 cm² dan panjang alasnya 18 cm. Berapakah tinggi segitiga tersebut?', NULL, '15 cm', 32, 'SD', '2022-06-13 06:34:50'),
 (17, 'berapa hasil dari gambar diatas?', 'ABC2.jpg', '66 cm²', 32, 'SD', '2022-06-13 06:35:40'),
-(18, 'Dari ramalan cuaca kota-kota besar di dunia tercatat suhu tertinggi dan terendah adalah sebagai berikut.\r\nMoskow: terendah -5°C dan tertinggi 10°C\r\nMeksiko: terendah 17°C dan tertinggi 34°C\r\nParis: terendah -3°C dan tertinggi 17°C\r\nTokyo: terendah -2°C dan tertinggi 25°C\r\nPerubahan suhu terbesar terjadi di kota…', NULL, 'tokyo', 33, 'SMP', '2022-06-13 06:36:32'),
+(18, 'Dari ramalan cuaca kota-kota besar di dunia tercatat suhu tertinggi dan terendah adalah sebagai berikut.\r\nMoskow: terendah -5°C dan tertinggi 10°C\r\nMeksiko: terendah 17°C dan tertinggi 34°C\r\nParis: terendah -3°C dan tertinggi 17°C\r\nTokyo: terendah -2°C dan tertinggi 25°C\r\nPerubahan suhu terbesar terjadi di kota…', NULL, 'Tokyo', 33, 'SMP', '2022-06-13 06:36:32'),
 (19, 'Suhu udara di puncak Gunung Jaya Wijaya -5°C. Jika suhu di kaki gunung tersebut 20°C, berapakah beda suhunya?', NULL, '25°C', 33, 'SMP', '2022-06-13 06:37:40'),
 (20, 'Sebuah kapal selam berada pada 50 m di atas permukaan laut. Kemudian, kapal tersebut menyelam hingga pada kedalaman 200 m. Berapakah beda posisi kapal dengan posisi terakhirnya?', NULL, '250 m', 33, 'SMP', '2022-06-13 06:38:29'),
 (21, 'bentuk sederhana dari 12abc:3a', NULL, '4bc', 34, 'SMP', '2022-06-13 06:39:24'),
@@ -488,7 +586,18 @@ INSERT INTO `soal_tes` (`id`, `soal`, `file`, `jawaban`, `materi_id`, `tingkatan
 (32, 'Tentukan nilai logaritma 3log 54 + 3log 18 – 3log 12', NULL, '4', 37, 'SMA', '2022-06-13 06:49:30'),
 (33, 'Hitung mean dari data berikut ini: 2,3,3,4...', NULL, '3', 38, 'SMA', '2022-06-13 06:49:56'),
 (34, 'Hitung median dari data berikut ini: 9,1,3,7,5...', NULL, '5', 38, 'SMA', '2022-06-13 06:50:28'),
-(35, 'Carilah nilai modus dari data berikut: 2,5,5,7,7,6...', NULL, '5 dan 7', 38, 'SMA', '2022-06-13 06:51:09');
+(35, 'Carilah nilai modus dari data berikut: 2,5,5,7,7,6...', NULL, '5 dan 7', 38, 'SMA', '2022-06-13 06:51:09'),
+(38, 'Hitunglah  (152 : 8) x 3 =', NULL, '55', 30, 'SD', '2022-06-16 17:39:22'),
+(39, 'Romi membeli 7 pensil seharga Rp.8.000. Jika romi membayar pensil itu dengan 3 lembar uang Rp. 20.000. Hitunglah berapa uang kembalian diterima romi', NULL, 'RP.4000', 30, 'SD', '2022-06-16 17:45:06'),
+(40, '175 + 32 x 6 – 25 = ….', NULL, '342', 30, 'SD', '2022-06-16 18:15:36'),
+(41, 'Hitunglah 325 – 125 : 5 + 100 x 3 =', NULL, '200', 30, 'SD', '2022-06-16 18:29:05'),
+(42, 'Hitunglah 79 – (6 x 8) = …..', NULL, '30', 30, 'SD', '2022-06-16 18:31:40'),
+(43, 'Hitunglah (8 x 5) + 30 =', NULL, '50', 30, 'SD', '2022-06-16 18:40:36'),
+(44, ' Dedi membeli 5 kotak bolpoin. Setiap kotak berisi 12 bolpoin. Bolpoin itu diberikan kepada adiknya 5 buah. Sisanya akan dibagikan kepada 5 temannya. Hitunglah berapa bolpoin yang diterima masing-masing teman dedi', NULL, '14 buah', 30, 'SD', '2022-06-16 19:40:29'),
+(45, ' Bilangan kelipatan 6 adalah', NULL, '6, 8, 10, 12, 14', 31, 'SD', '2022-06-16 19:44:50'),
+(46, 'Bilangan kelipatan 3 yang kurang dari 30 dan lebih dari 10 adalah', NULL, '3, 6, 9', 31, 'SD', '2022-06-16 20:53:29'),
+(47, 'Rumus untuk mencari keliling persegi adalah =', NULL, '4xs', 32, 'SD', '2022-06-17 01:22:17'),
+(48, 'Sebuah kolam renang berbentuk persegi panjang memiliki panjang 40 meter dan lebar 20 meter. Kolam renang tersebut dikelilingi jalan setapak selebar 1 meter. Luas jalan setapak itu adalah .... m²', NULL, '120', 32, 'SD', '2022-06-17 01:28:53');
 
 -- --------------------------------------------------------
 
@@ -544,9 +653,6 @@ INSERT INTO `soal_tes_pilihan_ganda` (`id`, `created_at`, `soal_id`, `jawaban`) 
 (54, '2022-06-13 06:35:41', 17, '67 cm²'),
 (55, '2022-06-13 06:35:41', 17, '68 cm²'),
 (56, '2022-06-13 06:35:41', 17, '66 cm²'),
-(57, '2022-06-13 06:36:32', 18, 'meksiko'),
-(58, '2022-06-13 06:36:32', 18, 'paris'),
-(59, '2022-06-13 06:36:32', 18, 'tokyo'),
 (60, '2022-06-13 06:37:40', 19, '26°C'),
 (61, '2022-06-13 06:37:40', 19, '27°C'),
 (62, '2022-06-13 06:37:40', 19, '25°C'),
@@ -597,7 +703,49 @@ INSERT INTO `soal_tes_pilihan_ganda` (`id`, `created_at`, `soal_id`, `jawaban`) 
 (107, '2022-06-13 06:50:29', 34, '5'),
 (108, '2022-06-13 06:51:09', 35, '6 dan 7'),
 (109, '2022-06-13 06:51:09', 35, '5 dan 6'),
-(110, '2022-06-13 06:51:09', 35, '5 dan 7');
+(110, '2022-06-13 06:51:09', 35, '5 dan 7'),
+(114, '2022-06-16 14:03:09', 36, '3'),
+(115, '2022-06-16 14:03:09', 36, '1'),
+(116, '2022-06-16 14:03:09', 36, '2'),
+(117, '2022-06-16 17:23:23', 37, 'Benar'),
+(118, '2022-06-16 17:23:23', 37, 'Sekali'),
+(119, '2022-06-16 17:23:23', 37, 'Ya'),
+(120, '2022-06-16 17:24:32', 18, 'Meksiko'),
+(121, '2022-06-16 17:24:32', 18, 'Paris'),
+(122, '2022-06-16 17:24:32', 18, 'Tokyo'),
+(153, '2022-06-16 23:41:29', 46, '3, 6, 9, 12, 15, 18, 21, 24, 27'),
+(154, '2022-06-16 23:41:29', 46, '33, 36, 39'),
+(155, '2022-06-16 23:41:29', 46, '3, 6, 9'),
+(156, '2022-06-16 23:41:53', 45, '6, 12, 18, 24, 32'),
+(157, '2022-06-16 23:41:53', 45, '6, 12, 16, 20, 26'),
+(158, '2022-06-16 23:41:53', 45, '6, 8, 10, 12, 14'),
+(159, '2022-06-16 23:42:27', 44, '19 buah'),
+(160, '2022-06-16 23:42:27', 44, '11 buah'),
+(161, '2022-06-16 23:42:27', 44, '14 buah'),
+(162, '2022-06-16 23:42:49', 43, '60'),
+(163, '2022-06-16 23:42:49', 43, '70'),
+(164, '2022-06-16 23:42:49', 43, '50'),
+(165, '2022-06-16 23:43:12', 42, '31'),
+(166, '2022-06-16 23:43:12', 42, '32'),
+(167, '2022-06-16 23:43:12', 42, '30'),
+(171, '2022-06-16 23:44:08', 40, '345'),
+(172, '2022-06-16 23:44:08', 40, '346'),
+(173, '2022-06-16 23:44:08', 40, '342'),
+(174, '2022-06-16 23:45:48', 39, 'RP.2000'),
+(175, '2022-06-16 23:45:48', 39, 'RP.1000'),
+(176, '2022-06-16 23:45:48', 39, 'RP.4000'),
+(177, '2022-06-17 00:51:09', 41, '400'),
+(178, '2022-06-17 00:51:09', 41, '600'),
+(179, '2022-06-17 00:51:09', 41, '200'),
+(180, '2022-06-17 00:51:33', 38, '56'),
+(181, '2022-06-17 00:51:33', 38, '57'),
+(182, '2022-06-17 00:51:33', 38, '55'),
+(183, '2022-06-17 01:22:17', 47, '4xp'),
+(184, '2022-06-17 01:22:17', 47, '6xs'),
+(185, '2022-06-17 01:22:17', 47, '4xs'),
+(186, '2022-06-17 01:28:53', 48, '124'),
+(187, '2022-06-17 01:28:53', 48, '126'),
+(188, '2022-06-17 01:28:53', 48, '120');
 
 -- --------------------------------------------------------
 
@@ -619,7 +767,8 @@ CREATE TABLE `tugas` (
 INSERT INTO `tugas` (`id`, `created_at`, `judul`, `deskripsi`) VALUES
 (1, '2022-06-09 04:31:30', 'Sebut', 'aksjaskd  '),
 (2, '2022-06-09 04:32:16', '', ' '),
-(3, '2022-06-11 15:35:22', '', ' ');
+(3, '2022-06-11 15:35:22', '', ' '),
+(4, '2022-06-16 14:07:12', 'Kerjakan soal', 'Ya itu tawes');
 
 -- --------------------------------------------------------
 
@@ -643,7 +792,9 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `nama`, `email`, `password`, `role_id`, `created_at`) VALUES
 (15, 'root', 'root@gmail.com', '$2y$10$ITjNrFRnoA5fJYNzg9shM.7XPIWcRseYd5kjwzjiQwVMWk7g73J9.', 1, '2022-04-30 05:24:49'),
 (19, 'Slamet', 'guru@gmail.com', '$2y$10$Nv5vP6YWgCbMXkFvzNz3Se/64inltPk9KCI1rIvujojjCFG3R/mi2', 18, '2022-05-11 04:43:27'),
-(36, 'koko', 'koko@gmail.com', '$2y$10$gZo/hx7QrFEEsxiJnkJdQeQHPJUP7y0EbldfJcQOYlLu4ReK2zxP2', 18, '2022-06-11 15:26:04');
+(36, 'koko', 'koko@gmail.com', '$2y$10$gZo/hx7QrFEEsxiJnkJdQeQHPJUP7y0EbldfJcQOYlLu4ReK2zxP2', 18, '2022-06-11 15:26:04'),
+(37, 'Riyadi', 'riyadi@gmail.com', '$2y$10$pdLuCQsktB/OK81W3k/kBumVFkHq18nk2j2SydxsmSoymPNOxzPV6', 18, '2022-06-16 03:14:47'),
+(38, 'Endang', 'endang@gmail.com', '$2y$10$7gd9w998DNVShCgWTfCc7u1rHQEQSpRAiMXUIXVXX3siQydzVY9U2', 18, '2022-06-16 03:15:25');
 
 --
 -- Indexes for dumped tables
@@ -704,12 +855,6 @@ ALTER TABLE `penerimaan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `pengumpulan_tugas`
---
-ALTER TABLE `pengumpulan_tugas`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indeks untuk tabel `pertemuan`
 --
 ALTER TABLE `pertemuan`
@@ -765,13 +910,13 @@ ALTER TABLE `akses`
 -- AUTO_INCREMENT untuk tabel `angkatan`
 --
 ALTER TABLE `angkatan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `hasil_tes`
 --
 ALTER TABLE `hasil_tes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
 
 --
 -- AUTO_INCREMENT untuk tabel `jam_pelajaran`
@@ -783,36 +928,30 @@ ALTER TABLE `jam_pelajaran`
 -- AUTO_INCREMENT untuk tabel `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `materi`
 --
 ALTER TABLE `materi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT untuk tabel `nilai_tes`
 --
 ALTER TABLE `nilai_tes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT untuk tabel `pembelajaran`
 --
 ALTER TABLE `pembelajaran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `penerimaan`
 --
 ALTER TABLE `penerimaan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT untuk tabel `pengumpulan_tugas`
---
-ALTER TABLE `pengumpulan_tugas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -831,31 +970,31 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT untuk tabel `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `soal_tes`
 --
 ALTER TABLE `soal_tes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT untuk tabel `soal_tes_pilihan_ganda`
 --
 ALTER TABLE `soal_tes_pilihan_ganda`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=189;
 
 --
 -- AUTO_INCREMENT untuk tabel `tugas`
 --
 ALTER TABLE `tugas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

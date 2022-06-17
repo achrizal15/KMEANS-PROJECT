@@ -29,7 +29,7 @@ class Home extends CI_Controller
 				"awal_periode"=>date("Y-m-d"),
 				"akhir_pendaftaran"=>date("Y-m-d",strtotime("+6 day")),
 				"awal_pendaftaran"=>date("Y-m-d"),
-				"angkatan"=>date("Y M")
+				"angkatan"=>date("Y M"),"status"=>"pendaftaran"
 			];
 			$this->angkatanmodels->create($data_angkatan);
 			$this->angkatanmodels->perbarui($angkatan->id,["status"=>'nonaktif']);
