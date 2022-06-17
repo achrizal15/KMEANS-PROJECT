@@ -69,7 +69,7 @@
                </a>
             </li> -->
             <li>
-               <a href="<?= base_url('/') ?>" class="<?= active_sidebar('/') ?>">
+               <a href="<?= base_url('siswacontroller/action/edit') ?>" class="<?= active_sidebar('/') ?>">
                   <i class="fa-solid fa-id-badge" style="font-size: 18px;"></i>
                   <span class="nama" style="font-weight: bold;">
                      Profil

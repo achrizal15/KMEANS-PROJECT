@@ -9,6 +9,7 @@ class PembelajaranController extends CI_Controller
       $this->load->library(["main_libraries", 'session', "form_validation"]);
       $this->load->model("pembelajaranmodels", "pm");
       $this->load->model("usermodels", "um");
+      $this->load->model("pengumpulanmodels", "nm");
       $this->load->model("kelasmodels", "km");
       $this->load->model("materimodels", "mt");
       $this->load->model("tugasmodels", "tm");
@@ -18,6 +19,11 @@ class PembelajaranController extends CI_Controller
    {
       $data["pembelajaran"] = $this->pm->get_all();
       $this->main_libraries->innerview("pembelajaran_view", $data);
+   }
+   public function show_hasil_tugas($id)
+   {
+      $data["tugas"] = $this->nm->get_all(["pembelajaran_id" => $id]);
+      $this->main_libraries->innerview("hasil_tugas_view", $data);
    }
    public function action($params = "add", $id = "")
    {

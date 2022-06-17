@@ -24,8 +24,8 @@
 					<div class="widget widget-metric_1 animate">
 						<span class="icon-wrapper custom-bg-orange"><i class="fa fa-area-chart"></i></span>
 						<div class="right">
-							<span class="value"> 50<i class="change-icon change-up fa fa-sort-up text-indicator-green"></i></span>
-							<span class="title">JUMLAH SMP <span class="change text-indicator-green"></span></span>
+							<span class="value"> <?= count($siswaSD)  ?><i class="change-icon change-up fa fa-sort-up text-indicator-green"></i></span>
+							<span class="title">SISWA SD <span class="change text-indicator-green"></span></span>
 						</div>
 					</div>
 				</div>
@@ -33,8 +33,8 @@
 					<div class="widget widget-metric_1 animate">
 						<span class="icon-wrapper custom-bg-lightseagreen"><i class="fa fa-shopping-cart"></i></span>
 						<div class="right">
-							<span class="value">20 <i class="change-icon change-up fa fa-sort-up text-indicator-green"></i></span>
-							<span class="title">SD<span class="change text-indicator-green"></span></span>
+							<span class="value"><?= count($siswaSMP)  ?> <i class="change-icon change-up fa fa-sort-up text-indicator-green"></i></span>
+							<span class="title">SISWA SMP<span class="change text-indicator-green"></span></span>
 						</div>
 					</div>
 				</div>
@@ -42,8 +42,8 @@
 					<div class="widget widget-metric_1 animate">
 						<span class="icon-wrapper custom-bg-blue2"><i class="fa-solid fa-cart-flatbed"></i></span>
 						<div class="right">
-							<span class="value">17<i class="change-icon change-down fa fa-sort-up text-indicator-green"></i></span>
-							<span class="title">SMA <span class="change text-indicator-green"></span></span>
+							<span class="value"><?= count($siswaSMA)  ?><i class="change-icon change-down fa fa-sort-up text-indicator-green"></i></span>
+							<span class="title">SISWA SMA <span class="change text-indicator-green"></span></span>
 						</div>
 					</div>
 				</div>

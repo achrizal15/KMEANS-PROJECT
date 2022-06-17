@@ -132,13 +132,23 @@ if (!function_exists("is_login")) {
       } else {
          if ($CI->session->userdata("role") === "siswa") {
             redirect(base_url("home/landing_siswa"));
-         }else{
+         } else {
             $role_akses = $CI->rak->get_roles_akses($CI->session->userdata("role"), $controller);
             if (!$role_akses) {
                show_404();
             }
          }
-    
+      }
+   }
+}
+if (!function_exists("is_siswa")) {
+   function is_siswa()
+   {
+      $CI = &get_instance();
+      $CI->load->library("session");
+      $role =    $CI->session->userdata("role");
+      if ($role != "siswa") {
+         show_404();
       }
    }
 }

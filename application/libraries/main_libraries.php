@@ -8,7 +8,7 @@ class Main_libraries
         {
                 $this->CI = &get_instance();
         }
-    
+
         public function uploadImage($path = "")
         {
                 $config['upload_path']          = './assets/' . $path;

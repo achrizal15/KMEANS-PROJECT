@@ -11,7 +11,7 @@ class Angkatanmodels extends CI_Model
       }
       return $result;
    }
-   public function get_all()
+   public function get_all($where=[])
    {
       $alias = [
          ["table" => "angkatan", "alias" => "a"]
@@ -22,6 +22,7 @@ class Angkatanmodels extends CI_Model
       }
       $this->db->select($select);
       $this->db->from("angkatan as a");
+      $this->db->where($where);
       return $this->db->get()->result();
    }
 
@@ -40,13 +41,17 @@ class Angkatanmodels extends CI_Model
    public function get_last()
    {
       $this->db->select("*");
-      $this->db->from("user");
+      $this->db->from("angkatan");
       $this->db->order_by("id", "desc");
       return $this->db->get()->row();
    }
    public function perbarui($id, $data)
    {
       $this->db->update("angkatan", $data, ["id" => $id]);
+      return $this->db->affected_rows();
+   }
+   public function ahir_angkatan($angkatan_id){
+      $this->db->update("siswa",["status"=>"NON ACTIVE"],["angkatan_id"=>$angkatan_id]);
       return $this->db->affected_rows();
    }
    public function create($data)

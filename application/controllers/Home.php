@@ -19,12 +19,32 @@ class Home extends CI_Controller
 	public function index()
 	{
 		is_login("home");
-		$this->main_libraries->innerview("home", []);
+		$data["siswaSD"] = $this->siswamodels->get_all(['s.tingkatan'=>"SD"]);
+		$data["siswaSMP"] = $this->siswamodels->get_all(['s.tingkatan'=>"SMP"]);
+		$data["siswaSMA"] = $this->siswamodels->get_all(['s.tingkatan'=>"SMA"]);
+		$angkatan = $this->angkatanmodels->get_last();
+		if($angkatan->akhir_periode <= date("Y-m-d")){
+			$data_angkatan=[
+				"akhir_periode"=>date("Y-m-d",strtotime("+6 month")),
+				"awal_periode"=>date("Y-m-d"),
+				"akhir_pendaftaran"=>date("Y-m-d",strtotime("+6 day")),
+				"awal_pendaftaran"=>date("Y-m-d"),
+				"angkatan"=>date("Y M")
+			];
+			$this->angkatanmodels->create($data_angkatan);
+			$this->angkatanmodels->perbarui($angkatan->id,["status"=>'nonaktif']);
+			$this->angkatanmodels->ahir_angkatan($angkatan->id);
+		}
+
+		$this->main_libraries->innerview("home", $data);
 	}
 	public function landing_siswa()
 	{
-		$data["pembelajaran"] = $this->pembelajaranmodels->get_all();
+		is_siswa();
 		$siswa_id = $this->session->userdata("id");
+		$siswa = $this->siswamodels->get($siswa_id);
+		// echo json_encode($siswa_id);exit;
+		$data["pembelajaran"] = $this->pembelajaranmodels->get_all(['p.kelas_id'=>$siswa->kelas_id]);
 		$hasilTes = $this->hasiltesmodels->get(["id_siswa" => $siswa_id]);
 		if ($hasilTes == null) {
 			redirect(base_url("home/tes_akademik"));
@@ -34,6 +54,7 @@ class Home extends CI_Controller
 	}
 	public function tes_akademik()
 	{
+		is_siswa();
 		$siswa_id = $this->session->userdata("id");
 		$data['siswa'] = $this->siswamodels->get($siswa_id);
 		$data['soal'] = $this->soaltesmodels->get_all(["s.tingkatan" => $data['siswa']->tingkatan]);
@@ -42,6 +63,7 @@ class Home extends CI_Controller
 	}
 	public function tes_akademik_submit()
 	{
+		is_siswa();
 		$siswa_id = $this->session->userdata("id");
 		$data['siswa'] = $this->siswamodels->get($siswa_id);
 		$item = $this->input->post("item");

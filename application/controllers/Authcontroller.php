@@ -73,6 +73,10 @@ class AuthController extends CI_Controller
          $this->session->set_flashdata("message", "Login error");
          redirect(base_url("authcontroller/login"));
       } else {
+         if($user->status=="NON ACTIVE"){
+            $this->session->set_flashdata("message", "Angkatan anda telah berakhi.");
+            redirect(base_url("authcontroller/login"));
+         }
          if (password_verify($password, $user->password)) {
             $user_data = [
                "id" => $user->id,

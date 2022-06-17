@@ -14,36 +14,31 @@ class Pengumpulanmodels extends CI_Model
    public function get_all()
    {
       $alias = [
-         ["table" => "pengumpulan", "alias" => "n"],
+         ["table" => "pengumpulan_tugas", "alias" => "n"],
          ["table" => "pembelajaran", "alias" => "p"],
-         ["table" => "user", "alias" => "s"],
-         ["table" => "kelas", "alias" => "k"],
-         ["table" => "materi", "alias" => "m"],
-         ["table" => "tugas", "alias" => "t"]
+         ["table" => "siswa", "alias" => "s"],
       ];
       $select="";
       foreach ($alias as $key) {
          $select .= implode(',', $this->setAliasColumn($key['table'], $key['alias'])) . ",";
       }
       $this->db->select($select);
-      $this->db->from("pembelajaran as p");
-      $this->db->join("user as s","s.id=p.guru_id");
-      $this->db->join("kelas as k","k.id=p.kelas_id");
-      $this->db->join("materi as m","m.id=p.materi_id");
-      $this->db->join("tugas as t","t.id=p.tugas_id");
+      $this->db->from("pengumpulan_tugas as n");
+      $this->db->join("siswa as s","s.id=n.siswa_id");
+      $this->db->join("pembelajaran as p","p.id=n.pembelajaran_id");
       return $this->db->get()->result();
    }
 
    public function delete($id)
    {
-      $this->db->delete("pembelajaran", ["id" => $id]);
+      $this->db->delete("pengumpulan_tugas", ["id" => $id]);
       return $this->db->affected_rows();
    }
-   public function get($id = "")
+   public function get($where= [])
    {
       $this->db->select("*");
-      $this->db->from("pembelajaran");
-      $this->db->where("id", $id);
+      $this->db->from("pengumpulan_tugas");
+      $this->db->where($where);
       return $this->db->get()->row();
    }
    public function get_last()
@@ -55,13 +50,13 @@ class Pengumpulanmodels extends CI_Model
    }
    public function perbarui($id, $data)
    {
-      $this->db->update("pembelajaran", $data, ["id" => $id]);
+      $this->db->update("pengumpulan_tugas", $data, ["id" => $id]);
       return $this->db->affected_rows();
    }
    public function create($data)
    {
       $data["created_at"] = date("Y-m-d H:i:s", strtotime("now"));
-      $this->db->insert("pembelajaran", $data);
+      $this->db->insert("pengumpulan_tugas", $data);
       return $this->db->affected_rows();
    }
 }

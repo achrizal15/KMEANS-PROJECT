@@ -21,9 +21,11 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title"><a href="<?=base_url('home/landing_siswa')?>"><i class="fa-solid fa-arrow-left"></i></a> <?= $pem->pnama  ?> </h3>
+                        <h3 class="card-title"><a href="<?= base_url('home/landing_siswa') ?>"><i class="fa-solid fa-arrow-left"></i></a> <?= $pem->pnama  ?> </h3>
                     </div>
                     <div class="card-body">
+                        <?php echo $this->session->flashdata("message") ? custom_alert_messages("error", $this->session->flashdata("message")) : "" ?>
+                        <br>
                         <table>
                             <tr>
                                 <td>Guru</td>
@@ -55,31 +57,44 @@
                                 </td>
                             </tr>
                             <?php if ($pem->tjudul) :  ?>
-                                <form action="">
-                                <tr>
-                                    <td class="align-top">Judul Tugas</td>
-                                    <td class="align-top" width="20px"> : </td>
-                                    <td>
-                                        <?= $pem->tjudul ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-top">Jawaban anda</td>
-                                    <td class="align-top" width="20px"> : </td>
-                                    <td>
-                                        <textarea class="form-control text-justify" cols="100" rows="10" placeholder="Ketik jawaban anda disini."></textarea>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-top">Upload File (Jika dibutuhkan)</td>
-                                    <td class="align-top" width="20px"> : </td>
-                                    <td>
-                                        <input type="file" class="dropify" name="doc" data-max-file-size="10000K">
-                                    </td>
-                                </tr>
-                                </form>
-                            <?php endif  ?>
+                                <form action="<?= base_url('pengumpulancontroller/submit_pengumpulan') ?>" method="POST" enctype="multipart/form-data">
+                                    <tr>
+                                        <td class="align-top">Judul Tugas</td>
+                                        <td class="align-top" width="20px"> : </td>
+                                        <td>
+                                            <?= $pem->tjudul ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-top">Jawaban anda</td>
+                                        <td class="align-top" width="20px"> : </td>
+                                        <td>
+                                            <input type="text" hidden name="p_id" value="<?= $pem->pid ?>">
+
+                                            <textarea name="jawaban" class="form-control text-justify" cols="100" rows="10" placeholder="Ketik jawaban anda disini."><?= isset($jawaban) ? $jawaban->jawaban : ""  ?></textarea>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-top">Upload File (Jika dibutuhkan)</td>
+                                        <td class="align-top" width="20px"> : </td>
+                                        <td>
+                                            <input type="file" name="doc">
+                                            <?php if (isset($jawaban)) :  ?>
+                                                <?php if($jawaban->file!=null) : ?>
+                                                    <a href="<?=  base_url("assets/file/" . $jawaban->file) ?>" target="_blank">Download file</a>
+                                                    <?php endif  ?>
+                                            <?php endif  ?>
+                                        </td>
+                                    </tr>
+
+                                <?php endif  ?>
                         </table>
+                        <br>
+                        <?php if ($pem->tjudul != null) : ?>
+                            <button class="btn btn-info" type="submit">Kumpulkan Tugas</button>
+                            </form>
+                        <?php endif  ?>
                     </div>
                 </div>
             </div>

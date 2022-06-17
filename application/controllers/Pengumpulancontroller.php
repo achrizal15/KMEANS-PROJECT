@@ -17,92 +17,37 @@ class PengumpulanController extends CI_Controller
    }
    public function index()
    {
-    return show_404();
+      return show_404();
    }
    public function pengumpulan($p_id)
    {
-      $data["pem"] = $this->pm->get_all(["p.id"=>$p_id])[0];
+      is_siswa();
+      $data["pem"] = $this->pm->get_all(["p.id" => $p_id])[0];
+      $data['jawaban']=$this->nm->get(["pembelajaran_id" => $p_id, "siswa_id" => $this->session->userdata("id")]);
       $this->main_libraries->innerview("pengumpulan_form", $data);
    }
-   public function action($params = "add", $id = "")
+   public function submit_pengumpulan()
    {
-      $data['guru'] = $this->um->get_all();
-      $data['materi'] = $this->mt->get_all();
-      $data['kelas'] = $this->km->get_all();
-      $data["aksi"] = strtolower($params);
-      if ($params == "edit") {
-         $data["pembelajaran"] = $this->pm->get($id);
-         $data["tugas"] = $this->tm->get($data['pembelajaran']->tugas_id);
-         // var_dump($data["tugas"]);exit;
-         if (!$data["pembelajaran"]) {
-            show_404();
-         }
-      }
-      $this->main_libraries->innerview("pembelajaran_form", $data);
-   }
-   public function add()
-   {
-      $data_tugas = [
-         "judul" => $this->input->post("judul"),
-         "deskripsi" => $this->input->post("deskripsi_tugas"),
-      ];
-      if ($data_tugas['judul'] != '' && $data_tugas['deskripsi'] != '') {
-         $this->tm->create($data_tugas);
-      }
-      $tugas_id = $this->db->insert_id();
-      $data = [
-         "nama" => $this->input->post("nama"),
-         "materi_id" => $this->input->post("materi_id"),
-         "kelas_id" => $this->input->post("kelas_id"),
-         "guru_id" => $this->input->post("guru_id"),
-         "tugas_id" => $tugas_id,
-         "deskripsi" => $this->input->post("deskripsi_pembelajaran"),
-      ];
-      if ($_FILES["doc"]["name"]) {
+      $jawaban = $this->input->post("jawaban");
+      $file = "";
+      $this->db->delete("pengumpulan_tugas",["pembelajaran_id" => $this->input->post("p_id"), "siswa_id" => $this->session->userdata("id")]);
+      if ($_FILES["doc"]!=null) {
          $this->main_libraries->uploadImage("file");
          $this->upload->do_upload('doc');
-         $data["file"] = $this->upload->data("file_name");
+         $file = $this->upload->data("file_name");
       }
-      // echo json_encode($data);exit; // sama dengan dd
-      $this->pm->create($data);
-      $this->session->set_flashdata("message", "Data ditambahkan");
-      redirect(base_url("pembelajarancontroller"));
-   }
-   public function edit()
-   {
-      $id = $this->input->post("pembelajaran_id");
-      $tugas_id = $this->input->post("tugas_id");
+      if($jawaban=="" && $file==""){
+         $this->session->set_flashdata("message", "Jawaban tidak boleh kosong");
+         redirect(base_url("pengumpulancontroller/pengumpulan/".$this->input->post("p_id")));
+      }
       $data = [
-         "nama" => $this->input->post("nama"),
-         "materi_id" => $this->input->post("materi_id"),
-         "kelas_id" => $this->input->post("kelas_id"),
-         "guru_id" => $this->input->post("guru_id"),
-         "deskripsi" => $this->input->post("deskripsi_pembelajaran"),
+         "pembelajaran_id" => $this->input->post("p_id"),
+         "jawaban" => $jawaban,
+         "file" => $file,
+         "siswa_id" => $this->session->userdata("id"),
       ];
-      if ($_FILES["doc"]["name"]) {
-         $this->main_libraries->uploadImage("file");
-         $this->upload->do_upload('doc');
-         $data["file"] = $this->upload->data("file_name");
-      }
-      $data_tugas = [
-         "judul" => $this->input->post("judul"),
-         "deskripsi" => $this->input->post("deskripsi_tugas"),
-      ];
-      if ($data_tugas['judul'] != '' && $data_tugas['deskripsi'] != '') {
-         if ($tugas_id == '') {
-            $this->tm->create($data_tugas);
-            $data["tugas_id"] = $this->db->insert_id();
-         } else {
-            $this->tm->perbarui($tugas_id, $data_tugas);
-         }
-      }
-      $this->pm->perbarui($id, $data);
-      $this->session->set_flashdata("message", "Data berhasil diperbarui.");
-      redirect(base_url("pembelajarancontroller"));
-   }
-   public function delete()
-   {
-      $id = $this->input->post("id");
-      echo $this->pm->delete($id);
+      $this->nm->create($data);
+      $this->session->set_flashdata("message", "Jawaban berhasil dikirim");
+      redirect(base_url("pengumpulancontroller/pengumpulan/".$this->input->post("p_id")));
    }
 }
