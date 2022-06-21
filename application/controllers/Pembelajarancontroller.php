@@ -17,11 +17,14 @@ class PembelajaranController extends CI_Controller
    }
    public function index()
    {
-      $data["pembelajaran"] = $this->pm->get_all();
+      
+      $user=$this->session->userdata("id");
+      $data["pembelajaran"] = $this->pm->get_all(["p.guru_id"=>$user]);
       $this->main_libraries->innerview("pembelajaran_view", $data);
    }
    public function show_hasil_tugas($id)
    {
+      // echo $id;exit;
       $data["tugas"] = $this->nm->get_all(["pembelajaran_id" => $id]);
       $this->main_libraries->innerview("hasil_tugas_view", $data);
    }

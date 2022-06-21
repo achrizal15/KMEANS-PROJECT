@@ -24,7 +24,7 @@
                         <h3 class="card-title"><a href="<?= base_url('home/landing_siswa') ?>"><i class="fa-solid fa-arrow-left"></i></a> <?= $pem->pnama  ?> </h3>
                     </div>
                     <div class="card-body">
-                        <?php echo $this->session->flashdata("message") ? custom_alert_messages("error", $this->session->flashdata("message")) : "" ?>
+                        <?php echo $this->session->flashdata("message") ? custom_alert_messages("success", $this->session->flashdata("message")) : "" ?>
                         <br>
                         <table>
                             <tr>
