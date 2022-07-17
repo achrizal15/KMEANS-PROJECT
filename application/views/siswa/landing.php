@@ -21,6 +21,35 @@
             <!-- TOP METRICS -->
             <?php echo $this->session->flashdata("message") ? custom_alert_messages("success", $this->session->flashdata("message")) : "" ?>
             <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Hasil Tes
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Materi</th>
+                                        <th>Nilai</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($hasiltes as $key => $nilai) : ?>
+                                        <tr>
+                                            <td><?= $key + 1 ?></td>
+                                            <td><?= $nilai->nmateri ?></td>
+                                            <td><?= $nilai->nnilai ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <?php foreach ($pembelajaran as $key => $value) : ?>
                     <div class="col-sm-12 col-lg-6">
                         <div class="card text-left">
@@ -47,12 +76,12 @@
                                     <tr>
                                         <td>Tanggal Pertemuan</td>
                                         <td width="20px"> : </td>
-                                        <td><?= date("d-m-Y",strtotime($value->pcreated_at)) ?></td>
+                                        <td><?= date("d-m-Y", strtotime($value->pcreated_at)) ?></td>
                                     </tr>
 
                                 </table>
 
-                                <a href="<?= base_url("pengumpulancontroller/pengumpulan/".$value->pid) ?>" class="btn btn-primary">Selengkapnya</a>
+                                <a href="<?= base_url("pengumpulancontroller/pengumpulan/" . $value->pid) ?>" class="btn btn-primary">Selengkapnya</a>
                             </div>
                         </div>
                     </div>
@@ -60,11 +89,7 @@
 
             </div>
             <!-- END TOP METRICS -->
-
-
-
         </div>
-
         <!-- END PERFORMANCE INDEX -->
     </div>
 </div>

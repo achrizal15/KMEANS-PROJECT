@@ -19,20 +19,20 @@ class Home extends CI_Controller
 	public function index()
 	{
 		is_login("home");
-		$data["siswaSD"] = $this->siswamodels->get_all(['s.tingkatan'=>"SD"]);
-		$data["siswaSMP"] = $this->siswamodels->get_all(['s.tingkatan'=>"SMP"]);
-		$data["siswaSMA"] = $this->siswamodels->get_all(['s.tingkatan'=>"SMA"]);
+		$data["siswaSD"] = $this->siswamodels->get_all(['s.tingkatan' => "SD"]);
+		$data["siswaSMP"] = $this->siswamodels->get_all(['s.tingkatan' => "SMP"]);
+		$data["siswaSMA"] = $this->siswamodels->get_all(['s.tingkatan' => "SMA"]);
 		$angkatan = $this->angkatanmodels->get_last();
-		if($angkatan->akhir_periode <= date("Y-m-d")){
-			$data_angkatan=[
-				"akhir_periode"=>date("Y-m-d",strtotime("+6 month")),
-				"awal_periode"=>date("Y-m-d"),
-				"akhir_pendaftaran"=>date("Y-m-d",strtotime("+6 day")),
-				"awal_pendaftaran"=>date("Y-m-d"),
-				"angkatan"=>date("Y M"),"status"=>"pendaftaran"
+		if ($angkatan->akhir_periode <= date("Y-m-d")) {
+			$data_angkatan = [
+				"akhir_periode" => date("Y-m-d", strtotime("+6 month")),
+				"awal_periode" => date("Y-m-d"),
+				"akhir_pendaftaran" => date("Y-m-d", strtotime("+6 day")),
+				"awal_pendaftaran" => date("Y-m-d"),
+				"angkatan" => date("Y M"), "status" => "pendaftaran"
 			];
 			$this->angkatanmodels->create($data_angkatan);
-			$this->angkatanmodels->perbarui($angkatan->id,["status"=>'nonaktif']);
+			$this->angkatanmodels->perbarui($angkatan->id, ["status" => 'nonaktif']);
 			$this->angkatanmodels->ahir_angkatan($angkatan->id);
 		}
 
@@ -43,14 +43,13 @@ class Home extends CI_Controller
 		is_siswa();
 		$siswa_id = $this->session->userdata("id");
 		$siswa = $this->siswamodels->get($siswa_id);
-		// echo json_encode($siswa_id);exit;
-		$data["pembelajaran"] = $this->pembelajaranmodels->get_all(['p.kelas_id'=>$siswa->kelas_id]);
-		$hasilTes = $this->hasiltesmodels->get(["id_siswa" => $siswa_id]);
-		if ($hasilTes == null) {
+		$data["pembelajaran"] = $this->pembelajaranmodels->get_all(['p.kelas_id' => $siswa->kelas_id]);
+		$data['hasiltes'] = $this->nilaitesmodels->get_all(["n.siswa_id" => $siswa_id]);
+		if ($data['hasiltes'] == null) {
 			redirect(base_url("home/tes_akademik"));
 			return false;
 		}
-		$this->main_libraries->innerview("siswa/landing",$data);
+		$this->main_libraries->innerview("siswa/landing", $data);
 	}
 	public function tes_akademik()
 	{
