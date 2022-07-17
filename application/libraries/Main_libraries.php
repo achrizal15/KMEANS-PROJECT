@@ -20,7 +20,7 @@ class Main_libraries
         }
         public function innerview($view, $data = [], $blank = false)
         {
-                $data["blank"]=$blank;
+                $data["blank"] = $blank;
                 $this->CI->load->view("templates/header", $data);
                 $this->CI->load->view($view, $data);
                 $this->CI->load->view("templates/footer", $data);

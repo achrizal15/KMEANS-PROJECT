@@ -9,6 +9,7 @@ class KelasController extends CI_Controller
       $this->load->library(["main_libraries", 'session', "form_validation"]);
       $this->load->model("kelasmodels", "km");
       $this->load->model("usermodels", "um");
+      $this->load->model("siswamodels", "sm");
       is_login("kelas");
    }
    public function index()
@@ -53,7 +54,7 @@ class KelasController extends CI_Controller
          $this->session->set_flashdata("message", "Data ditambahkan");
          redirect(base_url("kelascontroller"));
       } else {
-         $this->session->set_flashdata("message","Data sudah ada");
+         $this->session->set_flashdata("message", "Data sudah ada");
          redirect(base_url("kelascontroller/action/add"));
       }
    }
@@ -61,11 +62,11 @@ class KelasController extends CI_Controller
    {
       $id = $this->input->post("id");
       $data = $this->input->post();
-      $kelas=$this->km->get($id);
-      if($data['nama']!=$kelas->nama || $data['tingkatan']!=$kelas->tingkatan){
+      $kelas = $this->km->get($id);
+      if ($data['nama'] != $kelas->nama || $data['tingkatan'] != $kelas->tingkatan) {
          if ($this->check_kelas() == false) {
-            $this->session->set_flashdata("message","Data sudah ada");
-            redirect(base_url("kelascontroller/action/edit/".$id));
+            $this->session->set_flashdata("message", "Data sudah ada");
+            redirect(base_url("kelascontroller/action/edit/" . $id));
             return false;
          }
       }

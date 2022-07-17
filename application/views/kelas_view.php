@@ -34,6 +34,7 @@
                       <th>NAMA</th>
                       <th>TINGKATAN</th>
                       <th>GURU</th>
+                      <th>JUMLAH SISWA AKTIF</th>
                       <th>JAM PERTEMUAN</th>
                       <th class="text-nowrap">CREATED AT</th>
                       <th>ACTION</th>
@@ -41,11 +42,13 @@
                   </thead>
                   <tbody>
                     <?php foreach ($kelas as $key => $value) : ?>
+                      <?php $siswa_active = $this->sm->get_all(['s.status' => "ACTIVE", "s.tingkatan" => $value->ktingkatan, "s.kelas_id" => $value->kid]) ?>
                       <tr>
                         <td class="align-middle"><?= ucwords($value->knama)  ?></td>
                         <td class="align-middle"><?= $value->ktingkatan  ?></td>
                         <td class="align-middle"><?= $value->snama  ?></td>
-                        <td class="align-middle"><?= $value->khari." ($value->kwaktu) "?></td>
+                        <td class="align-middle"><?= count($siswa_active)  ?></td>
+                        <td class="align-middle"><?= $value->khari . " ($value->kwaktu) " ?></td>
                         <td class="align-middle"><?= date("d-m-Y", strtotime($value->kcreated_at))  ?></td>
                         <td class="align-middle" width="150px">
                           <a href="<?= base_url("kelascontroller/action/edit/" . $value->kid) ?>" class="btn btn-warning text-white" title="Edit"><i class="fas fa-edit"></i><span class="sr-only">EDIT</span></a>
